@@ -45,6 +45,11 @@ public class ListViewActivity extends AppCompatActivity {
                 Intent i = new Intent(this, MainActivity.class);
                 startActivity(i);
                 break;
+            case R.id.perfil:
+                Intent in = new Intent(ListViewActivity.this, PerfilActivity.class);
+                startActivity(in);
+                break;
+
         }
 
         return true;
