@@ -1,4 +1,4 @@
-package com.paulapps.kereseresapp;
+package com.paulapps.kereseresapp.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +12,9 @@ import android.view.MenuItem;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.paulapps.kereseresapp.R;
+import com.paulapps.kereseresapp.activities.login_signup.MainActivity;
+import com.paulapps.kereseresapp.activities.perfil.PerfilActivity;
 
 public class ListViewActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;

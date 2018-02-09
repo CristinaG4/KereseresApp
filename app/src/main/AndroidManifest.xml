@@ -9,19 +9,23 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashActivity">
+        <activity android:name=".activities.login_signup.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".ListViewActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".activities.login_signup.SignUpActivity" />
+        <activity android:name=".activities.ListViewActivity" />
+        <activity android:name=".activities.login_signup.MainActivity" />
         <activity
-            android:name=".PerfilActivity"
+            android:name=".activities.perfil.PerfilActivity"
             android:label="@string/title_activity_perfil"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activities.perfil.EditPerfilActivity"
+            android:label="@string/title_activity_edit_perfil"
             android:theme="@style/AppTheme"></activity>
     </application>
 

@@ -5,7 +5,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@color/VerdeClaro">
+    android:background="@drawable/fondo_principal">
 
 
     <ImageView

@@ -1,4 +1,4 @@
-package com.paulapps.kereseresapp;
+package com.paulapps.kereseresapp.activities.login_signup;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -8,6 +8,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.paulapps.kereseresapp.R;
 
 /**
  * @author crist

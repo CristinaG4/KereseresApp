@@ -11,4 +11,5 @@
     <string name="name">Name</string>
     <string name="code">Community Code</string>
     <string name="title_activity_perfil">PerfilActivity</string>
+    <string name="title_activity_edit_perfil">EditPerfilActivity</string>
 </resources>
