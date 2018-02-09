@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">KereseresApp</string>
+    <string name="tituloApp">Kereseres</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgotPass">Password?</string>
+    <string name="singUp">Sing Up</string>
+    <string name="cancelarBtn">Cancel</string>
+    <string name="okBtn">Ok</string>
+    <string name="apartment">Aparment</string>
+    <string name="name">Name</string>
+    <string name="code">Community Code</string>
+</resources>

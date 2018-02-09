@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "985555259957",
+    "firebase_url": "https://kereseresapp-1fd55.firebaseio.com",
+    "project_id": "kereseresapp-1fd55",
+    "storage_bucket": "kereseresapp-1fd55.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:985555259957:android:0a74111c1d26d08b",
+        "android_client_info": {
+          "package_name": "com.kereseresapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "985555259957-d0h0s5db68f1msdure0vclkofi8fvm6i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kereseresapp",
+            "certificate_hash": "ca501e9ca9559a354b86b9becb0d962d78d9e087"
+          }
+        },
+        {
+          "client_id": "985555259957-75k22evuksbkuhui3uin43vovoqsurs2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwGlyi80vACeTBoFeOVdl-i5trdLYA9jk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "985555259957-75k22evuksbkuhui3uin43vovoqsurs2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
