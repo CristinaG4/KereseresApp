@@ -6,18 +6,20 @@ import android.widget.ImageView;
 public class Pedido {
     private int id;
     private String titulo;
-    private Object Perfil;
-    private ImageView tipoPago;
+    private Perfil perfil;
+    private String tipoPago;
     private String categoria;
     private String descripcion;
+    private String oferDeman;
 
-    public Pedido(int id, String titulo, Object perfil, ImageView tipoPago, String categoria, String descripcion) {
+    public Pedido(int id, String titulo, Perfil perfil, String tipoPago, String categoria, String descripcion, String oferDeman) {
         this.id = id;
         this.titulo = titulo;
-        Perfil = perfil;
+        this. perfil = perfil;
         this.tipoPago = tipoPago;
         this.categoria = categoria;
         this.descripcion = descripcion;
+        this.oferDeman = oferDeman;
     }
 
 
@@ -37,19 +39,19 @@ public class Pedido {
         this.titulo = titulo;
     }
 
-    public Object getPerfil() {
-        return Perfil;
+    public Perfil getPerfil() {
+        return perfil;
     }
 
-    public void setPerfil(Object perfil) {
-        Perfil = perfil;
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
     }
 
-    public ImageView getTipoPago() {
+    public String getTipoPago() {
         return tipoPago;
     }
 
-    public void setTipoPago(ImageView tipoPago) {
+    public void setTipoPago(String tipoPago) {
         this.tipoPago = tipoPago;
     }
 
@@ -69,4 +71,11 @@ public class Pedido {
         this.descripcion = descripcion;
     }
 
+    public String getOferDeman() {
+        return oferDeman;
+    }
+
+    public void setOferDeman(String oferDeman) {
+        this.oferDeman = oferDeman;
+    }
 }
