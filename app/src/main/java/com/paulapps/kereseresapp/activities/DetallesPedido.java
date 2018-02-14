@@ -23,28 +23,23 @@ public class DetallesPedido extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalles_pedido);
+        //cogemos el objeto del intent->Pedido
+        pedido = (Pedido) getIntent().getSerializableExtra("PEDIDO");
 
         tv1 = findViewById(R.id.textView);
         tv2 = findViewById(R.id.textView2);
         tv3 = findViewById(R.id.textView3);
 
 
-        pedido = (Pedido) getIntent().getSerializableExtra("PEDIDO");
 
 
-
+        //ejemplo de como acceder a los datos de pedido
         tv1.setText(pedido.getTitulo());
         tv2.setText(pedido.getCategoria());
         tv3.setText(pedido.getPerfil().getNombre());
 
 
         setResult(Activity.RESULT_OK,intent);
-
-
-
-
-
-
 
     }
 }
