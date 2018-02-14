@@ -32,6 +32,7 @@ public class Adapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final View listview = inflater.inflate(R.layout.celda_listview,null);
+
         //Declaramos todos los elementos de la celda del listView
         TextView titulo = (TextView) listview.findViewById(R.id.tvTitulo);
         TextView nombre = (TextView) listview.findViewById(R.id.tvNombre);

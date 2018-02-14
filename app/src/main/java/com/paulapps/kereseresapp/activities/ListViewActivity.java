@@ -38,6 +38,11 @@ public class ListViewActivity extends AppCompatActivity {
     ImageView filtroMenaje;
     ListView listViewDemandas;
     ListView listViewOfertas;
+    ArrayList<Perfil> perfiles;
+    static ArrayList<Pedido> pedidos;
+    private int pedidoIndex;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,16 +54,16 @@ public class ListViewActivity extends AppCompatActivity {
         Toolbar menu =(Toolbar) findViewById(R.id.toolbar);//importar como v7 para q no de error
         setSupportActionBar(menu);
 
-        final ArrayList<Perfil> perfiles = new ArrayList<>();
+        perfiles = new ArrayList<>();
         perfiles.add(new Perfil("Nacho Jimenez","ncassinello@gmail.com","1234","7ºG",1000,"913140885",R.drawable.all));
         perfiles.add(new Perfil("Cristinini","cristinini@gmail.com","1234","1ºH",1000,"91548775",R.drawable.all));
         perfiles.add(new Perfil("PaulaCR7","paulaCR7@gmail.com","1234","13ºA",1000,"911254889",R.drawable.all));
 
-        final ArrayList<Pedido> pedidos = new ArrayList<>();
-        pedidos.add(new Pedido(1,"Formatear Ordenador",perfiles.get(0),"dinero","informatica","Necesito que me formateis el ordenador","demanda"));
-        pedidos.add(new Pedido(2,"Cuidar a mis hijos",perfiles.get(1),"favor","compañia","Salgo esta noche y encesito niñera","demanda"));
-        pedidos.add(new Pedido(3,"Ver el Madrid",perfiles.get(2),"favor","compañia","Ofrezco salon y futbol a cambio de alguien con quien verlo","oferta"));
-        pedidos.add(new Pedido(4,"Clases de XML",perfiles.get(0),"dinero","clases","Necesito clases de XML avanzadas","demanda"));
+        pedidos = new ArrayList<>();
+        pedidos.add(new Pedido(0,"Formatear Ordenador",perfiles.get(0),"dinero","informatica","Necesito que me formateis el ordenador","demanda"));
+        pedidos.add(new Pedido(1,"Cuidar a mis hijos",perfiles.get(1),"favor","compañia","Salgo esta noche y encesito niñera","demanda"));
+        pedidos.add(new Pedido(2,"Ver el Madrid",perfiles.get(2),"favor","compañia","Ofrezco salon y futbol a cambio de alguien con quien verlo","oferta"));
+        pedidos.add(new Pedido(3,"Clases de XML",perfiles.get(0),"dinero","clases","Necesito clases de XML avanzadas","demanda"));
 
         listViewOfertas.setAdapter(new Adapter(this,seleccionarLista(pedidos,"oferta")));
         listViewDemandas.setAdapter(new Adapter(this,seleccionarLista(pedidos,"demanda")));
@@ -66,9 +71,25 @@ public class ListViewActivity extends AppCompatActivity {
         listViewOfertas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent intent = new Intent(view.getContext(),DetallesPedido.class);
+                //se le pasa a traves del intent el pedido entero que ha seleccionado
+                intent.putExtra("PEDIDO",seleccionarLista(pedidos,"oferta").get(position));
+                pedidoIndex = position;
+
+                startActivityForResult(intent,1);
+
+            }
+        });
+        listViewDemandas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Hay que implementar la clase DetallesPedido tambien, para ello necesito el xml de la activity
-                //Intent intent = new Intent(view.getContext(),DetallesPedido.class);
-                //intent.putExtra("PEDIDO",pedidos.get(position).getId());
+                Intent intent = new Intent(view.getContext(),DetallesPedido.class);
+                intent.putExtra("PEDIDO",seleccionarLista(pedidos,"demanda").get(position));
+                pedidoIndex = position;
+
+                startActivityForResult(intent,1);
 
             }
         });
@@ -194,5 +215,18 @@ public class ListViewActivity extends AppCompatActivity {
         }
 
         return pedidosFiltrados;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1){
+            if(resultCode == RESULT_OK){/*
+                data.getSerializableExtra("PEDIDO");
+                pedidos.get(pedidoIndex) = (Pedido) data.getSerializableExtra("PEDIDO");;
+
+            */
+            }
+        }
     }
 }
