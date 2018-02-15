@@ -16,6 +16,7 @@ public class PerfilActivity extends AppCompatActivity {
     TextView tituloAppPerfil;
     Button btnCalcelarPerfil;
     Button btnEditarPerfil;
+    Button btprueba;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
