@@ -3,7 +3,9 @@ package com.paulapps.kereseresapp.model;
 
 import android.widget.ImageView;
 
-public class Pedido {
+import java.io.Serializable;
+
+public class Pedido implements Serializable{
     private int id;
     private String titulo;
     private Perfil perfil;
@@ -11,6 +13,9 @@ public class Pedido {
     private String categoria;
     private String descripcion;
     private String oferDeman;
+
+    public Pedido() {
+    }
 
     public Pedido(int id, String titulo, Perfil perfil, String tipoPago, String categoria, String descripcion, String oferDeman) {
         this.id = id;

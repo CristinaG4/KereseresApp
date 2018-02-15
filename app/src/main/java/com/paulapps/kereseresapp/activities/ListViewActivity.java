@@ -38,6 +38,11 @@ public class ListViewActivity extends AppCompatActivity {
     ImageView filtroMenaje;
     ListView listViewDemandas;
     ListView listViewOfertas;
+    ArrayList<Perfil> perfiles;
+    static ArrayList<Pedido> pedidos;
+    private int pedidoIndex;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,34 +53,66 @@ public class ListViewActivity extends AppCompatActivity {
         listViewOfertas= (ListView) findViewById(R.id.lvOfertas);
         Toolbar menu =(Toolbar) findViewById(R.id.toolbar);//importar como v7 para q no de error
         setSupportActionBar(menu);
+        //declaramos el Arraylist aqui porque sino tiene un bug que duplica la list view de forma
+        // exponencial al volver a cargar la Activity
+        perfiles = new ArrayList<>();
+        perfiles.add(new Perfil("Nacho Jimenez","ncassinello@gmail.com","1234",
+                "7ºG",1000,"913140885",R.drawable.all));
+        perfiles.add(new Perfil("Cristinini","cristinini@gmail.com","1234",
+                "1ºH",1000,"91548775",R.drawable.all));
+        perfiles.add(new Perfil("PaulaCR7","paulaCR7@gmail.com","1234",
+                "13ºA",1000,"911254889",R.drawable.all));
 
-        final ArrayList<Perfil> perfiles = new ArrayList<>();
-        perfiles.add(new Perfil("Nacho Jimenez","ncassinello@gmail.com","1234","7ºG",1000,"913140885",R.drawable.all));
-        perfiles.add(new Perfil("Cristinini","cristinini@gmail.com","1234","1ºH",1000,"91548775",R.drawable.all));
-        perfiles.add(new Perfil("PaulaCR7","paulaCR7@gmail.com","1234","13ºA",1000,"911254889",R.drawable.all));
+        pedidos = new ArrayList<>();
+        pedidos.add(new Pedido(0,"Formatear Ordenador",perfiles.get(0),"dinero",
+                "informatica","Necesito que me formateis el ordenador",
+                "demanda"));
+        pedidos.add(new Pedido(1,"Cuidar a mis hijos",perfiles.get(1),"favor",
+                "compañia","Salgo esta noche y encesito niñera",
+                "demanda"));
+        pedidos.add(new Pedido(2,"Ver el Madrid",perfiles.get(2),"favor",
+                "compañia",
+                "Ofrezco salon y futbol a cambio de alguien con quien verlo",
+                "oferta"));
+        pedidos.add(new Pedido(3,"Clases de XML",perfiles.get(0),"dinero",
+                "clases","Necesito clases de XML avanzadas",
+                "demanda"));
 
-        final ArrayList<Pedido> pedidos = new ArrayList<>();
-        pedidos.add(new Pedido(1,"Formatear Ordenador",perfiles.get(0),"dinero","informatica","Necesito que me formateis el ordenador","demanda"));
-        pedidos.add(new Pedido(2,"Cuidar a mis hijos",perfiles.get(1),"favor","compañia","Salgo esta noche y encesito niñera","demanda"));
-        pedidos.add(new Pedido(3,"Ver el Madrid",perfiles.get(2),"favor","compañia","Ofrezco salon y futbol a cambio de alguien con quien verlo","oferta"));
-        pedidos.add(new Pedido(4,"Clases de XML",perfiles.get(0),"dinero","clases","Necesito clases de XML avanzadas","demanda"));
-
-        listViewOfertas.setAdapter(new Adapter(this,seleccionarLista(pedidos,"oferta")));
-        listViewDemandas.setAdapter(new Adapter(this,seleccionarLista(pedidos,"demanda")));
-
+        //funcionalidad de los adapters
+        listViewOfertas.setAdapter(new Adapter(this,seleccionarLista(pedidos,
+                "oferta")));
+        listViewDemandas.setAdapter(new Adapter(this,seleccionarLista(pedidos,
+                "demanda")));
+        //funcionalidad cuando se pulsa un elemnto del listView
         listViewOfertas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Hay que implementar la clase DetallesPedido tambien, para ello necesito el xml de la activity
-                //Intent intent = new Intent(view.getContext(),DetallesPedido.class);
-                //intent.putExtra("PEDIDO",pedidos.get(position).getId());
+
+                Intent intent = new Intent(view.getContext(),DetallesPedido.class);
+                //se le pasa a traves del intent el pedido entero que ha seleccionado
+                intent.putExtra("PEDIDO",seleccionarLista(pedidos,
+                        "oferta").get(position));
+                pedidoIndex = position;
+
+                startActivityForResult(intent,1);
+
+            }
+        });
+        listViewDemandas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent intent = new Intent(view.getContext(),DetallesPedido.class);
+                intent.putExtra("PEDIDO",seleccionarLista(pedidos,
+                        "demanda").get(position));
+                pedidoIndex = position;
+
+                startActivityForResult(intent,1);
 
             }
         });
 
         //Manejamos los tabhost
-        Resources res = getResources();
-
         TabHost tabs = findViewById(android.R.id.tabhost);
         tabs.setup();
 
@@ -104,9 +141,12 @@ public class ListViewActivity extends AppCompatActivity {
         filtroAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Hacer el filtro
-                Intent i = new Intent(ListViewActivity.this, ListViewActivity.class);
-                startActivity(i);
+                //Volvemos el adapter al original diferenciandolo por oferta o compañia
+                listViewOfertas.setAdapter(new Adapter(ListViewActivity.this,
+                        seleccionarLista(pedidos,"oferta")));
+                listViewDemandas.setAdapter(new Adapter(ListViewActivity.this,
+                        seleccionarLista(pedidos,"demanda")));
+
 
             }
         });
@@ -114,9 +154,18 @@ public class ListViewActivity extends AppCompatActivity {
         filtroAmigos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Hacer el filtro
-                Intent i = new Intent(ListViewActivity.this, ListViewActivity.class);
-                startActivity(i);
+                //Recorremos el array y seleccionamos solo los que son de compañia,
+                // luego lo dividimos en oferta y demanda
+                ArrayList<Pedido> pedidosFiltradosCompania = new ArrayList<>();
+                for (Pedido p:pedidos){
+                    if (p.getCategoria().equalsIgnoreCase("compañia")){
+                        pedidosFiltradosCompania.add(p);
+                    }
+                }
+                listViewOfertas.setAdapter(new Adapter(ListViewActivity.this,
+                        seleccionarLista(pedidosFiltradosCompania,"oferta")));
+                listViewDemandas.setAdapter(new Adapter(ListViewActivity.this,
+                        seleccionarLista(pedidosFiltradosCompania,"demanda")));
 
             }
         });
@@ -124,9 +173,20 @@ public class ListViewActivity extends AppCompatActivity {
         filtroInformatica.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Hacer el filtro
-                Intent i = new Intent(ListViewActivity.this, ListViewActivity.class);
-                startActivity(i);
+                //Recorremos el array y seleccionamos solo los que son de Informatica,
+                // luego lo dividimos en oferta y demanda
+
+                ArrayList<Pedido> pedidosFiltradosInformatica = new ArrayList<>();
+                for (Pedido p:pedidos){
+                    if (p.getCategoria().equalsIgnoreCase("informatica")){
+                        pedidosFiltradosInformatica.add(p);
+                    }
+                }
+                listViewOfertas.setAdapter(new Adapter(ListViewActivity.this,
+                        seleccionarLista(pedidosFiltradosInformatica,"oferta")));
+                listViewDemandas.setAdapter(new Adapter(ListViewActivity.this,
+                        seleccionarLista(pedidosFiltradosInformatica,"demanda")));
+
 
             }
         });
@@ -134,9 +194,18 @@ public class ListViewActivity extends AppCompatActivity {
         filtroClases.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Hacer el filtro
-                Intent i = new Intent(ListViewActivity.this, ListViewActivity.class);
-                startActivity(i);
+                //Recorremos el array y seleccionamos solo los que son de Clase,
+                // luego lo dividimos en oferta y demanda
+                ArrayList<Pedido> pedidosFiltradosClases = new ArrayList<>();
+                for (Pedido p:pedidos){
+                    if (p.getCategoria().equalsIgnoreCase("clases")){
+                        pedidosFiltradosClases.add(p);
+                    }
+                }
+                listViewOfertas.setAdapter(new Adapter(ListViewActivity.this,
+                        seleccionarLista(pedidosFiltradosClases,"oferta")));
+                listViewDemandas.setAdapter(new Adapter(ListViewActivity.this,
+                        seleccionarLista(pedidosFiltradosClases,"demanda")));
 
             }
         });
@@ -144,9 +213,18 @@ public class ListViewActivity extends AppCompatActivity {
         filtroMenaje.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Hacer el filtro
-                Intent i = new Intent(ListViewActivity.this, ListViewActivity.class);
-                startActivity(i);
+                //Recorremos el array y seleccionamos solo los que son de Hogar/Menaje,
+                // luego lo dividimos en oferta y demanda
+                ArrayList<Pedido> pedidosFiltradosHM = new ArrayList<>();
+                for (Pedido p:pedidos){
+                    if (p.getCategoria().equalsIgnoreCase("hogar/menaje")){
+                        pedidosFiltradosHM.add(p);
+                    }
+                }
+                listViewOfertas.setAdapter(new Adapter(ListViewActivity.this,
+                        seleccionarLista(pedidosFiltradosHM,"oferta")));
+                listViewDemandas.setAdapter(new Adapter(ListViewActivity.this,
+                        seleccionarLista(pedidosFiltradosHM,"demanda")));
 
             }
         });
@@ -194,5 +272,18 @@ public class ListViewActivity extends AppCompatActivity {
         }
 
         return pedidosFiltrados;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1){
+            if(resultCode == RESULT_OK){/*
+                data.getSerializableExtra("PEDIDO");
+                pedidos.get(pedidoIndex) = (Pedido) data.getSerializableExtra("PEDIDO");;
+
+            */
+            }
+        }
     }
 }

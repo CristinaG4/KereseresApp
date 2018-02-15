@@ -1,10 +1,12 @@
 package com.paulapps.kereseresapp.model;
 
+import java.io.Serializable;
+
 /**
  * Created by crist on 09/02/2018.
  */
 
-public class Perfil {
+public class Perfil implements Serializable{
 
     private String nombre;
     private String email;
