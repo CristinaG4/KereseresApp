@@ -4,9 +4,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/logo2"
+        android:icon="@drawable/logofondo4azulclaro"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/logo2"
+        android:roundIcon="@drawable/logofondo4azulclaro"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activities.login_signup.SplashActivity">
@@ -28,7 +28,8 @@
             android:label="@string/title_activity_edit_perfil"
             android:theme="@style/AppTheme" />
         <activity android:name=".activities.login_signup.ResetPasswordActivity" />
-        <activity android:name=".activities.DetallesPedido"></activity>
+        <activity android:name=".activities.DetallesPedido" />
+        <activity android:name=".activities.NavigationDrawerActivity"></activity>
     </application>
 
 </manifest>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimaryDark">#f7127d8a</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorFondo1">#72d1e7db</color>
     <color name="colorFondo2">#B75FA5E7</color>
@@ -9,4 +9,5 @@
     <color name="btnLogin">#127d8a</color>
     <color name="VerdeClaro">#45bcca</color>
     <color name="textBtnLogin">#ffffff</color>
+    <color name="fondoPlano">#4842b8c6</color>
 </resources>

@@ -81,16 +81,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <Button
-            android:id="@+id/btnEditarPerfil"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="edit"
-            android:background="@drawable/btn_radious"
-            android:textColor="@color/textBtnLogin"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"/>
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="5dp">
+            <Button
+                android:id="@+id/btnEditarPerfil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="edit"
+                android:background="@drawable/btn_radious"
+                android:textColor="@color/textBtnLogin"
+                android:layout_margin="5dp"/>
 
+            <Button
+                android:id="@+id/btnEliminarPerfil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="remove"
+                android:background="@drawable/btn_radious"
+                android:textColor="@color/textBtnLogin"
+                android:layout_margin="5dp"/>
+        </LinearLayout>
 
     </LinearLayout>
     <LinearLayout
