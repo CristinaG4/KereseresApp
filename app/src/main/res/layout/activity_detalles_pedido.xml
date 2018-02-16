@@ -1,48 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.paulapps.kereseresapp.activities.DetallesPedido">
-
+    android:orientation="vertical"
+    android:background="@color/fondoPlano"
+    android:padding="15dp">
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tituloDetallePedido"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="titulo de la oferta o demanda"
+        android:gravity="center"/>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="132dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="horizontal"
+        android:layout_margin="20dp">
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/logo"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp">
+            <TextView
+                android:id="@+id/nombreDetallePedidoTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombre+apellido"/>
+            <TextView
+                android:id="@+id/direccionDetallePedidoTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="direccion"/>
+            <TextView
+                android:id="@+id/emailDetallePedidoTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="email"/>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/categoriaDetallePedidoTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TIPO DE CATEGORIA"/>
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:id="@+id/descripDetallePedidoTV"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        android:text="Esta es la descripcion de prueba del pedido"
+        android:layout_marginTop="10dp"/>
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
+        android:id="@+id/tipoPagoDetallePedidoTV"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-</android.support.constraint.ConstraintLayout>
+        android:text="Tipo de pago: Dinero/favor"
+        android:layout_marginTop="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="10dp">
+
+        <Button
+            android:id="@+id/btnVolverDetallePedido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BACK"
+            android:background="@drawable/btn_radious"
+            android:textColor="@color/textBtnLogin"
+            android:layout_margin="10dp"/>
+        <Button
+            android:id="@+id/btnContactarDetallePedido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_radious"
+            android:textColor="@color/textBtnLogin"
+            android:text="CONTACT"/>
+    </LinearLayout>
+
+</LinearLayout>
