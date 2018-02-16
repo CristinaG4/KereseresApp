@@ -18,6 +18,7 @@ public class DetallesPedido extends AppCompatActivity {
 
     Intent intent;
     //TextView tv1,tv2,tv3;
+    TextView tituloDetallePedido, categoriaDetallePedidoTV, nombreDetallePedidoTV, descripDetallePedidoTV, emailDetallePedidoTV;
     private Pedido pedido = new Pedido();
     Button btnVolverDetallePedido;
 
@@ -26,20 +27,36 @@ public class DetallesPedido extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalles_pedido);
+
         //cogemos el objeto del intent->Pedido
         pedido = (Pedido) getIntent().getSerializableExtra("PEDIDO");
+
+        //Declaramos botones
+        btnVolverDetallePedido = (Button) findViewById(R.id.btnVolverDetallePedido);
+
+        //Declaramos TextView
+        tituloDetallePedido = (TextView) findViewById(R.id.tituloDetallePedido);
+        categoriaDetallePedidoTV = (TextView) findViewById(R.id.categoriaDetallePedidoTV);
+        nombreDetallePedidoTV = (TextView) findViewById(R.id.nombreDetallePedidoTV);
+        descripDetallePedidoTV = (TextView) findViewById(R.id.descripDetallePedidoTV);
+        emailDetallePedidoTV = (TextView) findViewById(R.id.emailDetallePedidoTV);
 /*
         tv1 = findViewById(R.id.textView);
         tv2 = findViewById(R.id.textView2);
-        tv3 = findViewById(R.id.textView3);
+        tv3 = findViewById(R.id.textView3);*/
 
         //ejemplo de como acceder a los datos de pedido
-        tv1.setText(pedido.getTitulo());
+        tituloDetallePedido.setText(pedido.getTitulo());
+        categoriaDetallePedidoTV.setText(pedido.getCategoria());
+        nombreDetallePedidoTV.setText(pedido.getPerfil().getNombre());
+        descripDetallePedidoTV.setText(pedido.getDescripcion());
+        emailDetallePedidoTV.setText(pedido.getPerfil().getEmail());
+       /* tv1.setText(pedido.getTitulo());
         tv2.setText(pedido.getCategoria());
         tv3.setText(pedido.getPerfil().getNombre());*/
 
 
-        btnVolverDetallePedido = (Button) findViewById(R.id.btnVolverDetallePedido);
+
 
         btnVolverDetallePedido.setOnClickListener(new View.OnClickListener() {
             @Override

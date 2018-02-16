@@ -19,6 +19,7 @@
         android:orientation="horizontal"
         android:layout_margin="20dp">
         <ImageView
+            android:id="@+id/fotoCategoria"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:background="@drawable/logo"
