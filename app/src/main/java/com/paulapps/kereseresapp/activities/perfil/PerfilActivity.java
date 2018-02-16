@@ -10,13 +10,14 @@ import android.widget.TextView;
 
 import com.paulapps.kereseresapp.R;
 import com.paulapps.kereseresapp.activities.ListViewActivity;
+import com.paulapps.kereseresapp.activities.NavigationDrawerActivity;
 
 public class PerfilActivity extends AppCompatActivity {
 
     TextView tituloAppPerfil;
     Button btnCalcelarPerfil;
     Button btnEditarPerfil;
-    Button btprueba;
+    Button btnEliminarPerfil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +26,8 @@ public class PerfilActivity extends AppCompatActivity {
 
         tituloAppPerfil = (TextView) findViewById(R.id.tituloAppPerfil);
         btnCalcelarPerfil = (Button) findViewById(R.id.btnCalcelarPerfil);
-        btnEditarPerfil= (Button) findViewById(R.id.btnEditarPerfil);
+        btnEditarPerfil = (Button) findViewById(R.id.btnEditarPerfil);
+        btnEliminarPerfil = (Button) findViewById(R.id.btnEliminarPerfil);
 
 
         //Fuente titulo
@@ -35,7 +37,7 @@ public class PerfilActivity extends AppCompatActivity {
         btnCalcelarPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(PerfilActivity.this, ListViewActivity.class);
+                Intent i = new Intent(PerfilActivity.this, NavigationDrawerActivity.class);
                 startActivity(i);
             }
         });
@@ -48,6 +50,12 @@ public class PerfilActivity extends AppCompatActivity {
             }
         });
 
-    }
+        btnEliminarPerfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
+
+    }
 }

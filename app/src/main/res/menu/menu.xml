@@ -2,7 +2,5 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/menuSalir"
         android:title="SignOut"></item>
-    <item android:id="@+id/perfil"
-        android:title="Perfil"></item>
     <!--mirar notificaciones-->
 </menu>

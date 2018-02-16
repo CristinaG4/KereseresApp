@@ -74,7 +74,7 @@
             android:inputType="textPersonName"
             android:hint="@string/apartment"
             android:layout_margin="5dp"
-             />
+            />
 
         <EditText
             android:id="@+id/etCodeSingUp"

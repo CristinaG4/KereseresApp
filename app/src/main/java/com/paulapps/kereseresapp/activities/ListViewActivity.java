@@ -3,6 +3,8 @@ package com.paulapps.kereseresapp.activities;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -254,10 +256,6 @@ public class ListViewActivity extends AppCompatActivity {
                 Intent i = new Intent(this, MainActivity.class);
                 startActivity(i);
                 break;
-            case R.id.perfil:
-                Intent in = new Intent(ListViewActivity.this, PerfilActivity.class);
-                startActivity(in);
-                break;
         }
         return true;
     }
@@ -280,10 +278,36 @@ public class ListViewActivity extends AppCompatActivity {
         if(requestCode == 1){
             if(resultCode == RESULT_OK){/*
                 data.getSerializableExtra("PEDIDO");
-                pedidos.get(pedidoIndex) = (Pedido) data.getSerializableExtra("PEDIDO");;
-
+                pedidos.get(pedidoIndex) = (Pedido) data.getSerializableExtra("PEDIDO");
             */
             }
         }
+    }
+
+    //Esto es para que el NavigationDrawer funcione
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    //@Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_profile) {
+            Intent in = new Intent(ListViewActivity.this, PerfilActivity.class);
+            startActivity(in);
+            // Handle the camera action
+        } else if (id == R.id.nav_notifications) {
+
+        } else if (id == R.id.nav_manage) {
+
+        } else if (id == R.id.nav_offers) {
+
+        } else if (id == R.id.nav_demands) {
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }
