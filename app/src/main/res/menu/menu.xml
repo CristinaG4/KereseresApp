@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/perfil"
+        android:title="Profile"></item>
+    <item android:id="@+id/misDemandas"
+        android:title="Demands"></item>
+    <item android:id="@+id/misOfertas"
+    android:title="Offers"></item>
+    <item android:id="@+id/misNotificaciones"
+        android:title="Notifications"></item>
     <item android:id="@+id/menuSalir"
         android:title="SignOut"></item>
     <!--mirar notificaciones-->

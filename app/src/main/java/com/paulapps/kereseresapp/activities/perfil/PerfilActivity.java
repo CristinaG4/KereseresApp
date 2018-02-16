@@ -37,7 +37,7 @@ public class PerfilActivity extends AppCompatActivity {
         btnCalcelarPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(PerfilActivity.this, NavigationDrawerActivity.class);
+                Intent i = new Intent(PerfilActivity.this, ListViewActivity.class);
                 startActivity(i);
             }
         });

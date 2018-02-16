@@ -3,8 +3,8 @@ package com.paulapps.kereseresapp.activities;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -43,14 +43,24 @@ public class ListViewActivity extends AppCompatActivity {
     ArrayList<Perfil> perfiles;
     static ArrayList<Pedido> pedidos;
     private int pedidoIndex;
+    private Toolbar toolbar;
+    private  ActionBarDrawerToggle toggle;
+    private  DrawerLayout drawer;
+    private MenuInflater inflater;
 
+    Intent i;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
         // getSupportActionBar().hide();
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         listViewDemandas= (ListView) findViewById(R.id.lvDemandas);
         listViewOfertas= (ListView) findViewById(R.id.lvOfertas);
         Toolbar menu =(Toolbar) findViewById(R.id.toolbar);//importar como v7 para q no de error
@@ -231,17 +241,13 @@ public class ListViewActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
+        //NavDrawer();
     }
 
     //creamos el menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater =  getMenuInflater();
+        inflater =  getMenuInflater();
         inflater.inflate(R.menu.menu,menu);
         return true;
     }
@@ -250,12 +256,30 @@ public class ListViewActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.perfil:
+                i = new Intent(ListViewActivity.this, PerfilActivity.class);
+                startActivity(i);
+                break;
+            case R.id.misDemandas:
+                i= new Intent(ListViewActivity.this, PerfilActivity.class);
+                startActivity(i);
+                break;
+            case R.id.misOfertas:
+                i= new Intent(ListViewActivity.this, PerfilActivity.class);
+                startActivity(i);
+                break;
+            case R.id.misNotificaciones:
+                i= new Intent(ListViewActivity.this, PerfilActivity.class);
+                startActivity(i);
+                break;
+
             case R.id.menuSalir://hacer case por opcion
                 FirebaseAuth.getInstance().signOut();
                 finish();
-                Intent i = new Intent(this, MainActivity.class);
+                i = new Intent(this, MainActivity.class);
                 startActivity(i);
                 break;
+
         }
         return true;
     }
@@ -278,36 +302,38 @@ public class ListViewActivity extends AppCompatActivity {
         if(requestCode == 1){
             if(resultCode == RESULT_OK){/*
                 data.getSerializableExtra("PEDIDO");
-                pedidos.get(pedidoIndex) = (Pedido) data.getSerializableExtra("PEDIDO");
+                pedidos.get(pedidoIndex) = (Pedido) data.getSerializableExtra("PEDIDO");;
+
             */
             }
         }
     }
+    private void NavDrawer()
+    {
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        {
 
-    //Esto es para que el NavigationDrawer funcione
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                // code here will execute once the drawer is opened( As I dont want anything happened whe drawer is
+                // open I am not going to put anything here)
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    //@Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
+            }
 
-        if (id == R.id.nav_profile) {
-            Intent in = new Intent(ListViewActivity.this, PerfilActivity.class);
-            startActivity(in);
-            // Handle the camera action
-        } else if (id == R.id.nav_notifications) {
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                // Code here will execute once drawer is closed
+            }
+        };
+        // Drawer Toggle Object Made
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
 
-        } else if (id == R.id.nav_manage) {
+        //crearNavDrawer();
 
-        } else if (id == R.id.nav_offers) {
+    };
 
-        } else if (id == R.id.nav_demands) {
 
-        }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
 }
