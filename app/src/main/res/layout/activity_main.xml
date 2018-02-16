@@ -22,7 +22,8 @@
         android:layout_marginTop="2dp"
         android:text="@string/tituloApp"
         android:textSize="70dp"
-        android:textColor="@color/btnLogin"/>
+        android:textColor="@color/btnLogin"
+        />
 
     <LinearLayout
         android:id="@+id/cuadradoLogin"
@@ -38,29 +39,55 @@
         android:weightSum="10"
         android:padding="5dp">
 
-        <EditText
-            android:id="@+id/etEmail"
+        <LinearLayout
+            android:id="@+id/editTextlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:ems="10"
-            android:inputType="textEmailAddress"
-            android:hint="@string/email"
-            android:layout_weight="1"/>
+            android:orientation="vertical"
+            android:layout_marginTop="32dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:padding="10dp">
 
-        <EditText
-            android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/etEmail"
-            android:layout_alignRight="@+id/etEmail"
-            android:layout_centerVertical="true"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:hint="@string/password"
-            android:layout_weight="1"
-            />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_toStartOf="@+id/title">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/email"
+                    android:textColor="@color/VerdeClaro"
+                    android:textColorHint="@color/VerdeClaro"
+                    android:textSize="22sp">
+
+                    <requestFocus />
+                </android.support.design.widget.TextInputEditText>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_toStartOf="@+id/title">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:textColorHint="@color/VerdeClaro"
+                    android:textSize="22sp"/>
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
         <LinearLayout
             android:layout_width="200dp"
             android:layout_height="wrap_content"
@@ -92,21 +119,17 @@
                 android:onClick="SignUp"
                 android:layout_weight="2"/>
 
-
-
         </LinearLayout>
-
 
 
         <Button
             android:id="@+id/btnAceptar"
             android:layout_width="80dp"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:background="@drawable/btn_radious"
             android:textColor="@color/textBtnLogin"
             android:onClick="aceptar"
             android:text="@string/okBtn" />
-
     </LinearLayout>
 
     <Button

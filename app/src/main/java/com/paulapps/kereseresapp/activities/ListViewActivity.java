@@ -277,8 +277,7 @@ public class ListViewActivity extends AppCompatActivity {
         if(requestCode == 1){
             if(resultCode == RESULT_OK){/*
                 data.getSerializableExtra("PEDIDO");
-                pedidos.get(pedidoIndex) = (Pedido) data.getSerializableExtra("PEDIDO");;
-
+                pedidos.get(pedidoIndex) = (Pedido) data.getSerializableExtra("PEDIDO");
             */
             }
         }

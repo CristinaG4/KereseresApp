@@ -1,14 +1,13 @@
 package com.paulapps.kereseresapp.activities.login_signup;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.*;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -26,6 +25,7 @@ public class SignUpActivity extends AppCompatActivity {
     private Button btSignUp;
     private EditText etEmail, etPassword, etName, etApartment, etCode;
     private String emailUser, passwordUser, nameUser, codeUser, apartmentUser;
+    TextView tituloApp;
 
 
     @Override
@@ -43,6 +43,11 @@ public class SignUpActivity extends AppCompatActivity {
         etName = findViewById(R.id.etNameSingUp);
         etApartment = findViewById(R.id.etAparmetnSignUp);
         etCode = findViewById(R.id.etCodeSingUp);
+        tituloApp = (TextView) findViewById(R.id.tituloApp);
+
+        //Fuente titulo
+        Typeface myFont = Typeface.createFromAsset(getAssets(), "Strawberry Blossom.ttf");
+        tituloApp.setTypeface(myFont);
 
 
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
