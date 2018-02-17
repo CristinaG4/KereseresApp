@@ -15,7 +15,7 @@
         android:layout_marginTop="2dp"
         android:text="@string/tituloApp"
         android:textSize="70dp"
-        android:textColor="@color/btnLogin"/>
+        android:textColor="@color/verdeTitulo"/>
 
     <LinearLayout
         android:id="@+id/cuadradoLogin"

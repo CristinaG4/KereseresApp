@@ -19,5 +19,5 @@
         android:layout_height="wrap_content"
         android:text="Kereseres"
         android:textSize="60dp"
-        android:textColor="@color/btnLogin"/>
+        android:textColor="@color/verdeTitulo"/>
 </LinearLayout>

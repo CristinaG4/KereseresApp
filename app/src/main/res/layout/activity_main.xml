@@ -22,7 +22,7 @@
         android:layout_marginTop="2dp"
         android:text="@string/tituloApp"
         android:textSize="70dp"
-        android:textColor="@color/btnLogin"
+        android:textColor="@color/verdeTitulo"
         />
 
     <LinearLayout
@@ -62,8 +62,8 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/email"
-                    android:textColor="@color/VerdeClaro"
-                    android:textColorHint="@color/VerdeClaro"
+                    android:textColor="@color/verdeTitulo"
+                    android:textColorHint="@color/verdeTitulo"
                     android:textSize="22sp">
 
                     <requestFocus />
@@ -83,7 +83,8 @@
                     android:ems="10"
                     android:hint="@string/password"
                     android:inputType="textPassword"
-                    android:textColorHint="@color/VerdeClaro"
+                    android:textColor="@color/verdeTitulo"
+                    android:textColorHint="@color/verdeTitulo"
                     android:textSize="22sp"/>
             </android.support.design.widget.TextInputLayout>
 

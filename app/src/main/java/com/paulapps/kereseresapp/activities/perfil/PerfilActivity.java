@@ -8,16 +8,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 import com.paulapps.kereseresapp.R;
 import com.paulapps.kereseresapp.activities.ListViewActivity;
 import com.paulapps.kereseresapp.activities.NavigationDrawerActivity;
 
 public class PerfilActivity extends AppCompatActivity {
 
+    private FirebaseDatabase firebase;
+    private FirebaseAuth mAuth;
+    //private FirebaseUser user;
+    private FirebaseAuth.AuthStateListener mAuthStateListener;
     TextView tituloAppPerfil;
     Button btnCalcelarPerfil;
     Button btnEditarPerfil;
     Button btnEliminarPerfil;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,4 +65,22 @@ public class PerfilActivity extends AppCompatActivity {
         });
 
     }
+/*
+    public void InfoUser(){
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // Name, email address, and profile photo Url
+            String name = user.getDisplayName();
+            String email = user.getEmail();
+
+
+            // Check if user's email is verified
+            boolean emailVerified = user.isEmailVerified();
+
+            // The user's ID, unique to the Firebase project. Do NOT use this value to
+            // authenticate with your backend server, if you have one. Use
+            // FirebaseUser.getToken() instead.
+            String uid = user.getUid();
+        }
+    }*/
 }

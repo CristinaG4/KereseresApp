@@ -39,8 +39,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private String password;
     private TextView tituloApp;
     public static final int SIGN_IN_CODE = 777;
-    int hola = 20;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
 
     public void LogIn() {
+
         Intent i = new Intent(MainActivity.this, ListViewActivity.class);
         startActivity(i);
     }

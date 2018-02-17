@@ -28,7 +28,9 @@
             android:label="@string/title_activity_edit_perfil"
             android:theme="@style/AppTheme" />
         <activity android:name=".activities.login_signup.ResetPasswordActivity" />
-        <activity android:name=".activities.DetallesPedido" />
+        <activity
+            android:name=".activities.DetallesPedido"
+            android:parentActivityName=".activities.ListViewActivity"/>
         <activity android:name=".activities.NavigationDrawerActivity"></activity>
     </application>
 

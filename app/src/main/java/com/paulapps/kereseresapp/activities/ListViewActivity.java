@@ -30,10 +30,10 @@ public class ListViewActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private FirebaseDatabase firebase;
     private GoogleApiClient googleApiClient;
-    ImageButton filtroAll, filtroAmigos, filtroInformatica, filtroClases, filtroMenaje;
-    ListView listViewDemandas, listViewOfertas;
-    ArrayList<Perfil> perfiles;
-    static ArrayList<Pedido> pedidos;
+    private ImageButton filtroAll, filtroAmigos, filtroInformatica, filtroClases, filtroMenaje;
+    private ListView listViewDemandas, listViewOfertas;
+    private ArrayList<Perfil> perfiles;
+    private ArrayList<Pedido> pedidos;
     private int pedidoIndex;
     private Toolbar toolbar;
     private  ActionBarDrawerToggle toggle;
@@ -231,6 +231,7 @@ public class ListViewActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.perfil:
                 i = new Intent(ListViewActivity.this, PerfilActivity.class);
+               //i.putExtra("PEDIDO",seleccionarLista(pedidos,"oferta").get(position));
                 startActivity(i);
                 break;
             case R.id.misDemandas:
