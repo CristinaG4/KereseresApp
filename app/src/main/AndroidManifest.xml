@@ -30,8 +30,10 @@
         <activity android:name=".activities.login_signup.ResetPasswordActivity" />
         <activity
             android:name=".activities.DetallesPedido"
-            android:parentActivityName=".activities.ListViewActivity"/>
-        <activity android:name=".activities.NavigationDrawerActivity"></activity>
+            android:parentActivityName=".activities.ListViewActivity" />
+        <activity android:name=".activities.NavigationDrawerActivity" />
+        <activity android:name=".activities.crear_pedidos.CrearDemandaActivity" />
+        <activity android:name=".activities.crear_pedidos.CrearOfertaActivity"></activity>
     </application>
 
 </manifest>

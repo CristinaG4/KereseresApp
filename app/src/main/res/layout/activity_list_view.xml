@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/fondoPlano">
 
@@ -59,7 +60,43 @@
                         android:id="@+id/lvDemandas"></ListView>
                 </LinearLayout>
             </FrameLayout>
+
         </LinearLayout>
+        <com.github.clans.fab.FloatingActionMenu
+            android:id="@+id/floatButtonPrincipal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@drawable/ic_add_boton"
+            app:menu_fab_size="normal"
+            app:menu_colorNormal="@color/verdeTitulo"
+            app:menu_colorPressed="@color/VerdeClaro"
+            >
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/floatButtonDemanda"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_size="mini"
+                app:fab_label="Demand"
+                app:fab_colorNormal="@color/VerdeClaro"
+                app:fab_colorPressed="@color/verdeTitulo"
+                android:src="@drawable/d"
+                />
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/floatButtonOferta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_size="mini"
+                app:fab_label="Offer"
+                app:fab_colorNormal="@color/VerdeClaro"
+                app:fab_colorPressed="@color/verdeTitulo"
+                android:src="@drawable/o"
+                />
+
+        </com.github.clans.fab.FloatingActionMenu>
     </TabHost>
     <ImageView
         android:layout_width="match_parent"

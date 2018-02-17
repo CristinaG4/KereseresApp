@@ -12,12 +12,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.*;
+import android.view.ContextMenu;
 
+import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.paulapps.kereseresapp.Adapters.Adapter;
 import com.paulapps.kereseresapp.R;
+import com.paulapps.kereseresapp.activities.crear_pedidos.CrearDemandaActivity;
+import com.paulapps.kereseresapp.activities.crear_pedidos.CrearOfertaActivity;
 import com.paulapps.kereseresapp.activities.login_signup.MainActivity;
 import com.paulapps.kereseresapp.activities.perfil.PerfilActivity;
 import com.paulapps.kereseresapp.model.Pedido;
@@ -39,6 +43,9 @@ public class ListViewActivity extends AppCompatActivity {
     private  ActionBarDrawerToggle toggle;
     private  DrawerLayout drawer;
     private MenuInflater inflater;
+    private FloatingActionMenu floatButtonPrincipal;
+    private com.github.clans.fab.FloatingActionButton floatButtonDemanda, floatButtonOferta;
+
 
     Intent i;
 
@@ -49,6 +56,11 @@ public class ListViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
         // getSupportActionBar().hide();
+
+        //Botones Flotantes
+        floatButtonPrincipal = findViewById(R.id.floatButtonPrincipal);
+        floatButtonDemanda = findViewById(R.id.floatButtonDemanda);
+        floatButtonOferta = findViewById(R.id.floatButtonOferta);
 
         //Barra para filtrar
         filtroAll = (ImageButton) findViewById(R.id.filtroAll);
@@ -64,12 +76,14 @@ public class ListViewActivity extends AppCompatActivity {
         //Declaramos Toolbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-
         setSupportActionBar(toolbar);
-
 
         Toolbar menu =(Toolbar) findViewById(R.id.toolbar);//importar como v7 para q no de error
         setSupportActionBar(menu);
+
+
+
+
 
         //declaramos el Arraylist aqui porque sino tiene un bug que duplica la list view de forma exponencial al volver a cargar la Activity
         perfiles = new ArrayList<>();
@@ -214,8 +228,25 @@ public class ListViewActivity extends AppCompatActivity {
             }
         });
 
+        floatButtonDemanda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                i = new Intent(ListViewActivity.this, CrearDemandaActivity.class);
+                startActivity(i);
+            }
+        });
+
+        floatButtonOferta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                i = new Intent(ListViewActivity.this, CrearOfertaActivity.class);
+                startActivity(i);
+            }
+        });
+
         //NavDrawer();
     }
+
 
     //creamos el menu
     @Override
@@ -283,6 +314,14 @@ public class ListViewActivity extends AppCompatActivity {
             }
         }
     }
+
+
+
+
+
+
+
+
 
     //Navigation Drawer
     private void NavDrawer()

@@ -40,5 +40,8 @@ dependencies {
     //Google
     compile 'com.google.android.gms:play-services-auth:11.0.4'
 
+    //Dependencia para Botones flotantes
+    compile 'com.github.clans:fab:1.6.2'
+
 }
 apply plugin: 'com.google.gms.google-services'

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondoPlano"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create an offer"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:textSize="30dp"
+        android:background="@color/verdeTitulo"
+        android:textColor="@color/textBtnLogin"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title: "
+            android:textSize="15dp"/>
+
+        <EditText
+            android:id="@+id/titleCreaOfertaET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Introduce the title"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Category: "
+            android:textSize="15dp"
+            android:layout_marginTop="15dp"/>
+
+        <Spinner
+            android:id="@+id/spinnerCreaOferta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:entries="@array/Categories"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="15dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Type of payment: "
+            android:textSize="15dp"
+            android:layout_marginTop="5dp"/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <RadioButton
+                android:id="@+id/radioBtnMoneyCreaOferta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Money"
+                android:layout_marginRight="20dp"
+                android:onClick="onRadioButtonClicked"/>
+            <RadioButton
+                android:id="@+id/radioBtnFavorCreaOferta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Favor"
+                android:layout_marginLeft="20dp"
+                android:onClick="onRadioButtonClicked"/>
+
+        </RadioGroup>
+    </LinearLayout>
+
+    <MultiAutoCompleteTextView
+        android:id="@+id/descripCreaOfertaET"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:background="@color/textBtnLogin"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:hint="Enter the description."/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="15dp">
+        <Button
+            android:id="@+id/btnCancelarCreaOferta"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:background="@drawable/btn_radious"
+            android:onClick="Cancelar"
+            android:text="@string/cancelarBtn"
+            android:textColor="@color/textBtnLogin"
+            android:layout_marginRight="10dp"
+            />
+
+        <Button
+            android:id="@+id/btnCrearOferta"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:background="@drawable/btn_radious"
+            android:onClick="registrar"
+            android:text="@string/crearOfertaDemanda"
+            android:textColor="@color/textBtnLogin"
+            android:layout_gravity="end"
+            android:layout_marginLeft="10dp"
+            />
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
