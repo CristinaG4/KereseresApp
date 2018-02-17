@@ -19,8 +19,8 @@ public class CrearOfertaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_oferta);
 
-        btnCancelarCreaOferta = findViewById(R.id.btnCancelarCreaDemanda);
-        btnCrearOferta = findViewById(R.id.btnCrearDemanda);
+        btnCancelarCreaOferta = findViewById(R.id.btnCancelarCreaOferta);
+        btnCrearOferta = findViewById(R.id.btnCrearOferta);
 
         //Funcionalidad botones
         btnCancelarCreaOferta.setOnClickListener(new View.OnClickListener() {

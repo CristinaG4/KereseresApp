@@ -10,24 +10,28 @@
             android:title="Profile" />
         <item
             android:id="@+id/nav_notifications"
-            android:icon="@drawable/ic_menu_gallery"
             android:title="Notifications" />
+        <!--  android:icon="@drawable/ic_menu_gallery"-->
+
         <item
             android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
             android:title="Tools" />
+        <!--android:icon="@drawable/ic_menu_manage"-->
+
     </group>
 
     <item android:title="Your orders ">
         <menu>
             <item
                 android:id="@+id/nav_offers"
-                android:icon="@drawable/ic_menu_share"
                 android:title="Offers" />
+            <!--:icon="@drawable/ic_menu_share"-->
+
             <item
                 android:id="@+id/nav_demands"
-                android:icon="@drawable/ic_menu_send"
                 android:title="Demands" />
+            <!--android:icon="@drawable/ic_menu_send"-->
+
         </menu>
     </item>
 

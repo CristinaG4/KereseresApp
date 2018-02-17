@@ -20,8 +20,8 @@ public class PerfilActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     //private FirebaseUser user;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
-    TextView tituloAppPerfil;
-    Button btnCalcelarPerfil;
+    TextView tituloAppPerfil,PerfilEmail,PerfilPassword,PerfilName,PerfilApartment,PerfilComCode,PerfilTelefono;
+    Button btnAceptarPerfil;
     Button btnEditarPerfil;
     Button btnEliminarPerfil;
 
@@ -32,16 +32,22 @@ public class PerfilActivity extends AppCompatActivity {
         setContentView(R.layout.activity_perfil);
 
         tituloAppPerfil = (TextView) findViewById(R.id.tituloAppPerfil);
-        btnCalcelarPerfil = (Button) findViewById(R.id.btnCalcelarPerfil);
+        btnAceptarPerfil = (Button) findViewById(R.id.btnAceptarPerfil);
         btnEditarPerfil = (Button) findViewById(R.id.btnEditarPerfil);
         btnEliminarPerfil = (Button) findViewById(R.id.btnEliminarPerfil);
+        PerfilEmail=(TextView) findViewById(R.id.PerfilEmail);
+        PerfilPassword=(TextView) findViewById(R.id.PerfilPassword);
+        PerfilName=(TextView) findViewById(R.id.PerfilName);
+        PerfilApartment=(TextView) findViewById(R.id.PerfilApartment);
+        PerfilComCode=(TextView) findViewById(R.id.PerfilComCode);
+        PerfilTelefono=(TextView) findViewById(R.id.PerfilTelefono);
 
 
         //Fuente titulo
         Typeface myFont = Typeface.createFromAsset(getAssets(), "Strawberry Blossom.ttf");
         tituloAppPerfil.setTypeface(myFont);
 
-        btnCalcelarPerfil.setOnClickListener(new View.OnClickListener() {
+        btnAceptarPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(PerfilActivity.this, ListViewActivity.class);

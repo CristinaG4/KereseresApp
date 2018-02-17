@@ -2,8 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/fondoPlano"
-    android:orientation="vertical">
+    android:background="@drawable/fondo_degradado"
+    android:orientation="vertical"
+    >
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,42 +19,45 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="15dp">
+        android:layout_margin="15dp"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Title: "
-            android:textSize="15dp"/>
+            android:textSize="15dp" />
 
         <EditText
             android:id="@+id/titleCreaDemandaET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Introduce the title"/>
+            android:hint="Introduce the title" />
+
 
     </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="15dp">
+        android:layout_margin="15dp"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:text="Category: "
-            android:textSize="15dp"
-            android:layout_marginTop="15dp"/>
+            android:textSize="15dp" />
 
         <Spinner
             android:id="@+id/spinnerCreaDemanda"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:entries="@array/Categories"/>
+            android:entries="@array/Categories" />
 
     </LinearLayout>
 
@@ -112,7 +117,8 @@
             android:id="@+id/btnCancelarCreaDemanda"
             android:layout_width="80dp"
             android:layout_height="40dp"
-            android:background="@drawable/btn_radious"
+            android:background="@drawable/boton_cambio_color"
+            android:clickable="false"
             android:onClick="Cancelar"
             android:text="@string/cancelarBtn"
             android:textColor="@color/textBtnLogin"
@@ -123,7 +129,8 @@
             android:id="@+id/btnCrearDemanda"
             android:layout_width="80dp"
             android:layout_height="40dp"
-            android:background="@drawable/btn_radious"
+            android:background="@drawable/boton_cambio_color"
+            android:clickable="false"
             android:onClick="registrar"
             android:text="@string/crearOfertaDemanda"
             android:textColor="@color/textBtnLogin"
@@ -132,8 +139,6 @@
             />
 
     </LinearLayout>
-
-
 
 
 </LinearLayout>

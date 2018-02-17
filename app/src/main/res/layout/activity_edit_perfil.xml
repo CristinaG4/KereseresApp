@@ -31,54 +31,126 @@
         android:padding="5dp">
 
         <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:background="@drawable/user"
             android:layout_margin="10dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Email:"
-            android:layout_gravity="left"
-            android:layout_margin="10dp"/>
+            android:orientation="horizontal"
+            android:layout_margin="5dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="Email:" />
+
+            <EditText
+                android:id="@+id/EtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@null"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Password:"
-            android:layout_gravity="left"
-            android:layout_margin="10dp"/>
+            android:orientation="horizontal"
+            android:layout_margin="5dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="Password:"
+               />
+            <EditText
+                android:id="@+id/EtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@null"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name:"
-            android:layout_gravity="left"
-            android:layout_margin="10dp"/>
+            android:orientation="horizontal"
+            android:layout_margin="5dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="Name:"
+              />
+            <EditText
+                android:id="@+id/EtName"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@null"/>
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Aparment:"
-            android:layout_gravity="left"
-            android:layout_margin="10dp"/>
+            android:orientation="horizontal"
+            android:layout_margin="5dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="Apartment:"
+               />
+
+            <EditText
+                android:id="@+id/EtApartment"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@null"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Community Code:"
-            android:layout_gravity="left"
-            android:layout_margin="10dp"/>
+            android:orientation="horizontal"
+            android:layout_margin="5dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="Community Code:"
+               />
+            <EditText
+                android:id="@+id/EtComCode"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@null"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Telefono:"
-            android:layout_gravity="left"
-            android:layout_margin="10dp"/>
+            android:orientation="horizontal"
+            android:layout_margin="5dp">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="Telefono:"
+               />
+            <EditText
+                android:id="@+id/EtTelefono"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@null"/>
 
+        </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -91,7 +163,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
-            android:background="@drawable/btn_radious"
+            android:background="@drawable/boton_cambio_color"
+            android:clickable="false"
             android:text="CANCEL"
             android:textColor="@color/textBtnLogin" />
 
@@ -101,12 +174,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="ACEPT"
-            android:background="@drawable/btn_radious"
+            android:background="@drawable/boton_cambio_color"
+            android:clickable="false"
             android:textColor="@color/textBtnLogin"/>
-
     </LinearLayout>
-
-
-
-
 </LinearLayout>

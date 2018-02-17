@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--cuando se pulse la imagen se activa boton pulsado,las imagenes se meten en drawable clickando ahi y pulsando en show in explorer-->
+    <item android:drawable="@drawable/boton_push"
+        android:state_pressed="true" />
+    <item android:drawable="@drawable/btn_nopush" />
+</selector>

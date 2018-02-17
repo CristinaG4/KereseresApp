@@ -10,4 +10,5 @@
     <color name="VerdeClaro">#45bcca</color>
     <color name="textBtnLogin">#ffffff</color>
     <color name="fondoPlano">#4842b8c6</color>
+    <color name="transparente">#3928757e</color>
 </resources>

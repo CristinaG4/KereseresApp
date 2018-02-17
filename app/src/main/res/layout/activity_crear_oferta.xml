@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/fondoPlano"
+    android:background="@drawable/fondo_degradado"
     android:orientation="vertical">
     <TextView
         android:layout_width="match_parent"
@@ -112,7 +112,8 @@
             android:id="@+id/btnCancelarCreaOferta"
             android:layout_width="80dp"
             android:layout_height="40dp"
-            android:background="@drawable/btn_radious"
+            android:background="@drawable/boton_cambio_color"
+            android:clickable="false"
             android:onClick="Cancelar"
             android:text="@string/cancelarBtn"
             android:textColor="@color/textBtnLogin"
@@ -123,7 +124,8 @@
             android:id="@+id/btnCrearOferta"
             android:layout_width="80dp"
             android:layout_height="40dp"
-            android:background="@drawable/btn_radious"
+            android:background="@drawable/boton_cambio_color"
+            android:clickable="false"
             android:onClick="registrar"
             android:text="@string/crearOfertaDemanda"
             android:textColor="@color/textBtnLogin"

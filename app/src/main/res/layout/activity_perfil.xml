@@ -31,55 +31,119 @@
         android:padding="5dp">
 
         <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:background="@drawable/user"/>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Email:"
-            android:layout_gravity="left"
-            android:layout_margin="10dp"/>
+            android:orientation="horizontal"
+            android:layout_margin="5dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email:"
+                android:layout_gravity="left"
+                android:layout_margin="5dp"/>
+
+            <TextView
+                android:id="@+id/PerfilEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Password:"
-            android:layout_gravity="left"
-            android:layout_margin="10dp"/>
+            android:orientation="horizontal"
+            android:layout_margin="5dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password:"
+                android:layout_gravity="left"
+                android:layout_margin="5dp"/>
+            <TextView
+                android:id="@+id/PerfilPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name:"
-            android:layout_gravity="left"
-            android:layout_margin="10dp"/>
+            android:orientation="horizontal"
+            android:layout_margin="5dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name:"
+                android:layout_gravity="left"
+                android:layout_margin="5dp"/>
+            <TextView
+                android:id="@+id/PerfilName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Aparment:"
-            android:layout_gravity="left"
-            android:layout_margin="10dp"/>
+            android:orientation="horizontal"
+            android:layout_margin="5dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apartment:"
+                android:layout_gravity="left"
+                android:layout_margin="5dp"/>
+
+            <TextView
+                android:id="@+id/PerfilApartment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+      </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Community Code:"
-            android:layout_gravity="left"
-            android:layout_margin="10dp"/>
+            android:orientation="horizontal"
+            android:layout_margin="5dp">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Community Code:"
+                android:layout_gravity="left"
+                android:layout_margin="5dp"/>
+             <TextView
+                android:id="@+id/PerfilComCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+     </LinearLayout>
+
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal"
+         android:layout_margin="5dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Telefono:"
             android:layout_gravity="left"
-            android:layout_margin="10dp"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
+            android:layout_margin="5dp"/>
+        <TextView
+            android:id="@+id/PerfilTelefono"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -92,7 +156,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="edit"
-                android:background="@drawable/btn_radious"
+                android:background="@drawable/boton_cambio_color"
+                android:clickable="false"
                 android:textColor="@color/textBtnLogin"
                 android:layout_margin="5dp"/>
 
@@ -101,7 +166,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="remove"
-                android:background="@drawable/btn_radious"
+                android:background="@drawable/boton_cambio_color"
+                android:clickable="false"
                 android:textColor="@color/textBtnLogin"
                 android:layout_margin="5dp"/>
         </LinearLayout>
@@ -113,14 +179,6 @@
         android:orientation="horizontal"
         android:layout_gravity="center_horizontal">
 
-        <Button
-            android:id="@+id/btnCalcelarPerfil"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/btn_radious"
-            android:text="cancelar"
-            android:textColor="@color/textBtnLogin" />
 
         <Button
             android:id="@+id/btnAceptarPerfil"
@@ -128,7 +186,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="aceptar"
-            android:background="@drawable/btn_radious"
+            android:background="@drawable/boton_cambio_color"
+            android:clickable="false"
             android:textColor="@color/textBtnLogin"/>
 
     </LinearLayout>

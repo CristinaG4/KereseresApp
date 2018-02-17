@@ -83,14 +83,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="BACK"
-            android:background="@drawable/btn_radious"
+            android:background="@drawable/boton_cambio_color"
+            android:clickable="false"
             android:textColor="@color/textBtnLogin"
             android:layout_margin="10dp"/>
         <Button
             android:id="@+id/btnContactarDetallePedido"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_radious"
+            android:background="@drawable/boton_cambio_color"
+            android:clickable="false"
             android:textColor="@color/textBtnLogin"
             android:text="CONTACT"/>
     </LinearLayout>

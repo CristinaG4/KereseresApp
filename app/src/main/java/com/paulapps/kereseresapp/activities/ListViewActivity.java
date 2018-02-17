@@ -62,6 +62,7 @@ public class ListViewActivity extends AppCompatActivity {
         floatButtonDemanda = findViewById(R.id.floatButtonDemanda);
         floatButtonOferta = findViewById(R.id.floatButtonOferta);
 
+
         //Barra para filtrar
         filtroAll = (ImageButton) findViewById(R.id.filtroAll);
         filtroAmigos = (ImageButton) findViewById(R.id.filtroAmigos);
@@ -82,7 +83,20 @@ public class ListViewActivity extends AppCompatActivity {
         setSupportActionBar(menu);
 
 
-
+        floatButtonDemanda.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(ListViewActivity.this,CrearDemandaActivity.class);
+            startActivity(intent);
+        }
+    });
+        floatButtonOferta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ListViewActivity.this,CrearOfertaActivity.class);
+                startActivity(i);
+            }
+        });
 
 
         //declaramos el Arraylist aqui porque sino tiene un bug que duplica la list view de forma exponencial al volver a cargar la Activity
