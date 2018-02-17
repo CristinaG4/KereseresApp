@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#f7127d8a</color>
-    <color name="colorComplementario">#0081ea</color>
+    <color name="colorComplementario">#f7b30faf</color>
     <color name="colorFondo1">#72d1e7db</color>
     <color name="colorFondo2">#B75FA5E7</color>
     <color name="colorCuadradoLogin">#5FA5E7</color>

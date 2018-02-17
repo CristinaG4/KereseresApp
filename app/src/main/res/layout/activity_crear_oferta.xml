@@ -78,16 +78,16 @@
                 android:id="@+id/radioBtnMoneyCreaOferta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/radioButtonMoney"
-                android:textSize="15dp"
+                android:text="Money"
+                android:textSize="17dp"
                 android:layout_marginRight="20dp"
                 android:onClick="onRadioButtonClicked"/>
             <RadioButton
                 android:id="@+id/radioBtnFavorCreaOferta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/radioButtonFavor"
-                android:textSize="15dp"
+                android:text="Favor"
+                android:textSize="17dp"
                 android:onClick="onRadioButtonClicked"/>
 
         </RadioGroup>
@@ -100,7 +100,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="15dp"
-        android:hint="@string/hintEnterDescription"
+        android:hint="Enter the description."
         android:gravity="left"
         android:padding="8dp"
         android:scrollbarThumbVertical="@drawable/scrollbar_design"
@@ -121,7 +121,8 @@
             android:onClick="Cancelar"
             android:text="@string/cancelarBtn"
             android:textColor="@color/textBtnLogin"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="10dp"
+            />
 
         <Button
             android:id="@+id/btnCrearOferta"
@@ -130,11 +131,15 @@
             android:background="@drawable/boton_cambio_color"
             android:clickable="false"
             android:onClick="registrar"
-            android:text="@string/createBtn"
+            android:text="@string/crearOfertaDemanda"
             android:textColor="@color/textBtnLogin"
             android:layout_gravity="end"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="10dp"
+            />
 
     </LinearLayout>
+
+
+
 
 </LinearLayout>
