@@ -80,9 +80,9 @@
                 android:layout_height="wrap_content"
                 app:fab_size="mini"
                 app:fab_label="Demand"
-                app:fab_colorNormal="@color/VerdeClaro"
+                app:fab_colorNormal="@color/btfloating"
                 app:fab_colorPressed="@color/verdeTitulo"
-                android:src="@drawable/d"
+                android:src="@mipmap/ic_demands_all"
                 />
 
             <com.github.clans.fab.FloatingActionButton
@@ -91,9 +91,9 @@
                 android:layout_height="wrap_content"
                 app:fab_size="mini"
                 app:fab_label="Offer"
-                app:fab_colorNormal="@color/VerdeClaro"
+                app:fab_colorNormal="@color/btfloating"
                 app:fab_colorPressed="@color/verdeTitulo"
-                android:src="@drawable/o"
+                android:src="@mipmap/ic_offers_all"
                 />
 
         </com.github.clans.fab.FloatingActionMenu>
