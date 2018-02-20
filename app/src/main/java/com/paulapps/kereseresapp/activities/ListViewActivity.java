@@ -23,6 +23,7 @@ import com.paulapps.kereseresapp.activities.crear_pedidos.CrearDemandaActivity;
 import com.paulapps.kereseresapp.activities.crear_pedidos.CrearOfertaActivity;
 import com.paulapps.kereseresapp.activities.login_signup.MainActivity;
 import com.paulapps.kereseresapp.activities.perfil.PerfilActivity;
+import com.paulapps.kereseresapp.activities.ver_pedidos.verPedidosListViewActivity;
 import com.paulapps.kereseresapp.model.Pedido;
 import com.paulapps.kereseresapp.model.Perfil;
 
@@ -288,29 +289,28 @@ public class ListViewActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.miMainInicio:
+                i= new Intent(ListViewActivity.this, ListViewActivity.class);
+                startActivity(i);
+                break;
             case R.id.perfil:
                 i = new Intent(ListViewActivity.this, PerfilActivity.class);
                //i.putExtra("PEDIDO",seleccionarLista(pedidos,"oferta").get(position));
                 startActivity(i);
                 break;
-            case R.id.misDemandas:
+            case R.id.misPedidos:
+                i= new Intent(ListViewActivity.this, verPedidosListViewActivity.class);
+                startActivity(i);
+            case R.id.eliminarPerfil:
                 i= new Intent(ListViewActivity.this, PerfilActivity.class);
                 startActivity(i);
                 break;
-            case R.id.misOfertas:
-                i= new Intent(ListViewActivity.this, PerfilActivity.class);
-                startActivity(i);
-                break;
-            case R.id.misNotificaciones:
-                i= new Intent(ListViewActivity.this, PerfilActivity.class);
-                startActivity(i);
-                break;
-
             case R.id.menuSalir://hacer case por opcion
                 FirebaseAuth.getInstance().signOut();
                 finish();
                 i = new Intent(this, MainActivity.class);
                 startActivity(i);
+                overridePendingTransition(R.transition.login_in, R.transition.login_out);
                 break;
         }
         return true;

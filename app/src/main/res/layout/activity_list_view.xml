@@ -14,7 +14,6 @@
         android:layout_height="wrap_content">
     </android.support.v7.widget.Toolbar>
 
-
         <TabHost
             android:id="@android:id/tabhost"
             android:layout_width="match_parent"

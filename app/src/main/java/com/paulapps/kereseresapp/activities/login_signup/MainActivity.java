@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
         Intent i = new Intent(MainActivity.this, ListViewActivity.class);
         startActivity(i);
+        overridePendingTransition(R.transition.login_in, R.transition.login_out);
     }
 
 

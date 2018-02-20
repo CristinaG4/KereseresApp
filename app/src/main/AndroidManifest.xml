@@ -33,7 +33,9 @@
             android:parentActivityName=".activities.ListViewActivity" />
         <activity android:name=".activities.NavigationDrawerActivity" />
         <activity android:name=".activities.crear_pedidos.CrearDemandaActivity" />
-        <activity android:name=".activities.crear_pedidos.CrearOfertaActivity"></activity>
+        <activity android:name=".activities.crear_pedidos.CrearOfertaActivity" />
+        <activity android:name=".activities.ver_pedidos.verPedidosListViewActivity" />
+        <activity android:name=".activities.ver_pedidos.VerDetallePedidoActivity"></activity>
     </application>
 
 </manifest>

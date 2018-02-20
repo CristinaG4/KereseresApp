@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/fondoPlano"
+    android:padding="15dp">
+    <TextView
+        android:id="@+id/tituloDetallePedido"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="titulo de la oferta o demanda"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:textStyle="bold"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp"
+        android:paddingBottom="20dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="20dp"
+        android:background="@drawable/estilo_crea_ofertademanda">
+
+        <ImageView
+            android:id="@+id/fotoCategoria"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/estilo_edit_text"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp">
+            <TextView
+                android:id="@+id/nombreVerDetallePedidoTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombre+apellido"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+            <TextView
+                android:id="@+id/direccionVerDetallePedidoTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="direccion"
+                android:textStyle="italic"/>
+            <TextView
+                android:id="@+id/emailVerDetallePedidoTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="email"
+                android:textStyle="italic"/>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Category:"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginRight="15dp"/>
+        <TextView
+            android:id="@+id/categoriaVerDetallePedidoTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="tipo categoria"
+            android:textSize="18dp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description:"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginRight="15dp"/>
+
+    <TextView
+        android:id="@+id/descripVerDetallePedidoTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/estilo_crea_ofertademanda"
+        android:padding="10dp"
+        android:text="Esta es la descripcion de prueba del pedido" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Type of payment:"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginRight="15dp"/>
+
+        <TextView
+            android:id="@+id/tipoPagoVerDetallePedidoTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dinero/favor"
+            android:textSize="18dp"/>
+    </LinearLayout>
+
+        android:layout_marginBottom="25dp">
+
+        <Button
+            android:id="@+id/btnVolverVerDetallePedido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BACK"
+            android:background="@drawable/boton_cambio_color"
+            android:clickable="false"
+            android:textColor="@color/textBtnLogin"
+            android:layout_margin="15dp"
+            android:layout_gravity="center"/>
+
+
+</LinearLayout>
