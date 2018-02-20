@@ -9,6 +9,8 @@
     android:title="Offers"></item>
     <item android:id="@+id/misNotificaciones"
         android:title="Notifications"></item>
+    <item android:id="@+id/eliminarPerfil"
+        android:title="Delete profile"></item>
     <item android:id="@+id/menuSalir"
         android:title="SignOut"></item>
     <!--mirar notificaciones-->

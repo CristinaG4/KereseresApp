@@ -12,8 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.*;
-import android.view.ContextMenu;
-
+import android.support.v4.widget.SwipeRefreshLayout;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,6 +29,9 @@ import com.paulapps.kereseresapp.model.Perfil;
 import java.util.ArrayList;
 
 public class ListViewActivity extends AppCompatActivity {
+
+    private SwipeRefreshLayout swipeLayout;
+
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private FirebaseDatabase firebase;
@@ -81,6 +83,10 @@ public class ListViewActivity extends AppCompatActivity {
 
         Toolbar menu =(Toolbar) findViewById(R.id.toolbar);//importar como v7 para q no de error
         setSupportActionBar(menu);
+
+        //Refresh
+        swipeLayout = (SwipeRefreshLayout) findViewById(R.id.myswipe);
+        swipeLayout.setOnRefreshListener(mOnRefreshListener);
 
 
         floatButtonDemanda.setOnClickListener(new View.OnClickListener() {
@@ -337,7 +343,15 @@ public class ListViewActivity extends AppCompatActivity {
         }
     }
 
-
+    //Refresh
+    protected SwipeRefreshLayout.OnRefreshListener mOnRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
+        @Override
+        public void onRefresh() {
+            Toast toast0 = Toast.makeText(ListViewActivity.this, "Refrescado!!", Toast.LENGTH_LONG);
+            toast0.show();
+            swipeLayout.setRefreshing(false);
+        }
+    };
 
 
 

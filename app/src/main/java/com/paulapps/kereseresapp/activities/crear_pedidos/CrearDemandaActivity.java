@@ -15,6 +15,7 @@ public class CrearDemandaActivity extends AppCompatActivity {
     EditText titleCreaDemandaET, descripCreaDemandaET;
     Button btnCancelarCreaDemanda, btnCrearDemanda;
     Intent i;
+    Spinner spinnerCreaDemanda;
 
 
 
@@ -28,7 +29,9 @@ public class CrearDemandaActivity extends AppCompatActivity {
         btnCancelarCreaDemanda = findViewById(R.id.btnCancelarCreaDemanda);
         btnCrearDemanda = findViewById(R.id.btnCrearDemanda);
         descripCreaDemandaET = findViewById(R.id.descripCreaDemandaET);
-
+        spinnerCreaDemanda = findViewById(R.id.spinnerCreaDemanda);
+        //Coger valor spinner
+        String categoria=spinnerCreaDemanda.getSelectedItem().toString();
         //Hacer scroll en el texto para descripcion
         descripCreaDemandaET.setMovementMethod(new ScrollingMovementMethod());
 
@@ -64,4 +67,7 @@ public class CrearDemandaActivity extends AppCompatActivity {
                     break;
         }
     }
+
+    //Funcionalidad spinner
+
 }

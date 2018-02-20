@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
+import android.net.Uri;
 
 
 import com.paulapps.kereseresapp.R;
@@ -20,7 +21,7 @@ public class DetallesPedido extends AppCompatActivity {
     TextView tituloDetallePedido, categoriaDetallePedidoTV, nombreDetallePedidoTV, descripDetallePedidoTV, emailDetallePedidoTV;
     ImageView fotoCategoria;
     private Pedido pedido = new Pedido();
-    Button btnVolverDetallePedido;
+    Button btnVolverDetallePedido,btnContactarDetallePedido;
 
 
     @Override
@@ -33,6 +34,7 @@ public class DetallesPedido extends AppCompatActivity {
 
         //Declaramos botones
         btnVolverDetallePedido = (Button) findViewById(R.id.btnVolverDetallePedido);
+        btnContactarDetallePedido= findViewById(R.id.btnContactarDetallePedido);
 
         //Declaramos TextView
         tituloDetallePedido = (TextView) findViewById(R.id.tituloDetallePedido);
@@ -60,11 +62,15 @@ public class DetallesPedido extends AppCompatActivity {
             }
         });
 
-
-
         setResult(Activity.RESULT_OK,intent);
 
     }
+    //CODIGO PARA CONTACTAR CON EL USUARIO
+    public void contactar(View v){
+        Intent i=new Intent(android.content.Intent.ACTION_DIAL, Uri.parse(""));
+        startActivity(i);
+    }
+
 
     private  int seleccionarImagenTipo(){
         if(pedido.getCategoria().equalsIgnoreCase("compañia")){

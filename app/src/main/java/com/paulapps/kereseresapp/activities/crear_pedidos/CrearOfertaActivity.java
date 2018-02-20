@@ -14,6 +14,7 @@ public class CrearOfertaActivity extends AppCompatActivity {
 
     Button btnCancelarCreaOferta, btnCrearOferta;
     EditText descripCreaOfertaET;
+    Spinner spinnerCrearOferta;
     Intent i;
 
     @Override
@@ -24,6 +25,10 @@ public class CrearOfertaActivity extends AppCompatActivity {
         btnCancelarCreaOferta = findViewById(R.id.btnCancelarCreaOferta);
         btnCrearOferta = findViewById(R.id.btnCrearOferta);
         descripCreaOfertaET = findViewById(R.id.descripCreaOfertaET);
+        spinnerCrearOferta=findViewById(R.id.spinnerCreaOferta);
+
+        //Coger valor spinner
+        String categoria=spinnerCrearOferta.getSelectedItem().toString();
 
         //Hacer scroll en el texto para descripcion
         descripCreaOfertaET.setMovementMethod(new ScrollingMovementMethod());
