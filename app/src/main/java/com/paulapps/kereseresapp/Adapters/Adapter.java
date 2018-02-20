@@ -72,7 +72,7 @@ public class Adapter extends BaseAdapter {
             return R.drawable.ordenador;
         }else if (pedido.get(position).getCategoria().equalsIgnoreCase("clases")){
             return R.drawable.clases;
-        }else if (pedido.get(position).getCategoria().equalsIgnoreCase("menaje/hogar")){
+        }else if (pedido.get(position).getCategoria().equalsIgnoreCase("hogar")){
             return R.drawable.herramientas;
         }
         return 0;

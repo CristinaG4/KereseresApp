@@ -34,7 +34,7 @@ public class ListViewActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private FirebaseDatabase firebase;
     private GoogleApiClient googleApiClient;
-    private ImageButton filtroAll, filtroAmigos, filtroInformatica, filtroClases, filtroMenaje;
+    private Button filtroAll, filtroAmigos, filtroInformatica, filtroClases, filtroMenaje;
     private ListView listViewDemandas, listViewOfertas;
     private ArrayList<Perfil> perfiles;
     private ArrayList<Pedido> pedidos;
@@ -64,11 +64,11 @@ public class ListViewActivity extends AppCompatActivity {
 
 
         //Barra para filtrar
-        filtroAll = (ImageButton) findViewById(R.id.filtroAll);
-        filtroAmigos = (ImageButton) findViewById(R.id.filtroAmigos);
-        filtroInformatica = (ImageButton) findViewById(R.id.filtroInformatica);
-        filtroClases = (ImageButton) findViewById(R.id.filtroClases);
-        filtroMenaje = (ImageButton) findViewById(R.id.filtroMenaje);
+        filtroAll =  findViewById(R.id.filtroAll);
+        filtroAmigos = findViewById(R.id.filtroAmigos);
+        filtroInformatica = findViewById(R.id.filtroInformatica);
+        filtroClases =  findViewById(R.id.filtroClases);
+        filtroMenaje = findViewById(R.id.filtroMenaje);
 
         //ListView Demandas y Ofertas
         listViewDemandas= (ListView) findViewById(R.id.lvDemandas);
@@ -104,12 +104,19 @@ public class ListViewActivity extends AppCompatActivity {
         perfiles.add(new Perfil("Nacho Jimenez","ncassinello@gmail.com","1234","7ºG",1000,"913140885",R.drawable.all));
         perfiles.add(new Perfil("Cristinini","cristinini@gmail.com","1234","1ºH",1000,"91548775",R.drawable.all));
         perfiles.add(new Perfil("PaulaCR7","paulaCR7@gmail.com","1234","13ºA",1000,"911254889",R.drawable.all));
+        perfiles.add(new Perfil("Sara","sara@gmail.com","1234","7ºG",1000,"913140885",R.drawable.all));
+        perfiles.add(new Perfil("Aitor Tilla","aitortilla@gmail.com","1234","1ºH",1000,"91548775",R.drawable.all));
+        perfiles.add(new Perfil("Ana Tomia","anatomia@gmail.com","1234","13ºA",1000,"911254889",R.drawable.all));
 
         pedidos = new ArrayList<>();
         pedidos.add(new Pedido(0,"Formatear Ordenador",perfiles.get(0),"dinero","informatica","Necesito que me formateis el ordenador","demanda"));
         pedidos.add(new Pedido(1,"Cuidar a mis hijos",perfiles.get(1),"favor", "compañia","Salgo esta noche y encesito niñera","demanda"));
         pedidos.add(new Pedido(2,"Ver el Madrid",perfiles.get(2),"favor","compañia","Ofrezco salon y futbol a cambio de alguien con quien verlo", "oferta"));
-        pedidos.add(new Pedido(3,"Clases de XML",perfiles.get(0),"dinero","clases","Necesito clases de XML avanzadas","demanda"));
+        pedidos.add(new Pedido(3,"Clases de XML",perfiles.get(3),"dinero","clases","Necesito clases de XML avanzadas","demanda"));
+        pedidos.add(new Pedido(4,"Subir la compra",perfiles.get(4),"dinero","compañia","Necesito ayuda para subir la compra porque yo no puedo","demanda"));
+        pedidos.add(new Pedido(5,"Docena de huevos",perfiles.get(5),"favor","hogar","Necesito uan docena de huevo para hacer tortilla de patata","demanda"));
+        pedidos.add(new Pedido(6,"Clases de biologia",perfiles.get(5),"favor","clases","Necesito clases de biologia avanzadas para entrar en la carrera de medicina para estudiar anatomía","demanda"));
+        pedidos.add(new Pedido(1,"Cuido niños",perfiles.get(1),"dinero", "compañia","Cuido niños/as.Tengo experiencia","oferta"));
 
         //funcionalidad de los adapters
         listViewOfertas.setAdapter(new Adapter(this,seleccionarLista(pedidos,"oferta")));
@@ -232,13 +239,14 @@ public class ListViewActivity extends AppCompatActivity {
 
                 for (Pedido p:pedidos)
                 {
-                    if (p.getCategoria().equalsIgnoreCase("hogar/menaje"))
+                    if (p.getCategoria().equalsIgnoreCase("hogar"))
                     {
                         pedidosFiltradosHM.add(p);
                     }
                 }
                 listViewOfertas.setAdapter(new Adapter(ListViewActivity.this,seleccionarLista(pedidosFiltradosHM,"oferta")));
                 listViewDemandas.setAdapter(new Adapter(ListViewActivity.this, seleccionarLista(pedidosFiltradosHM,"demanda")));
+
             }
         });
 

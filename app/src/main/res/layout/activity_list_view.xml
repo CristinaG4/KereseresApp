@@ -44,7 +44,8 @@
                     <ListView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/lvOfertas"></ListView>
+                        android:id="@+id/lvOfertas"
+                        android:scrollbarThumbVertical="@drawable/scrollbar_design"/>
 
                 </LinearLayout>
 
@@ -57,7 +58,8 @@
                     <ListView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/lvDemandas"></ListView>
+                        android:id="@+id/lvDemandas"
+                        android:scrollbarThumbVertical="@drawable/scrollbar_design"/>
                 </LinearLayout>
             </FrameLayout>
 
@@ -103,6 +105,73 @@
         android:layout_height="4dp"
         android:background="@drawable/separador"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/separador"/>
+
+        <Button
+            android:id="@+id/filtroAll"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/all"/>
+
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/separador"/>
+
+        <Button
+            android:id="@+id/filtroAmigos"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/amigos"/>
+
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/separador"/>
+
+        <Button
+            android:id="@+id/filtroInformatica"
+            android:layout_width="65dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/ordenador"/>
+
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/separador"/>
+
+        <Button
+            android:id="@+id/filtroClases"
+            android:layout_width="65dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/clases"/>
+
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/separador"/>
+        <Button
+            android:id="@+id/filtroMenaje"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/herramientas"/>
+
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/separador"/>
+
+    </LinearLayout>
+
+    <!--
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -158,6 +227,7 @@
             android:background="@drawable/separador"/>
 
     </LinearLayout>
+    -->
 </LinearLayout>
 
 

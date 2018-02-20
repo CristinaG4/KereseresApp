@@ -73,7 +73,7 @@ public class DetallesPedido extends AppCompatActivity {
             return R.drawable.ordenador;
         }else if (pedido.getCategoria().equalsIgnoreCase("clases")){
             return R.drawable.clases;
-        }else if (pedido.getCategoria().equalsIgnoreCase("menaje/hogar")){
+        }else if (pedido.getCategoria().equalsIgnoreCase("hogar")){
             return R.drawable.herramientas;
         }
         return 0;
