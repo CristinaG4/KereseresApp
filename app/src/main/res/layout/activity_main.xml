@@ -136,7 +136,7 @@
             android:clickable="false"
             android:textColor="@color/textBtnLogin"
             android:onClick="aceptar"
-            android:text="@string/okBtn" />
+            android:text="@string/aceptarBtn" />
     </LinearLayout>
 
     <Button

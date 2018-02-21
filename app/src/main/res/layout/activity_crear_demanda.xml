@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create a demand"
+        android:text="@string/textCreateDemand"
         android:gravity="center"
         android:layout_margin="10dp"
         android:textSize="30dp"
@@ -26,18 +26,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Title: "
+            android:text="@string/textTitlePedido"
             android:textSize="20dp" />
 
         <EditText
             android:id="@+id/titleCreaDemandaET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Introduce the title" />
-
-
+            android:hint="@string/hintIntroduceTitulo" />
     </LinearLayout>
-
 
 
     <LinearLayout
@@ -50,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="Category: "
+            android:text="@string/textCategory"
             android:textSize="20dp" />
 
         <Spinner
@@ -58,8 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:entries="@array/Categories"
-            />
+            android:entries="@array/Categories"/>
 
     </LinearLayout>
 
@@ -71,7 +67,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Type of payment: "
+            android:text="@string/textTypePayment"
             android:textSize="20dp"
             android:layout_marginTop="3dp"/>
 
@@ -85,7 +81,7 @@
                 android:id="@+id/radioBtnMoneyCreaDemanda"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="17dp"
+                android:textSize="15dp"
                 android:text="Money"
                 android:layout_marginRight="20dp"
                 android:onClick="onRadioButtonClicked"/>
@@ -94,7 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Favor"
-                android:textSize="17dp"
+                android:textSize="15dp"
                 android:onClick="onRadioButtonClicked"/>
 
         </RadioGroup>
@@ -138,7 +134,7 @@
             android:background="@drawable/boton_cambio_color"
             android:clickable="false"
             android:onClick="registrar"
-            android:text="@string/crearOfertaDemanda"
+            android:text="@string/createBtn"
             android:textColor="@color/textBtnLogin"
             android:layout_gravity="end"
             android:layout_marginLeft="10dp"

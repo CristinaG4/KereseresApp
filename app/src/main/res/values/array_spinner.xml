@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
         <string-array name="Categories">
-            <item>Company/Babysitter</item>
-            <item>Computing</item>
-            <item>Clases</item>
-            <item>Household items</item>
+            <item>@string/arraySpinnerCompany</item>
+            <item>@string/arraySpinnerComputing</item>
+            <item>@string/arraySpinnerClases</item>
+            <item>@string/arraySpinnerHousehold</item>
         </string-array>
 </resources>

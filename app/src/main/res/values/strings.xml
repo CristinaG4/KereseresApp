@@ -1,24 +1,40 @@
 <resources>
     <string name="app_name">KereseresApp</string>
     <string name="tituloApp">Kereseres</string>
+    <!-- Login -->
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="forgotPass">Password?</string>
     <string name="singUp">Sing Up</string>
+
+    <!--Botones comunes-->
     <string name="cancelarBtn">Cancel</string>
-    <string name="okBtn">Ok</string>
+    <string name="aceptarBtn">Acept</string>
+    <string name="createBtn">Create</string>
+
+    <!--Sing up-->
     <string name="apartment">Apartment</string>
     <string name="name">Name</string>
     <string name="code">Community Code</string>
-    <string name="title_activity_perfil">PerfilActivity</string>
-    <string name="title_activity_edit_perfil">EditPerfilActivity</string>
-    <string name="title_activity_navigation_drawer">NavigationDrawerActivity</string>
     <string name="descripResetPassword">Forgot your password?</string>
-    <string name="crearOfertaDemanda">Create</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <!--activity_crear_demanda-->
+    <string name="textCreateDemand">Create a demand</string>
+    <string name="textTitlePedido">Title:</string>
+    <string name="hintIntroduceTitulo">Introduce the title</string>
+    <string name="textCategory">Category:</string>
+    <string name="textTypePayment">Type of payment:</string>
+    <string name="radioButtonMoney">Money</string>
+    <string name="radioButtonFavor">Favor</string>
+    <string name="hintEnterDescription">Enter the description.</string>
 
+    <!--array_spinner-->
+    <string name="arraySpinnerCompany">Company/Babysitter</string>
+    <string name="arraySpinnerComputing">Computing</string>
+    <string name="arraySpinnerClases">Clases</string>
+    <string name="arraySpinnerHousehold">Household items</string>
+
+    <!--SIN CATALOGAR-->
     <string name="action_settings">Settings</string>
 
     <!-- TODO: Remove or change this placeholder text -->
