@@ -102,7 +102,7 @@ public class verPedidosListViewActivity extends AppCompatActivity {
         tabs.setCurrentTab(0);
     }
 
-        //creamos el menu
+        //creamos el menuasfdghj,
         @Override
         public boolean onCreateOptionsMenu (Menu menu){
             inflater = getMenuInflater();
