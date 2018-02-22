@@ -133,6 +133,7 @@ public class verPedidosListViewActivity extends AppCompatActivity {
             case R.id.misPedidos:
                 i = new Intent(verPedidosListViewActivity.this, verPedidosListViewActivity.class);
                 startActivity(i);
+                break;
             case R.id.eliminarPerfil:
                 //Creamos un alert dialog
                 builder=new AlertDialog.Builder(this);
