@@ -8,7 +8,7 @@
     <item android:id="@+id/misPedidos"
         android:title="My orders"></item>
     <item android:id="@+id/eliminarPerfil"
-        android:title="Delete profile"></item>
+        android:title="Delete account"></item>
     <item android:id="@+id/menuSalir"
         android:title="SignOut"></item>
 </menu>
