@@ -50,6 +50,7 @@ public class PerfilActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(PerfilActivity.this, ListViewActivity.class);
                 startActivity(i);
+                overridePendingTransition(R.transition.fade_in, R.transition.fade_out);
             }
         });
 
@@ -58,6 +59,7 @@ public class PerfilActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent in = new Intent(PerfilActivity.this, EditPerfilActivity.class);
                 startActivity(in);
+                overridePendingTransition(R.transition.left_in, R.transition.left_out);
             }
         });
 

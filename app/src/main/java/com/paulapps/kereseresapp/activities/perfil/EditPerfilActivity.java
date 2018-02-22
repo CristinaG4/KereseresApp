@@ -43,6 +43,7 @@ public class EditPerfilActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i  = new Intent(EditPerfilActivity.this, PerfilActivity.class);
                 startActivity(i);
+                overridePendingTransition(R.transition.right_in, R.transition.right_out);
             }
         });
 
