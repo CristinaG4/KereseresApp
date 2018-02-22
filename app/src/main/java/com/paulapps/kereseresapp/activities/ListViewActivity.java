@@ -2,6 +2,7 @@ package com.paulapps.kereseresapp.activities;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -68,7 +69,9 @@ public class ListViewActivity extends AppCompatActivity {
     private MenuInflater inflater;
     private FloatingActionMenu floatButtonPrincipal;
     private com.github.clans.fab.FloatingActionButton floatButtonDemanda, floatButtonOferta;
-    AlertDialog.Builder builder;
+    private AlertDialog.Builder builder;
+    private ProgressDialog Prodialog;
+
 
     //Firebase Instance variables
     private FirebaseDatabase mFirebaseDatabase;
@@ -86,6 +89,8 @@ public class ListViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
         // getSupportActionBar().hide();
+
+        Prodialog=new ProgressDialog(this);
 
         //initialize firebase components
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -460,6 +465,8 @@ public class ListViewActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
+                        Prodialog.setMessage("Deleting account... Please wait");
+                        Prodialog.show();
                         Toast.makeText(ListViewActivity.this, "Deleting the account was correct", Toast.LENGTH_SHORT).show();
                         i= new Intent(ListViewActivity.this, MainActivity.class);
                         startActivity(i);

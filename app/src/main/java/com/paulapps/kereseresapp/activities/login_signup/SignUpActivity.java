@@ -26,6 +26,7 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText etEmail, etPassword, etName, etApartment, etCode;
     private String emailUser, passwordUser, nameUser, codeUser, apartmentUser;
     TextView tituloApp;
+    Intent i;
 
 
     @Override
@@ -92,7 +93,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 // Sign in success, update UI with the signed-in user's information
                                 Toast.makeText(SignUpActivity.this, "Se ha registrado el usuario", Toast.LENGTH_LONG).show();
                                 //updateUI(user);
-                                Intent i = new Intent(SignUpActivity.this, MainActivity.class);
+                                i = new Intent(SignUpActivity.this, MainActivity.class);
                                 startActivity(i);
                             } else {
                                 // If sign in fails, display a message to the user.
@@ -106,7 +107,7 @@ public class SignUpActivity extends AppCompatActivity {
 
 
     public void Cancelar(View v) {
-        Intent i = new Intent(SignUpActivity.this, MainActivity.class);
+        i = new Intent(SignUpActivity.this, MainActivity.class);
         startActivity(i);
     }
 }

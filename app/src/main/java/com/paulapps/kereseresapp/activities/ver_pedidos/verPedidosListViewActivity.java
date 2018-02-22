@@ -2,6 +2,7 @@ package com.paulapps.kereseresapp.activities.ver_pedidos;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -38,6 +39,7 @@ public class verPedidosListViewActivity extends AppCompatActivity {
     private ListView lvOfertasVerPedido, lvDemandasVerPedido;
     private Toolbar toolbar;
     AlertDialog.Builder builder;
+    private ProgressDialog Prodialog;
 
     Intent i;
 
@@ -46,6 +48,7 @@ public class verPedidosListViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_pedidos_listview);
 
+        Prodialog=new ProgressDialog(this);
 
         Toolbar menu = (Toolbar) findViewById(R.id.toolbar);//importar como v7 para q no de error
         setSupportActionBar(menu);
@@ -195,6 +198,8 @@ public class verPedidosListViewActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
+                        Prodialog.setMessage("Deleting account... Please wait");
+                        Prodialog.show();
                         Toast.makeText(verPedidosListViewActivity.this, "Deleting the account was correct", Toast.LENGTH_SHORT).show();
                         i= new Intent(verPedidosListViewActivity.this, MainActivity.class);
                         startActivity(i);
