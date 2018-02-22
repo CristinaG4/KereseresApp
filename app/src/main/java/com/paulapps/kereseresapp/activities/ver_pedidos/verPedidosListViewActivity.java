@@ -53,6 +53,8 @@ public class verPedidosListViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_pedidos_listview);
 
+       // EliminarCelda();
+
         Prodialog = new ProgressDialog(this);
 
         Toolbar menu = (Toolbar) findViewById(R.id.toolbar);//importar como v7 para q no de error
@@ -221,7 +223,7 @@ public class verPedidosListViewActivity extends AppCompatActivity {
 
 
     //Deslizar item para borrarlo
-    public void EliminarCelda() {
+    /*public void EliminarCelda() {
         SwipeListViewTouchListener touchListener = new SwipeListViewTouchListener(lvOfertasVerPedido, new SwipeListViewTouchListener.OnSwipeCallback() {
 
             @Override
@@ -246,7 +248,7 @@ public class verPedidosListViewActivity extends AppCompatActivity {
         //Escuchadores del listView
         lvOfertasVerPedido.setOnTouchListener(touchListener);
         //adapterOfertas.setOnScrollListener(touchListener.makeScrollListener());
-    }
+    }*/
 }
 
 
