@@ -53,13 +53,13 @@ public class verPedidosListViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_pedidos_listview);
 
-        Prodialog=new ProgressDialog(this);
+        Prodialog = new ProgressDialog(this);
 
         Toolbar menu = (Toolbar) findViewById(R.id.toolbar);//importar como v7 para q no de error
         setSupportActionBar(menu);
 
-        lvDemandasVerPedido = (ListView)findViewById(R.id.lvDemandasVerPedido);
-        lvOfertasVerPedido = (ListView)findViewById(R.id.lvOfertasVerPedido);
+        lvDemandasVerPedido = (ListView) findViewById(R.id.lvDemandasVerPedido);
+        lvOfertasVerPedido = (ListView) findViewById(R.id.lvOfertasVerPedido);
 
         perfiles = new ArrayList<>();
         perfiles.add(new Perfil("Nacho Jimenez", "ncassinello@gmail.com", "1234", "7ºG", 1000, "913140885", R.drawable.all));
@@ -72,10 +72,10 @@ public class verPedidosListViewActivity extends AppCompatActivity {
         pedidos.add(new Pedido(3, "Clases de XML", perfiles.get(0), "dinero", "clases", "Necesito clases de XML avanzadas", "demanda"));
 
 
-        adapterDemandas = new Adapter(this,R.layout.celda_listview,pedidosDemandas);
-        adapterOfertas = new Adapter(this,R.layout.celda_listview,pedidosOfertas);
+        adapterDemandas = new Adapter(this, R.layout.celda_listview, pedidosDemandas);
+        adapterOfertas = new Adapter(this, R.layout.celda_listview, pedidosOfertas);
         //funcionalidad de los adapters
-         lvOfertasVerPedido.setAdapter(new Adapter2(this, seleccionarLista(pedidos,"oferta")));
+        lvOfertasVerPedido.setAdapter(new Adapter2(this, seleccionarLista(pedidos, "oferta")));
         lvDemandasVerPedido.setAdapter(new Adapter2(this, seleccionarLista(pedidos, "demanda")));
 
         //funcionalidad cuando se pulsa un elemento del listView
@@ -123,14 +123,15 @@ public class verPedidosListViewActivity extends AppCompatActivity {
 
     //creamos el menu
     @Override
-    public boolean onCreateOptionsMenu (Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
         return true;
     }
+
     //para saber que opcion del menu se selecciona
     @Override
-    public boolean onOptionsItemSelected (MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.miMainInicio:
                 i = new Intent(verPedidosListViewActivity.this, ListViewActivity.class);
@@ -147,18 +148,18 @@ public class verPedidosListViewActivity extends AppCompatActivity {
                 break;
             case R.id.eliminarPerfil:
                 //Creamos un alert dialog
-                builder=new AlertDialog.Builder(this);
+                builder = new AlertDialog.Builder(this);
                 builder.setTitle("Delete account");
                 builder.setMessage("Are you sure to delete your account?");
                 builder.setPositiveButton("Acept", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                     eliminarCuenta();
+                        eliminarCuenta();
                     }
                 });
 
-                builder.setNegativeButton(android.R.string.cancel,null);
-                Dialog dialog=builder.create();
+                builder.setNegativeButton(android.R.string.cancel, null);
+                Dialog dialog = builder.create();
                 dialog.show();
                 break;
             case R.id.menuSalir://hacer case por opcion
@@ -171,14 +172,12 @@ public class verPedidosListViewActivity extends AppCompatActivity {
         }
         return true;
     }
+
     //funcion para filtrar por el oferta/demanda
-    public ArrayList<Pedido> seleccionarLista(ArrayList<Pedido> pedidos, String filtro)
-    {
+    public ArrayList<Pedido> seleccionarLista(ArrayList<Pedido> pedidos, String filtro) {
         ArrayList<Pedido> pedidosFiltrados = new ArrayList<>();
-        for (Pedido p:pedidos)
-        {
-            if (p.getOferDeman().equalsIgnoreCase(filtro))
-            {
+        for (Pedido p : pedidos) {
+            if (p.getOferDeman().equalsIgnoreCase(filtro)) {
                 pedidosFiltrados.add(p);
             }
         }
@@ -186,11 +185,10 @@ public class verPedidosListViewActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1){
-            if(resultCode == RESULT_OK){/*
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {/*
                 data.getSerializableExtra("PEDIDO");
                 pedidos.get(pedidoIndex) = (Pedido) data.getSerializableExtra("PEDIDO");
             */
@@ -198,7 +196,7 @@ public class verPedidosListViewActivity extends AppCompatActivity {
         }
     }
 
-    public void eliminarCuenta(){
+    public void eliminarCuenta() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {
@@ -209,7 +207,7 @@ public class verPedidosListViewActivity extends AppCompatActivity {
                         Prodialog.setMessage("Deleting account... Please wait");
                         Prodialog.show();
                         Toast.makeText(verPedidosListViewActivity.this, "Deleting the account was correct", Toast.LENGTH_SHORT).show();
-                        i= new Intent(verPedidosListViewActivity.this, MainActivity.class);
+                        i = new Intent(verPedidosListViewActivity.this, MainActivity.class);
                         startActivity(i);
                     } else {
                         Toast.makeText(verPedidosListViewActivity.this, "The account could not be deleted", Toast.LENGTH_SHORT).show();
@@ -221,32 +219,38 @@ public class verPedidosListViewActivity extends AppCompatActivity {
         }
     }
 
+
     //Deslizar item para borrarlo
+    public void EliminarCelda() {
+        SwipeListViewTouchListener touchListener = new SwipeListViewTouchListener(lvOfertasVerPedido, new SwipeListViewTouchListener.OnSwipeCallback() {
 
-   /* SwipeListViewTouchListener touchListener =new SwipeListViewTouchListener(lvOfertasVerPedido,new SwipeListViewTouchListener.OnSwipeCallback() {
+            @Override
+            public void onSwipeLeft(ListView listView, int[] reverseSortedPositions) {
 
-        @Override
-        public void onSwipeLeft(ListView listView, int [] reverseSortedPositions) {
+                //Aqui ponemos lo que hara el programa cuando deslizamos un item ha la izquierda
+                pedidos.remove(reverseSortedPositions[0]);
+                adapterOfertas.notifyDataSetChanged();
 
-            //Aqui ponemos lo que hara el programa cuando deslizamos un item ha la izquierda
-            pedidos.remove(reverseSortedPositions[0]);
-            adapterOfertas.notifyDataSetChanged();
+            }
 
-        }
+            @Override
+            public void onSwipeRight(ListView listView, int[] reverseSortedPositions) {
 
-        @Override
-        public void onSwipeRight(ListView listView, int [] reverseSortedPositions) {
+                //Aqui ponemos lo que hara el programa cuando deslizamos un item ha la derecha
+                pedidos.remove(reverseSortedPositions[0]);
+                adapterOfertas.notifyDataSetChanged();
+            }
 
-            //Aqui ponemos lo que hara el programa cuando deslizamos un item ha la derecha
-            pedidos.remove(reverseSortedPositions[0]);
-            adapterOfertas.notifyDataSetChanged();
-        }
+        }, true, false);
 
-    },true, false);
-
-    //Escuchadores del listView
-		lvOfertasVerPedido.setOnTouchListener(touchListener);
-		adapterOfertas.setOnScrollListener(touchListener.makeScrollListener());*/
-
+        //Escuchadores del listView
+        lvOfertasVerPedido.setOnTouchListener(touchListener);
+        //adapterOfertas.setOnScrollListener(touchListener.makeScrollListener());
+    }
 }
+
+
+
+
+
 

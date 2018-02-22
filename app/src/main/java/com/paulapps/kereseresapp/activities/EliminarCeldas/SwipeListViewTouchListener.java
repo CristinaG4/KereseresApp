@@ -59,7 +59,7 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
 
      //Constructs a new swipe-to-action touch listener for the given list view.
 
-    public SwipeListViewTouchListener(ListView listView, OnSwipeCallback callback) {
+    public SwipeListViewTouchListener(ListView listView, OnSwipeCallback callback, boolean b, boolean b1) {
 
         ViewConfiguration vc = ViewConfiguration.get(listView.getContext());
         mSlop = vc.getScaledTouchSlop();
