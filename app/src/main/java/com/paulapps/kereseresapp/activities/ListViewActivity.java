@@ -346,7 +346,6 @@ public class ListViewActivity extends AppCompatActivity {
         });
     }
 
-
     //creamos el menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
