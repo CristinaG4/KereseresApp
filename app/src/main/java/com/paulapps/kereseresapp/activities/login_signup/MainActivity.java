@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         mAuth.addAuthStateListener(mAuthStateListener);
+
     }
 
     public void onStop() {
@@ -150,12 +151,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     //Si no esta autentificado llama a GoogleSignInApi para autentificarse
     public void GoogleIn(View v) {
-        Intent i = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
-        startActivityForResult(i, SIGN_IN_CODE);
+
+            Intent i = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+            startActivityForResult(i, SIGN_IN_CODE);
 
     }
 
-    //obtenemos el resultado al pulsar el boton, de la autentificacion
+    //obtenemos el resultado al pulsar el boton, de la autentificacion con google
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

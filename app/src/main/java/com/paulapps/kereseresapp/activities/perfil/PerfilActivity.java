@@ -67,6 +67,7 @@ public class PerfilActivity extends AppCompatActivity {
     }
 //para sacar info del usuario
     public void InfoUser(){
+        //obtenemos el usuario q ha abierto la sesion
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             // Name, email address, and profile photo Url

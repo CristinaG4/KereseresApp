@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.paulapps.kereseresapp.Adapters.Adapter;
 import com.paulapps.kereseresapp.Adapters.Adapter2;
 import com.paulapps.kereseresapp.R;
+import com.paulapps.kereseresapp.activities.EliminarCeldas.SwipeListViewTouchListener;
 import com.paulapps.kereseresapp.activities.ListViewActivity;
 import com.paulapps.kereseresapp.activities.login_signup.MainActivity;
 import com.paulapps.kereseresapp.activities.perfil.PerfilActivity;
@@ -34,12 +35,16 @@ public class verPedidosListViewActivity extends AppCompatActivity {
 
     private ArrayList<Perfil> perfiles;
     private ArrayList<Pedido> pedidos;
+    private ArrayList<Pedido> pedidosOfertas;
+    private ArrayList<Pedido> pedidosDemandas;
     private int pedidoIndex;
     private MenuInflater inflater;
     private ListView lvOfertasVerPedido, lvDemandasVerPedido;
     private Toolbar toolbar;
     AlertDialog.Builder builder;
     private ProgressDialog Prodialog;
+    private Adapter adapterOfertas;
+    private Adapter adapterDemandas;
 
     Intent i;
 
@@ -53,8 +58,8 @@ public class verPedidosListViewActivity extends AppCompatActivity {
         Toolbar menu = (Toolbar) findViewById(R.id.toolbar);//importar como v7 para q no de error
         setSupportActionBar(menu);
 
-        lvDemandasVerPedido = findViewById(R.id.lvDemandasVerPedido);
-        lvOfertasVerPedido = findViewById(R.id.lvOfertasVerPedido);
+        lvDemandasVerPedido = (ListView)findViewById(R.id.lvDemandasVerPedido);
+        lvOfertasVerPedido = (ListView)findViewById(R.id.lvOfertasVerPedido);
 
         perfiles = new ArrayList<>();
         perfiles.add(new Perfil("Nacho Jimenez", "ncassinello@gmail.com", "1234", "7ºG", 1000, "913140885", R.drawable.all));
@@ -66,9 +71,12 @@ public class verPedidosListViewActivity extends AppCompatActivity {
         pedidos.add(new Pedido(2, "Ver el Madrid", perfiles.get(0), "favor", "compañia", "Ofrezco salon y futbol a cambio de alguien con quien verlo", "oferta"));
         pedidos.add(new Pedido(3, "Clases de XML", perfiles.get(0), "dinero", "clases", "Necesito clases de XML avanzadas", "demanda"));
 
+
+        adapterDemandas = new Adapter(this,R.layout.celda_listview,pedidosDemandas);
+        adapterOfertas = new Adapter(this,R.layout.celda_listview,pedidosOfertas);
         //funcionalidad de los adapters
-        // lvOfertasVerPedido.setAdapter(new Adapter2(this, seleccionarLista(pedidos,"oferta")));
-        //lvDemandasVerPedido.setAdapter(new Adapter(this, seleccionarLista(pedidos, "demanda")));
+         lvOfertasVerPedido.setAdapter(new Adapter2(this, seleccionarLista(pedidos,"oferta")));
+        lvDemandasVerPedido.setAdapter(new Adapter2(this, seleccionarLista(pedidos, "demanda")));
 
         //funcionalidad cuando se pulsa un elemento del listView
         lvOfertasVerPedido.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -212,4 +220,33 @@ public class verPedidosListViewActivity extends AppCompatActivity {
 
         }
     }
+
+    //Deslizar item para borrarlo
+
+   /* SwipeListViewTouchListener touchListener =new SwipeListViewTouchListener(lvOfertasVerPedido,new SwipeListViewTouchListener.OnSwipeCallback() {
+
+        @Override
+        public void onSwipeLeft(ListView listView, int [] reverseSortedPositions) {
+
+            //Aqui ponemos lo que hara el programa cuando deslizamos un item ha la izquierda
+            pedidos.remove(reverseSortedPositions[0]);
+            adapterOfertas.notifyDataSetChanged();
+
+        }
+
+        @Override
+        public void onSwipeRight(ListView listView, int [] reverseSortedPositions) {
+
+            //Aqui ponemos lo que hara el programa cuando deslizamos un item ha la derecha
+            pedidos.remove(reverseSortedPositions[0]);
+            adapterOfertas.notifyDataSetChanged();
+        }
+
+    },true, false);
+
+    //Escuchadores del listView
+		lvOfertasVerPedido.setOnTouchListener(touchListener);
+		adapterOfertas.setOnScrollListener(touchListener.makeScrollListener());*/
+
 }
+
