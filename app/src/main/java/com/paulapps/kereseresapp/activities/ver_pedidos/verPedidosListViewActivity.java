@@ -1,6 +1,10 @@
 package com.paulapps.kereseresapp.activities.ver_pedidos;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -10,7 +14,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.paulapps.kereseresapp.Adapters.Adapter;
 import com.paulapps.kereseresapp.Adapters.Adapter2;
 import com.paulapps.kereseresapp.R;
@@ -30,6 +37,7 @@ public class verPedidosListViewActivity extends AppCompatActivity {
     private MenuInflater inflater;
     private ListView lvOfertasVerPedido, lvDemandasVerPedido;
     private Toolbar toolbar;
+    AlertDialog.Builder builder;
 
     Intent i;
 
@@ -56,8 +64,8 @@ public class verPedidosListViewActivity extends AppCompatActivity {
         pedidos.add(new Pedido(3, "Clases de XML", perfiles.get(0), "dinero", "clases", "Necesito clases de XML avanzadas", "demanda"));
 
         //funcionalidad de los adapters
-        lvOfertasVerPedido.setAdapter(new Adapter2(this, seleccionarLista(pedidos,"oferta")));
-        lvDemandasVerPedido.setAdapter(new Adapter(this, seleccionarLista(pedidos, "demanda")));
+        // lvOfertasVerPedido.setAdapter(new Adapter2(this, seleccionarLista(pedidos,"oferta")));
+        //lvDemandasVerPedido.setAdapter(new Adapter(this, seleccionarLista(pedidos, "demanda")));
 
         //funcionalidad cuando se pulsa un elemento del listView
         lvOfertasVerPedido.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -102,43 +110,55 @@ public class verPedidosListViewActivity extends AppCompatActivity {
         tabs.setCurrentTab(0);
     }
 
-        //creamos el menu
-        @Override
-        public boolean onCreateOptionsMenu (Menu menu){
-            inflater = getMenuInflater();
-            inflater.inflate(R.menu.menu, menu);
-            return true;
+    //creamos el menu
+    @Override
+    public boolean onCreateOptionsMenu (Menu menu){
+        inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+    //para saber que opcion del menu se selecciona
+    @Override
+    public boolean onOptionsItemSelected (MenuItem item){
+        switch (item.getItemId()) {
+            case R.id.miMainInicio:
+                i = new Intent(verPedidosListViewActivity.this, ListViewActivity.class);
+                startActivity(i);
+                break;
+            case R.id.perfil:
+                i = new Intent(verPedidosListViewActivity.this, PerfilActivity.class);
+                //i.putExtra("PEDIDO",seleccionarLista(pedidos,"oferta").get(position));
+                startActivity(i);
+                break;
+            case R.id.misPedidos:
+                i = new Intent(verPedidosListViewActivity.this, verPedidosListViewActivity.class);
+                startActivity(i);
+            case R.id.eliminarPerfil:
+                //Creamos un alert dialog
+                builder=new AlertDialog.Builder(this);
+                builder.setTitle("Delete account");
+                builder.setMessage("Are you sure to delete your account?");
+                builder.setPositiveButton("Acept", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                     eliminarCuenta();
+                    }
+                });
+
+                builder.setNegativeButton(android.R.string.cancel,null);
+                Dialog dialog=builder.create();
+                dialog.show();
+                break;
+            case R.id.menuSalir://hacer case por opcion
+                FirebaseAuth.getInstance().signOut();
+                finish();
+                i = new Intent(this, MainActivity.class);
+                startActivity(i);
+                overridePendingTransition(R.transition.login_in, R.transition.login_out);
+                break;
         }
-        //para saber que opcion del menu se selecciona
-        @Override
-        public boolean onOptionsItemSelected (MenuItem item){
-            switch (item.getItemId()) {
-                case R.id.miMainInicio:
-                    i = new Intent(verPedidosListViewActivity.this, ListViewActivity.class);
-                    startActivity(i);
-                    break;
-                case R.id.perfil:
-                    i = new Intent(verPedidosListViewActivity.this, PerfilActivity.class);
-                    //i.putExtra("PEDIDO",seleccionarLista(pedidos,"oferta").get(position));
-                    startActivity(i);
-                    break;
-                case R.id.misPedidos:
-                    i = new Intent(verPedidosListViewActivity.this, verPedidosListViewActivity.class);
-                    startActivity(i);
-                case R.id.eliminarPerfil:
-                    i = new Intent(verPedidosListViewActivity.this, PerfilActivity.class);
-                    startActivity(i);
-                    break;
-                case R.id.menuSalir://hacer case por opcion
-                    FirebaseAuth.getInstance().signOut();
-                    finish();
-                    i = new Intent(this, MainActivity.class);
-                    startActivity(i);
-                    overridePendingTransition(R.transition.login_in, R.transition.login_out);
-                    break;
-            }
-            return true;
-        }
+        return true;
+    }
     //funcion para filtrar por el oferta/demanda
     public ArrayList<Pedido> seleccionarLista(ArrayList<Pedido> pedidos, String filtro)
     {
@@ -165,5 +185,25 @@ public class verPedidosListViewActivity extends AppCompatActivity {
             }
         }
     }
-}
 
+    public void eliminarCuenta(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user != null) {
+            user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(verPedidosListViewActivity.this, "Deleting the account was correct", Toast.LENGTH_SHORT).show();
+                        i= new Intent(verPedidosListViewActivity.this, MainActivity.class);
+                        startActivity(i);
+                    } else {
+                        Toast.makeText(verPedidosListViewActivity.this, "The account could not be deleted", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            });
+
+        }
+    }
+}

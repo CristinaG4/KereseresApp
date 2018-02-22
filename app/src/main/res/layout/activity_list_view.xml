@@ -6,175 +6,228 @@
     android:orientation="vertical"
     android:background="@drawable/fondo_degradado">
 
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:background="@color/verdeTitulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+
     </android.support.v7.widget.Toolbar>
 
-        <TabHost
-            android:id="@android:id/tabhost"
-            android:layout_width="match_parent"
-            android:layout_height="470dp">
+    <TabHost
+        android:id="@android:id/tabhost"
+        android:layout_width="match_parent"
+        android:layout_height="470dp">
 
-            <android.support.v4.widget.SwipeRefreshLayout
-                android:id="@+id/myswipe"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TabWidget android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@android:id/tabs"
+                android:background="@color/VerdeClaro"
+                />
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <LinearLayout
-                    android:orientation="vertical"
+                    android:id="@+id/tab1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-                    <TabWidget android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@android:id/tabs"
-                        android:background="@color/VerdeClaro"/>
-
-                    <FrameLayout
-                        android:id="@android:id/tabcontent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <ListView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <LinearLayout
-                            android:id="@+id/tab1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
-                            <ListView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:id="@+id/lvOfertas"
-                                android:scrollbarThumbVertical="@drawable/scrollbar_design"/>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/tab2"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
-
-                            <ListView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:id="@+id/lvDemandas"
-                                android:scrollbarThumbVertical="@drawable/scrollbar_design"/>
-                        </LinearLayout>
-                    </FrameLayout>
+                        android:layout_height="match_parent"
+                        android:id="@+id/lvOfertas"
+                        android:scrollbarThumbVertical="@drawable/scrollbar_design"/>
 
                 </LinearLayout>
-            </android.support.v4.widget.SwipeRefreshLayout>
-            <com.github.clans.fab.FloatingActionMenu
-                android:id="@+id/floatButtonPrincipal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:layout_margin="@dimen/fab_margin"
-                android:src="@drawable/ic_add_boton"
-                app:menu_fab_size="normal"
-                app:menu_colorNormal="@color/verdeTitulo"
-                app:menu_colorPressed="@color/VerdeClaro">
 
-                <com.github.clans.fab.FloatingActionButton
-                    android:id="@+id/floatButtonDemanda"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:fab_size="mini"
-                    app:fab_label="Demand"
-                    app:fab_colorNormal="@color/btfloating"
-                    app:fab_colorPressed="@color/verdeTitulo"
-                    android:src="@mipmap/ic_demands_all"/>
+                <LinearLayout
+                    android:id="@+id/tab2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                <com.github.clans.fab.FloatingActionButton
-                    android:id="@+id/floatButtonOferta"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:fab_size="mini"
-                    app:fab_label="Offer"
-                    app:fab_colorNormal="@color/btfloating"
-                    app:fab_colorPressed="@color/verdeTitulo"
-                    android:src="@mipmap/ic_offers_all"/>
-
-            </com.github.clans.fab.FloatingActionMenu>
-        </TabHost>
-
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:background="@drawable/separador"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="5dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/separador"/>
-
-            <Button
-                android:id="@+id/filtroAll"
-                android:layout_width="70dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/all"/>
-
-            <ImageView
-                android:layout_width="5dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/separador"/>
-
-            <Button
-                android:id="@+id/filtroAmigos"
-                android:layout_width="70dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/amigos"/>
-
-            <ImageView
-                android:layout_width="5dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/separador"/>
-
-            <Button
-                android:id="@+id/filtroInformatica"
-                android:layout_width="65dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/ordenador"/>
-
-            <ImageView
-                android:layout_width="5dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/separador"/>
-
-            <Button
-                android:id="@+id/filtroClases"
-                android:layout_width="65dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/clases"/>
-
-            <ImageView
-                android:layout_width="5dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/separador"/>
-            <Button
-                android:id="@+id/filtroMenaje"
-                android:layout_width="60dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/herramientas"/>
-
-            <ImageView
-                android:layout_width="5dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/separador"/>
+                    <ListView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/lvDemandas"
+                        android:scrollbarThumbVertical="@drawable/scrollbar_design"/>
+                </LinearLayout>
+            </FrameLayout>
 
         </LinearLayout>
+        <com.github.clans.fab.FloatingActionMenu
+            android:id="@+id/floatButtonPrincipal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@drawable/ic_add_boton"
+            app:menu_fab_size="normal"
+            app:menu_colorNormal="@color/verdeTitulo"
+            app:menu_colorPressed="@color/VerdeClaro"
+            >
 
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/floatButtonDemanda"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_size="mini"
+                app:fab_label="Demand"
+                app:fab_colorNormal="@color/btfloating"
+                app:fab_colorPressed="@color/verdeTitulo"
+                android:src="@mipmap/ic_demands_all"
+                />
 
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/floatButtonOferta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_size="mini"
+                app:fab_label="Offer"
+                app:fab_colorNormal="@color/btfloating"
+                app:fab_colorPressed="@color/verdeTitulo"
+                android:src="@mipmap/ic_offers_all"
+                />
+
+        </com.github.clans.fab.FloatingActionMenu>
+    </TabHost>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@drawable/separador"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/separador"/>
+
+        <Button
+            android:id="@+id/filtroAll"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/all"/>
+
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/separador"/>
+
+        <Button
+            android:id="@+id/filtroAmigos"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/amigos"/>
+
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/separador"/>
+
+        <Button
+            android:id="@+id/filtroInformatica"
+            android:layout_width="65dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/ordenador"/>
+
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/separador"/>
+
+        <Button
+            android:id="@+id/filtroClases"
+            android:layout_width="65dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/clases"/>
+
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/separador"/>
+        <Button
+            android:id="@+id/filtroMenaje"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/herramientas"/>
+
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/separador"/>
+
+    </LinearLayout>
+
+    <!--
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/separador"/>
+        <ImageButton
+            android:id="@+id/filtroAll"
+            android:layout_width="114dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/all"/>
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/separador"/>
+        <ImageButton
+            android:id="@+id/filtroAmigos"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/amigos"/>
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/separador"/>
+        <ImageButton
+            android:id="@+id/filtroInformatica"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ordenador"/>
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/separador"/>
+        <ImageButton
+            android:id="@+id/filtroClases"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/clases"/>
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/separador"/>
+        <ImageButton
+            android:id="@+id/filtroMenaje"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/herramientas"/>
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/separador"/>
+
+    </LinearLayout>
+    -->
 </LinearLayout>
 
 

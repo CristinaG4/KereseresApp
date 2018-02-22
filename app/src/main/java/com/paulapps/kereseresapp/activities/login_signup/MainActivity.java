@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
+
 import com.paulapps.kereseresapp.R;
 import com.paulapps.kereseresapp.activities.ListViewActivity;
 
@@ -78,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 FirebaseUser user = mAuth.getCurrentUser();
                 if (user != null) {
                     LogIn();
-
                 }
             }
         };
@@ -122,24 +122,24 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
         }else{
 
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
 
-                         if (task.isSuccessful()) {
-                             // Sign in success, update UI with the signed-in user's information
-                             Toast.makeText(MainActivity.this, "Inicio sesión correcto", Toast.LENGTH_LONG).show();
-                             // updateUI(user);
-                         } else {
-                             // If sign in fails, display a message to the user.
-                             // updateUI(null);
-                             Toast.makeText(MainActivity.this, "Email o contraseña incorrectos", Toast.LENGTH_LONG).show();
-                             etPassword.setText("");
-                         }
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Toast.makeText(MainActivity.this, "Inicio sesión correcto", Toast.LENGTH_LONG).show();
+                                // updateUI(user);
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                // updateUI(null);
+                                Toast.makeText(MainActivity.this, "Email o contraseña incorrectos", Toast.LENGTH_LONG).show();
+                                etPassword.setText("");
+                            }
 
-                    }
-                });
+                        }
+                    });
         }
     }
 
@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private void handleSignInResult(GoogleSignInResult result) {
         if (result.isSuccess()) {
             firebaseAuthWithGoogle(result.getSignInAccount());
-            //    GoogleSignInAccount account=result.getSignInAccount();
+            // GoogleSignInAccount account=result.getSignInAccount();
             //nameTextView,setText(account.getDisplayName()); asi cogeriamos datos de la cuenta google
 
         } else {
@@ -206,6 +206,4 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         Intent i = new Intent(this, ResetPasswordActivity.class);
         startActivity(i);
     }
-
 }
-

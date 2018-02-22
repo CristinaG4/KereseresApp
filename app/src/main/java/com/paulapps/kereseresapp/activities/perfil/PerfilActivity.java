@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.paulapps.kereseresapp.R;
 import com.paulapps.kereseresapp.activities.ListViewActivity;
@@ -60,14 +61,21 @@ public class PerfilActivity extends AppCompatActivity {
             }
         });
 
+        //Mostrar datos usuario
+        InfoUser();
+
     }
-/*
+//para sacar info del usuario
     public void InfoUser(){
-        user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             // Name, email address, and profile photo Url
             String name = user.getDisplayName();
             String email = user.getEmail();
+            String phone = user.getPhoneNumber();
+
+            PerfilEmail.setText(email);
+            PerfilName.setText(name);
 
 
             // Check if user's email is verified
@@ -78,5 +86,5 @@ public class PerfilActivity extends AppCompatActivity {
             // FirebaseUser.getToken() instead.
             String uid = user.getUid();
         }
-    }*/
+    }
 }

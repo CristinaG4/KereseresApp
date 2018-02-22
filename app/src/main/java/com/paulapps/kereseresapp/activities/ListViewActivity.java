@@ -1,11 +1,16 @@
 package com.paulapps.kereseresapp.activities;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,8 +20,17 @@ import android.widget.*;
 import android.support.v4.widget.SwipeRefreshLayout;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.paulapps.kereseresapp.Adapters.Adapter;
 import com.paulapps.kereseresapp.R;
 import com.paulapps.kereseresapp.activities.crear_pedidos.CrearDemandaActivity;
@@ -24,16 +38,17 @@ import com.paulapps.kereseresapp.activities.crear_pedidos.CrearOfertaActivity;
 import com.paulapps.kereseresapp.activities.login_signup.MainActivity;
 import com.paulapps.kereseresapp.activities.perfil.PerfilActivity;
 import com.paulapps.kereseresapp.activities.ver_pedidos.verPedidosListViewActivity;
+import com.paulapps.kereseresapp.model.FirebaseReferences;
 import com.paulapps.kereseresapp.model.Pedido;
 import com.paulapps.kereseresapp.model.Perfil;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListViewActivity extends AppCompatActivity {
 
     private SwipeRefreshLayout swipeLayout;
 
-    private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private FirebaseDatabase firebase;
     private GoogleApiClient googleApiClient;
@@ -41,6 +56,11 @@ public class ListViewActivity extends AppCompatActivity {
     private ListView listViewDemandas, listViewOfertas;
     private ArrayList<Perfil> perfiles;
     private ArrayList<Pedido> pedidos;
+    private ArrayList<Pedido> pedidosOfertas;
+    private ArrayList<Pedido> pedidosDemandas;
+    ArrayList<Pedido> pedidosFiltrados;
+    private Adapter adapterOfertas;
+    private Adapter adapterDemandas;
     private int pedidoIndex;
     private Toolbar toolbar;
     private  ActionBarDrawerToggle toggle;
@@ -48,6 +68,13 @@ public class ListViewActivity extends AppCompatActivity {
     private MenuInflater inflater;
     private FloatingActionMenu floatButtonPrincipal;
     private com.github.clans.fab.FloatingActionButton floatButtonDemanda, floatButtonOferta;
+    AlertDialog.Builder builder;
+
+    //Firebase Instance variables
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mDatabaseReference;
+    private ChildEventListener mChildEventListener;
+    private FirebaseAuth mAuth;
 
 
     Intent i;
@@ -59,6 +86,10 @@ public class ListViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
         // getSupportActionBar().hide();
+
+        //initialize firebase components
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mDatabaseReference = mFirebaseDatabase.getReference();
 
         //Botones Flotantes
         floatButtonPrincipal = findViewById(R.id.floatButtonPrincipal);
@@ -77,35 +108,6 @@ public class ListViewActivity extends AppCompatActivity {
         listViewDemandas= (ListView) findViewById(R.id.lvDemandas);
         listViewOfertas= (ListView) findViewById(R.id.lvOfertas);
 
-        //Declaramos Toolbar
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        setSupportActionBar(toolbar);
-
-        Toolbar menu =(Toolbar) findViewById(R.id.toolbar);//importar como v7 para q no de error
-        setSupportActionBar(menu);
-
-        //Refresh
-        swipeLayout = (SwipeRefreshLayout) findViewById(R.id.myswipe);
-        swipeLayout.setOnRefreshListener(mOnRefreshListener);
-
-
-        floatButtonDemanda.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(ListViewActivity.this,CrearDemandaActivity.class);
-            startActivity(intent);
-        }
-    });
-        floatButtonOferta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(ListViewActivity.this,CrearOfertaActivity.class);
-                startActivity(i);
-            }
-        });
-
-
         //declaramos el Arraylist aqui porque sino tiene un bug que duplica la list view de forma exponencial al volver a cargar la Activity
         perfiles = new ArrayList<>();
         perfiles.add(new Perfil("Nacho Jimenez","ncassinello@gmail.com","1234","7ºG",1000,"913140885",R.drawable.all));
@@ -115,19 +117,80 @@ public class ListViewActivity extends AppCompatActivity {
         perfiles.add(new Perfil("Aitor Tilla","aitortilla@gmail.com","1234","1ºH",1000,"91548775",R.drawable.all));
         perfiles.add(new Perfil("Ana Tomia","anatomia@gmail.com","1234","13ºA",1000,"911254889",R.drawable.all));
 
+
         pedidos = new ArrayList<>();
-        pedidos.add(new Pedido(0,"Formatear Ordenador",perfiles.get(0),"dinero","informatica","Necesito que me formateis el ordenador","demanda"));
+
+        pedidosOfertas = new ArrayList<>();
+        pedidosOfertas = seleccionarLista(pedidos,"oferta");
+        pedidosDemandas = new ArrayList<>();
+        pedidosDemandas = seleccionarLista(pedidos,"demanda");
+
+
+        adapterDemandas = new Adapter(this,R.layout.celda_listview,pedidosDemandas);
+        adapterOfertas = new Adapter(this,R.layout.celda_listview,pedidosOfertas);
+
+
+        /*pedidos.add(new Pedido(0,"Formatear Ordenador",perfiles.get(0),"dinero","informatica","Necesito que me formateis el ordenador","demanda"));
         pedidos.add(new Pedido(1,"Cuidar a mis hijos",perfiles.get(1),"favor", "compañia","Salgo esta noche y encesito niñera","demanda"));
         pedidos.add(new Pedido(2,"Ver el Madrid",perfiles.get(2),"favor","compañia","Ofrezco salon y futbol a cambio de alguien con quien verlo", "oferta"));
         pedidos.add(new Pedido(3,"Clases de XML",perfiles.get(3),"dinero","clases","Necesito clases de XML avanzadas","demanda"));
         pedidos.add(new Pedido(4,"Subir la compra",perfiles.get(4),"dinero","compañia","Necesito ayuda para subir la compra porque yo no puedo","demanda"));
         pedidos.add(new Pedido(5,"Docena de huevos",perfiles.get(5),"favor","hogar","Necesito uan docena de huevo para hacer tortilla de patata","demanda"));
         pedidos.add(new Pedido(6,"Clases de biologia",perfiles.get(5),"favor","clases","Necesito clases de biologia avanzadas para entrar en la carrera de medicina para estudiar anatomía","demanda"));
-        pedidos.add(new Pedido(1,"Cuido niños",perfiles.get(1),"dinero", "compañia","Cuido niños/as.Tengo experiencia","oferta"));
+        pedidos.add(new Pedido(7,"Cuido niños",perfiles.get(1),"dinero", "compañia","Cuido niños/as.Tengo experiencia","oferta"));*/
+
+        mChildEventListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Pedido pedido = dataSnapshot.getValue(Pedido.class);
+                if (pedido.getOferDeman().equalsIgnoreCase("oferta")){
+                    adapterOfertas.add(pedido);
+                }else if(pedido.getOferDeman().equalsIgnoreCase("demanda")){
+                    adapterDemandas.add(pedido);
+                }
+                pedidos.add(pedido);
+            }
+
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
+            public void onChildRemoved(DataSnapshot dataSnapshot) {}
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+        mDatabaseReference.child(FirebaseReferences.PEDIDO_REFERENCES).addChildEventListener(mChildEventListener);
+
+
+        //Declaramos Toolbar
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Toolbar menu =(Toolbar) findViewById(R.id.toolbar);//importar como v7 para q no de error
+        setSupportActionBar(menu);
+
+        //Refresh
+        // swipeLayout = (SwipeRefreshLayout) findViewById(R.id.myswipe);
+        // swipeLayout.setOnRefreshListener(mOnRefreshListener);
+
+
+        floatButtonDemanda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListViewActivity.this,CrearDemandaActivity.class);
+                startActivity(intent);
+            }
+        });
+        floatButtonOferta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ListViewActivity.this,CrearOfertaActivity.class);
+                startActivity(i);
+            }
+        });
+
+
+
 
         //funcionalidad de los adapters
-        listViewOfertas.setAdapter(new Adapter(this,seleccionarLista(pedidos,"oferta")));
-        listViewDemandas.setAdapter(new Adapter(this,seleccionarLista(pedidos,"demanda")));
+        listViewOfertas.setAdapter(adapterOfertas);
+        listViewDemandas.setAdapter(adapterDemandas);
 
         //funcionalidad cuando se pulsa un elemento del listView
         listViewOfertas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -177,8 +240,13 @@ public class ListViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Volvemos el adapter al original diferenciandolo por oferta o compañia
-                listViewOfertas.setAdapter(new Adapter(ListViewActivity.this, seleccionarLista(pedidos,"oferta")));
-                listViewDemandas.setAdapter(new Adapter(ListViewActivity.this, seleccionarLista(pedidos,"demanda")));
+                //listViewOfertas.setAdapter(new Adapter(ListViewActivity.this, seleccionarLista(pedidos,"oferta")));
+                //listViewDemandas.setAdapter(new Adapter(ListViewActivity.this, seleccionarLista(pedidos,"demanda")));
+                adapterDemandas.clear();
+                adapterDemandas.addAll(seleccionarLista(pedidos,"demanda"));
+                adapterOfertas.clear();
+                adapterOfertas.addAll(seleccionarLista(pedidos,"oferta"));
+
             }
         });
 
@@ -186,17 +254,22 @@ public class ListViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Recorremos el array y seleccionamos solo los que son de compañia luego lo dividimos en oferta y demanda
-                ArrayList<Pedido> pedidosFiltradosCompania = new ArrayList<>();
+                ArrayList<Pedido> pedidosFiltrados = new ArrayList<>();
 
                 for (Pedido p:pedidos)
                 {
                     if (p.getCategoria().equalsIgnoreCase("compañia"))
                     {
-                        pedidosFiltradosCompania.add(p);
+                        pedidosFiltrados.add(p);
                     }
                 }
-                listViewOfertas.setAdapter(new Adapter(ListViewActivity.this, seleccionarLista(pedidosFiltradosCompania,"oferta")));
-                listViewDemandas.setAdapter(new Adapter(ListViewActivity.this,seleccionarLista(pedidosFiltradosCompania,"demanda")));
+                //listViewOfertas.setAdapter(new Adapter(ListViewActivity.this, seleccionarLista(pedidosFiltradosCompania,"oferta")));
+                //listViewDemandas.setAdapter(new Adapter(ListViewActivity.this,seleccionarLista(pedidosFiltradosCompania,"demanda")));
+                adapterDemandas.clear();
+                adapterDemandas.addAll(seleccionarLista(pedidosFiltrados,"demanda"));
+                adapterOfertas.clear();
+                adapterOfertas.addAll(seleccionarLista(pedidosFiltrados,"oferta"));
+                //Query recentPostsQuery = mDatabaseReference.child(FirebaseReferences.PEDIDO_REFERENCES).child(FirebaseReferences.CAT_PERFIL_PREFERENCES).equalTo("compañia");
             }
         });
 
@@ -205,17 +278,21 @@ public class ListViewActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Recorremos el array y seleccionamos solo los que son de Informatica,luego lo dividimos en oferta y demanda
 
-                ArrayList<Pedido> pedidosFiltradosInformatica = new ArrayList<>();
+                ArrayList<Pedido> pedidosFiltrados = new ArrayList<>();
 
                 for (Pedido p:pedidos)
                 {
                     if (p.getCategoria().equalsIgnoreCase("informatica"))
                     {
-                        pedidosFiltradosInformatica.add(p);
+                        pedidosFiltrados.add(p);
                     }
                 }
-                listViewOfertas.setAdapter(new Adapter(ListViewActivity.this,seleccionarLista(pedidosFiltradosInformatica,"oferta")));
-                listViewDemandas.setAdapter(new Adapter(ListViewActivity.this, seleccionarLista(pedidosFiltradosInformatica,"demanda")));
+                // listViewOfertas.setAdapter(new Adapter(ListViewActivity.this,seleccionarLista(pedidosFiltradosInformatica,"oferta")));
+                // listViewDemandas.setAdapter(new Adapter(ListViewActivity.this, seleccionarLista(pedidosFiltradosInformatica,"demanda")));
+                adapterDemandas.clear();
+                adapterDemandas.addAll(seleccionarLista(pedidosFiltrados,"demanda"));
+                adapterOfertas.clear();
+                adapterOfertas.addAll(seleccionarLista(pedidosFiltrados,"oferta"));
 
             }
         });
@@ -224,17 +301,21 @@ public class ListViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Recorremos el array y seleccionamos solo los que son de Clase, luego lo dividimos en oferta y demanda
-                ArrayList<Pedido> pedidosFiltradosClases = new ArrayList<>();
+                ArrayList<Pedido> pedidosFiltrados = new ArrayList<>();
 
                 for (Pedido p:pedidos)
                 {
                     if (p.getCategoria().equalsIgnoreCase("clases"))
                     {
-                        pedidosFiltradosClases.add(p);
+                        pedidosFiltrados.add(p);
                     }
                 }
-                listViewOfertas.setAdapter(new Adapter(ListViewActivity.this,seleccionarLista(pedidosFiltradosClases,"oferta")));
-                listViewDemandas.setAdapter(new Adapter(ListViewActivity.this, seleccionarLista(pedidosFiltradosClases,"demanda")));
+                // listViewOfertas.setAdapter(new Adapter(ListViewActivity.this,seleccionarLista(pedidosFiltradosClases,"oferta")));
+                //  listViewDemandas.setAdapter(new Adapter(ListViewActivity.this, seleccionarLista(pedidosFiltradosClases,"demanda")));
+                adapterDemandas.clear();
+                adapterDemandas.addAll(seleccionarLista(pedidosFiltrados,"demanda"));
+                adapterOfertas.clear();
+                adapterOfertas.addAll(seleccionarLista(pedidosFiltrados,"oferta"));
             }
         });
 
@@ -242,17 +323,21 @@ public class ListViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Recorremos el array y seleccionamos solo los que son de Hogar/Menaje, luego lo dividimos en oferta y demanda
-                ArrayList<Pedido> pedidosFiltradosHM = new ArrayList<>();
+                ArrayList<Pedido> pedidosFiltrados = new ArrayList<>();
 
                 for (Pedido p:pedidos)
                 {
                     if (p.getCategoria().equalsIgnoreCase("hogar"))
                     {
-                        pedidosFiltradosHM.add(p);
+                        pedidosFiltrados.add(p);
                     }
                 }
-                listViewOfertas.setAdapter(new Adapter(ListViewActivity.this,seleccionarLista(pedidosFiltradosHM,"oferta")));
-                listViewDemandas.setAdapter(new Adapter(ListViewActivity.this, seleccionarLista(pedidosFiltradosHM,"demanda")));
+                // listViewOfertas.setAdapter(new Adapter(ListViewActivity.this,seleccionarLista(pedidosFiltradosHM,"oferta")));
+                // listViewDemandas.setAdapter(new Adapter(ListViewActivity.this, seleccionarLista(pedidosFiltradosHM,"demanda")));
+                adapterDemandas.clear();
+                adapterDemandas.addAll(seleccionarLista(pedidosFiltrados,"demanda"));
+                adapterOfertas.clear();
+                adapterOfertas.addAll(seleccionarLista(pedidosFiltrados,"oferta"));
 
             }
         });
@@ -295,15 +380,27 @@ public class ListViewActivity extends AppCompatActivity {
                 break;
             case R.id.perfil:
                 i = new Intent(ListViewActivity.this, PerfilActivity.class);
-               //i.putExtra("PEDIDO",seleccionarLista(pedidos,"oferta").get(position));
+                //i.putExtra("PEDIDO",seleccionarLista(pedidos,"oferta").get(position));
                 startActivity(i);
                 break;
             case R.id.misPedidos:
-                i= new Intent(ListViewActivity.this, verPedidosListViewActivity.class);
-                startActivity(i);
+                Intent in= new Intent(ListViewActivity.this, verPedidosListViewActivity.class);
+                startActivity(in);
             case R.id.eliminarPerfil:
-                i= new Intent(ListViewActivity.this, PerfilActivity.class);
-                startActivity(i);
+                //Creamos un alert dialog
+                builder=new AlertDialog.Builder(this);
+                builder.setTitle("Delete account");
+                builder.setMessage("Are you sure to delete your account?");
+                builder.setPositiveButton("Acept", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                eliminarCuenta();
+                            }
+                        });
+
+                builder.setNegativeButton(android.R.string.cancel,null);
+                Dialog dialog=builder.create();
+                dialog.show();
                 break;
             case R.id.menuSalir://hacer case por opcion
                 FirebaseAuth.getInstance().signOut();
@@ -354,11 +451,28 @@ public class ListViewActivity extends AppCompatActivity {
     };
 
 
+    public void eliminarCuenta(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+        if (user != null) {
+            user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(ListViewActivity.this, "Deleting the account was correct", Toast.LENGTH_SHORT).show();
+                        i= new Intent(ListViewActivity.this, MainActivity.class);
+                        startActivity(i);
+                    } else {
+                        Toast.makeText(ListViewActivity.this, "The account could not be deleted", Toast.LENGTH_SHORT).show();
+                    }
 
+                }
+            });
 
+        }
+    }
 
-
+/*
     //Navigation Drawer
     private void NavDrawer()
     {
@@ -381,8 +495,8 @@ public class ListViewActivity extends AppCompatActivity {
         // Drawer Toggle Object Made
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-    };
-
-
+    };*/
 
 }
+
+
