@@ -11,5 +11,4 @@
         android:title="Delete profile"></item>
     <item android:id="@+id/menuSalir"
         android:title="SignOut"></item>
-    <!--mirar notificaciones-->
 </menu>

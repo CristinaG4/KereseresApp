@@ -21,15 +21,15 @@
         android:layout_height="470dp">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <TabWidget android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <TabWidget
                 android:id="@android:id/tabs"
-                android:background="@color/VerdeClaro"
-                />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/VerdeClaro" />
 
             <FrameLayout
                 android:id="@android:id/tabcontent"
@@ -41,11 +41,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+
                     <ListView
+                        android:id="@+id/lvOfertas"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/lvOfertas"
-                        android:scrollbarThumbVertical="@drawable/scrollbar_design"/>
+                        android:scrollbarThumbVertical="@drawable/scrollbar_design" />
 
                 </LinearLayout>
 
@@ -56,14 +57,15 @@
                     android:orientation="vertical">
 
                     <ListView
+                        android:id="@+id/lvDemandas"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/lvDemandas"
-                        android:scrollbarThumbVertical="@drawable/scrollbar_design"/>
+                        android:scrollbarThumbVertical="@drawable/scrollbar_design" />
                 </LinearLayout>
             </FrameLayout>
 
         </LinearLayout>
+
         <com.github.clans.fab.FloatingActionMenu
             android:id="@+id/floatButtonPrincipal"
             android:layout_width="wrap_content"
@@ -71,32 +73,29 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
             android:src="@drawable/ic_add_boton"
-            app:menu_fab_size="normal"
             app:menu_colorNormal="@color/verdeTitulo"
             app:menu_colorPressed="@color/VerdeClaro"
-            >
+            app:menu_fab_size="normal">
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/floatButtonDemanda"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:fab_size="mini"
-                app:fab_label="Demand"
+                android:src="@mipmap/ic_demands_all"
                 app:fab_colorNormal="@color/btfloating"
                 app:fab_colorPressed="@color/verdeTitulo"
-                android:src="@mipmap/ic_demands_all"
-                />
+                app:fab_label="Demand"
+                app:fab_size="mini" />
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/floatButtonOferta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:fab_size="mini"
-                app:fab_label="Offer"
+                android:src="@mipmap/ic_offers_all"
                 app:fab_colorNormal="@color/btfloating"
                 app:fab_colorPressed="@color/verdeTitulo"
-                android:src="@mipmap/ic_offers_all"
-                />
+                app:fab_label="Offer"
+                app:fab_size="mini" />
 
         </com.github.clans.fab.FloatingActionMenu>
     </TabHost>
