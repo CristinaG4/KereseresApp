@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">KereseresApp</string>
+    <string name="app_name">Kereseres</string>
     <string name="tituloApp">Kereseres</string>
     <string name="title_activity_perfil">PerfilActivity</string>
     <string name="title_activity_edit_perfil">EditPerfilActivity</string>
