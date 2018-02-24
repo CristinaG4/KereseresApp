@@ -78,6 +78,4 @@ public class Adapter extends ArrayAdapter<Pedido> {
 
         return 0;
     }
-
-
 }

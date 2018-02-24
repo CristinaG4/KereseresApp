@@ -29,9 +29,6 @@ public class CrearDemandaActivity extends AppCompatActivity {
     private Perfil perfil;
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

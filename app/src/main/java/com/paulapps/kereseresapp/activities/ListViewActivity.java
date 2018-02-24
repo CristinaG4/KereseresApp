@@ -17,7 +17,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.*;
-import android.support.v4.widget.SwipeRefreshLayout;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -45,8 +44,6 @@ import java.util.List;
 
 public class ListViewActivity extends AppCompatActivity {
 
-    private SwipeRefreshLayout swipeLayout;
-
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private FirebaseDatabase firebase;
     private GoogleApiClient googleApiClient;
@@ -72,7 +69,6 @@ public class ListViewActivity extends AppCompatActivity {
     private DatabaseReference mDatabaseReference;
     private ChildEventListener mChildEventListener;
     private FirebaseAuth mAuth;
-
 
     Intent i;
 
@@ -100,6 +96,11 @@ public class ListViewActivity extends AppCompatActivity {
 
         //toolbar.setTitleTextColor(0xFFF0);
 
+        //Declaramos Toolbar
+        setSupportActionBar(toolbar);
+        Toolbar menu =(Toolbar) findViewById(R.id.toolbar);//importar como v7 para q no de error
+        setSupportActionBar(menu);
+
         //Barra para filtrar
         filtroAll =  findViewById(R.id.filtroAll);
         filtroAmigos = findViewById(R.id.filtroAmigos);
@@ -118,16 +119,6 @@ public class ListViewActivity extends AppCompatActivity {
 
         adapterDemandas = new Adapter(this,R.layout.celda_listview,seleccionarLista(pedidos,"demanda"));
         adapterOfertas = new Adapter(this,R.layout.celda_listview, seleccionarLista(pedidos,"oferta"));
-
-
-        /*pedidos.add(new Pedido(0,"Formatear Ordenador",perfiles.get(0),"dinero","informatica","Necesito que me formateis el ordenador","demanda"));
-        pedidos.add(new Pedido(1,"Cuidar a mis hijos",perfiles.get(1),"favor", "compañia","Salgo esta noche y encesito niñera","demanda"));
-        pedidos.add(new Pedido(2,"Ver el Madrid",perfiles.get(2),"favor","compañia","Ofrezco salon y futbol a cambio de alguien con quien verlo", "oferta"));
-        pedidos.add(new Pedido(3,"Clases de XML",perfiles.get(3),"dinero","clases","Necesito clases de XML avanzadas","demanda"));
-        pedidos.add(new Pedido(4,"Subir la compra",perfiles.get(4),"dinero","compañia","Necesito ayuda para subir la compra porque yo no puedo","demanda"));
-        pedidos.add(new Pedido(5,"Docena de huevos",perfiles.get(5),"favor","hogar","Necesito uan docena de huevo para hacer tortilla de patata","demanda"));
-        pedidos.add(new Pedido(6,"Clases de biologia",perfiles.get(5),"favor","clases","Necesito clases de biologia avanzadas para entrar en la carrera de medicina para estudiar anatomía","demanda"));
-        pedidos.add(new Pedido(7,"Cuido niños",perfiles.get(1),"dinero", "compañia","Cuido niños/as.Tengo experiencia","oferta"));*/
 
         mChildEventListener = new ChildEventListener() {
             @Override
@@ -168,18 +159,6 @@ public class ListViewActivity extends AppCompatActivity {
         };
         mDatabaseReference.child(FirebaseReferences.PERFIL_REFERENCES).addChildEventListener(mChildEventListener);
 
-
-        //Declaramos Toolbar
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        Toolbar menu =(Toolbar) findViewById(R.id.toolbar);//importar como v7 para q no de error
-        setSupportActionBar(menu);
-
-        //Refresh
-        // swipeLayout = (SwipeRefreshLayout) findViewById(R.id.myswipe);
-        // swipeLayout.setOnRefreshListener(mOnRefreshListener);
-
-
         floatButtonDemanda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -195,9 +174,6 @@ public class ListViewActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-
-
 
         //funcionalidad de los adapters
         listViewOfertas.setAdapter(adapterOfertas);
@@ -368,8 +344,6 @@ public class ListViewActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-        //NavDrawer();
     }
 
 
@@ -453,17 +427,6 @@ public class ListViewActivity extends AppCompatActivity {
         }
     }
 
-    //Refresh
-    protected SwipeRefreshLayout.OnRefreshListener mOnRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
-        @Override
-        public void onRefresh() {
-            Toast toast0 = Toast.makeText(ListViewActivity.this, "Refrescado!!", Toast.LENGTH_LONG);
-            toast0.show();
-            swipeLayout.setRefreshing(false);
-        }
-    };
-
-
     public void eliminarCuenta(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -486,32 +449,6 @@ public class ListViewActivity extends AppCompatActivity {
 
         }
     }
-
-/*
-    //Navigation Drawer
-    private void NavDrawer()
-    {
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        {
-            public void onDrawerOpened(View drawerView)
-            {
-                super.onDrawerOpened(drawerView);
-                // code here will execute once the drawer is opened( As I dont want anything happened whe drawer is
-                // open I am not going to put anything here)
-            }
-
-            public void onDrawerClosed(View drawerView)
-            {
-                super.onDrawerClosed(drawerView);
-                // Code here will execute once drawer is closed
-            }
-        };
-        // Drawer Toggle Object Made
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-    };*/
-
 }
 
 

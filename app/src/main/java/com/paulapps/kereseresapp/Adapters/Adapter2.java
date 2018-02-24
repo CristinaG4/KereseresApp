@@ -91,6 +91,4 @@ public class Adapter2 extends BaseAdapter {
 
         return 0;
     }
-
-
 }
