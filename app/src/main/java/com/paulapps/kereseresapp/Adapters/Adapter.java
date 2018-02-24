@@ -47,15 +47,15 @@ public class Adapter extends ArrayAdapter<Pedido> {
         //Introducimos los valores en el xml
         nombre.setText(pedido.getPerfil().getNombre());
         titulo.setText(pedido.getTitulo());
-        tipo.setImageResource(seleccionarImagenTipo(position));
-        pago.setImageResource(seleccionarImagenPago(position));
+        tipo.setImageResource(seleccionarImagenTipo());
+        pago.setImageResource(seleccionarImagenPago());
 
         return convertView;
     }
 
 
     //funcion que segun el tipo de pedido le dispone un imagen personalizada
-    private  int seleccionarImagenTipo(int position){
+    private  int seleccionarImagenTipo(){
         if(pedido.getCategoria().equalsIgnoreCase("compañia")){
             return R.drawable.amigos;
         }else if (pedido.getCategoria().equalsIgnoreCase("informatica")){
@@ -69,11 +69,11 @@ public class Adapter extends ArrayAdapter<Pedido> {
     }
 
     //funcion que segun el tipo de pago le dispone un imagen personalizada
-    private int seleccionarImagenPago(int position){
-        if(pedido.getCategoria().equalsIgnoreCase("dinero")){
-            return R.drawable.amigos;
-        }else if (pedido.getCategoria().equalsIgnoreCase("favor")){
-            return R.drawable.herramientas;
+    private int seleccionarImagenPago(){
+        if(pedido.getTipoPago().equalsIgnoreCase("dinero")){
+            return R.drawable.euro;
+        }else if (pedido.getTipoPago().equalsIgnoreCase("favor")){
+            return R.drawable.logo2;
         }
 
         return 0;

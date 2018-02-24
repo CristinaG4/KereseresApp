@@ -11,7 +11,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -30,8 +29,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.paulapps.kereseresapp.Adapters.Adapter;
 import com.paulapps.kereseresapp.R;
 import com.paulapps.kereseresapp.activities.crear_pedidos.CrearDemandaActivity;
@@ -55,11 +52,8 @@ public class ListViewActivity extends AppCompatActivity {
     private GoogleApiClient googleApiClient;
     private Button filtroAll, filtroAmigos, filtroInformatica, filtroClases, filtroMenaje;
     private ListView listViewDemandas, listViewOfertas;
-    private ArrayList<Perfil> perfiles;
+    private Perfil perfil;
     private ArrayList<Pedido> pedidos;
-    private ArrayList<Pedido> pedidosOfertas;
-    private ArrayList<Pedido> pedidosDemandas;
-    ArrayList<Pedido> pedidosFiltrados;
     private Adapter adapterOfertas;
     private Adapter adapterDemandas;
     private int pedidoIndex;
@@ -118,25 +112,12 @@ public class ListViewActivity extends AppCompatActivity {
         listViewOfertas= (ListView) findViewById(R.id.lvOfertas);
 
         //declaramos el Arraylist aqui porque sino tiene un bug que duplica la list view de forma exponencial al volver a cargar la Activity
-        perfiles = new ArrayList<>();
-        perfiles.add(new Perfil("Nacho Jimenez","ncassinello@gmail.com","1234","7ºG",1000,"913140885",R.drawable.all));
-        perfiles.add(new Perfil("Cristinini","cristinini@gmail.com","1234","1ºH",1000,"91548775",R.drawable.all));
-        perfiles.add(new Perfil("PaulaCR7","paulaCR7@gmail.com","1234","13ºA",1000,"911254889",R.drawable.all));
-        perfiles.add(new Perfil("Sara","sara@gmail.com","1234","7ºG",1000,"913140885",R.drawable.all));
-        perfiles.add(new Perfil("Aitor Tilla","aitortilla@gmail.com","1234","1ºH",1000,"91548775",R.drawable.all));
-        perfiles.add(new Perfil("Ana Tomia","anatomia@gmail.com","1234","13ºA",1000,"911254889",R.drawable.all));
-
-
         pedidos = new ArrayList<>();
 
-        pedidosOfertas = new ArrayList<>();
-        pedidosOfertas = seleccionarLista(pedidos,"oferta");
-        pedidosDemandas = new ArrayList<>();
-        pedidosDemandas = seleccionarLista(pedidos,"demanda");
 
 
-        adapterDemandas = new Adapter(this,R.layout.celda_listview,pedidosDemandas);
-        adapterOfertas = new Adapter(this,R.layout.celda_listview,pedidosOfertas);
+        adapterDemandas = new Adapter(this,R.layout.celda_listview,seleccionarLista(pedidos,"demanda"));
+        adapterOfertas = new Adapter(this,R.layout.celda_listview, seleccionarLista(pedidos,"oferta"));
 
 
         /*pedidos.add(new Pedido(0,"Formatear Ordenador",perfiles.get(0),"dinero","informatica","Necesito que me formateis el ordenador","demanda"));
@@ -167,6 +148,26 @@ public class ListViewActivity extends AppCompatActivity {
         };
         mDatabaseReference.child(FirebaseReferences.PEDIDO_REFERENCES).addChildEventListener(mChildEventListener);
 
+        mChildEventListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Perfil p = dataSnapshot.getValue(Perfil.class);
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (p.getEmail().equals(user.getEmail())){
+                    perfil = p;
+                    if (perfil.getTelf()==null){
+                        perfil.setTelf("");
+                    }
+                }
+            }
+
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
+            public void onChildRemoved(DataSnapshot dataSnapshot) {}
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+        mDatabaseReference.child(FirebaseReferences.PERFIL_REFERENCES).addChildEventListener(mChildEventListener);
+
 
         //Declaramos Toolbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -183,6 +184,7 @@ public class ListViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ListViewActivity.this,CrearDemandaActivity.class);
+                intent.putExtra("PCD",perfil);
                 startActivity(intent);
             }
         });
@@ -389,6 +391,7 @@ public class ListViewActivity extends AppCompatActivity {
                 break;
             case R.id.perfil:
                 i = new Intent(ListViewActivity.this, PerfilActivity.class);
+                i.putExtra("PERFIL",perfil);
                 //i.putExtra("PEDIDO",seleccionarLista(pedidos,"oferta").get(position));
                 startActivity(i);
                 break;

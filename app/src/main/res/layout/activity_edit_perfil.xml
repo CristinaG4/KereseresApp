@@ -52,7 +52,8 @@
                 android:id="@+id/EtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:background="@null"/>
+                android:background="@null"
+                android:enabled="false"/>
         </LinearLayout>
 
         <LinearLayout
@@ -71,7 +72,8 @@
                 android:id="@+id/EtPassword"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:background="@null"/>
+                android:background="@null"
+                android:inputType="textPassword"/>
         </LinearLayout>
 
         <LinearLayout
@@ -159,7 +161,7 @@
         android:layout_gravity="center_horizontal">
 
         <Button
-            android:id="@+id/btnCalcelarProfile"
+            android:id="@+id/btnCalcelarEditProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
@@ -169,7 +171,7 @@
             android:textColor="@color/textBtnLogin" />
 
         <Button
-            android:id="@+id/btnAceptarProfile"
+            android:id="@+id/btnAceptarEditProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"

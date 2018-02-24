@@ -13,6 +13,8 @@ import com.paulapps.kereseresapp.model.FirebaseReferences;
 import com.paulapps.kereseresapp.model.Pedido;
 import com.paulapps.kereseresapp.R;
 import com.paulapps.kereseresapp.activities.ListViewActivity;
+import com.paulapps.kereseresapp.model.Perfil;
+import android.util.Log;
 
 public class CrearDemandaActivity extends AppCompatActivity {
 
@@ -24,6 +26,7 @@ public class CrearDemandaActivity extends AppCompatActivity {
     RadioGroup radioGroup;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
+    private Perfil perfil;
 
 
 
@@ -46,6 +49,11 @@ public class CrearDemandaActivity extends AppCompatActivity {
         radioBtnFavorCreaDemanda = findViewById(R.id.radioBtnFavorCreaDemanda);
         radioBtnMoneyCreaDemanda = findViewById(R.id.radioBtnMoneyCreaDemanda);
         radioGroup = findViewById(R.id.radioGroupBtn);
+
+        perfil = new Perfil();
+        perfil = (Perfil) getIntent().getSerializableExtra("PCD");
+
+
         //Coger valor spinner
         String categoria=spinnerCreaDemanda.getSelectedItem().toString();
         //Hacer scroll en el texto para descripcion
@@ -66,7 +74,7 @@ public class CrearDemandaActivity extends AppCompatActivity {
 
                 if(examinarCampos() == true) {
                     Pedido p = new Pedido();
-                    rellnarPedido(p);
+                    rellenarPedido(p);
                     mDatabaseReference.child(FirebaseReferences.PEDIDO_REFERENCES).push().setValue(p);
                     Toast t = Toast.makeText(CrearDemandaActivity.this, "Demand created", Toast.LENGTH_SHORT);
                     t.show();
@@ -94,7 +102,7 @@ public class CrearDemandaActivity extends AppCompatActivity {
         }
     }
 
-    private void rellnarPedido(Pedido p){
+    private void rellenarPedido(Pedido p){
         p.setTitulo(titleCreaDemandaET.getText().toString());
         p.setCategoria(spinnerCreaDemanda.getSelectedItem().toString());
         p.setDescripcion(descripCreaDemandaET.getText().toString());
@@ -106,7 +114,8 @@ public class CrearDemandaActivity extends AppCompatActivity {
             p.setTipoPago(radioBtnMoneyCreaDemanda.getText().toString());
         }
         p.setOferDeman("demanda");
-        p.setPerfil(null);
+        p.setPerfil(perfil);
+
 
     }
 

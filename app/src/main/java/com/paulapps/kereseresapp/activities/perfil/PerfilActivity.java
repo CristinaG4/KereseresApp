@@ -13,16 +13,15 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.paulapps.kereseresapp.R;
 import com.paulapps.kereseresapp.activities.ListViewActivity;
-import com.paulapps.kereseresapp.activities.NavigationDrawerActivity;
+import com.paulapps.kereseresapp.model.Perfil;
 
 public class PerfilActivity extends AppCompatActivity {
 
-    private FirebaseDatabase firebase;
-    private FirebaseAuth mAuth;
-    private FirebaseUser user;
+    private Perfil perfil;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     TextView tituloAppPerfil,PerfilEmail,PerfilPassword,PerfilName,PerfilApartment,PerfilComCode,PerfilTelefono;
     Button btnAceptarPerfil, btnEditarPerfil;
+
 
 
     @Override
@@ -39,6 +38,8 @@ public class PerfilActivity extends AppCompatActivity {
         PerfilApartment=(TextView) findViewById(R.id.PerfilApartment);
         PerfilComCode=(TextView) findViewById(R.id.PerfilComCode);
         PerfilTelefono=(TextView) findViewById(R.id.PerfilTelefono);
+
+        perfil = (Perfil) getIntent().getSerializableExtra("PERFIL");
 
 
         //Fuente titulo
@@ -58,7 +59,8 @@ public class PerfilActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(PerfilActivity.this, EditPerfilActivity.class);
-                startActivity(in);
+                in.putExtra("PERFIL",perfil);
+                startActivityForResult(in,1);
                 overridePendingTransition(R.transition.left_in, R.transition.left_out);
             }
         });
@@ -69,25 +71,30 @@ public class PerfilActivity extends AppCompatActivity {
     }
 //para sacar info del usuario
     public void InfoUser(){
-        //obtenemos el usuario q ha abierto la sesion
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            // Name, email address, and profile photo Url
-            String name = user.getDisplayName();
-            String email = user.getEmail();
-            String phone = user.getPhoneNumber();
 
-            PerfilEmail.setText(email);
-            PerfilName.setText(name);
+        //obtenemos el usuario q ha abierto la sesion
+
+        PerfilEmail.setText(perfil.getEmail());
+        PerfilName.setText(perfil.getNombre());
+        PerfilApartment.setText(perfil.getApart());
+        PerfilComCode.setText(Integer.toString(perfil.getComCode()));
+        PerfilTelefono.setText(perfil.getTelf());
+        PerfilPassword.setText(perfil.getPass());
 
 
             // Check if user's email is verified
-            boolean emailVerified = user.isEmailVerified();
+            //boolean emailVerified = user.isEmailVerified();
+    }
 
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            // FirebaseUser.getToken() instead.
-            String uid = user.getUid();
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1){
+            if(resultCode == RESULT_OK){
+                perfil = (Perfil)data.getSerializableExtra("PV");
+            }else{
+
+            }
         }
     }
 }

@@ -11,14 +11,12 @@ import android.net.Uri;
 
 import com.paulapps.kereseresapp.R;
 import com.paulapps.kereseresapp.model.Pedido;
-
-
+import com.paulapps.kereseresapp.model.Perfil;
 
 public class DetallesPedido extends AppCompatActivity {
 
     Intent intent;
-    //TextView tv1,tv2,tv3;
-    TextView tituloDetallePedido, categoriaDetallePedidoTV, nombreDetallePedidoTV, descripDetallePedidoTV, emailDetallePedidoTV;
+    TextView tituloDetallePedido, categoriaDetallePedidoTV, nombreDetallePedidoTV, descripDetallePedidoTV, emailDetallePedidoTV,tipoPagoDetallePedidoTV;
     ImageView fotoCategoria;
     private Pedido pedido = new Pedido();
     Button btnVolverDetallePedido,btnContactarDetallePedido;
@@ -43,6 +41,7 @@ public class DetallesPedido extends AppCompatActivity {
         descripDetallePedidoTV = (TextView) findViewById(R.id.descripDetallePedidoTV);
         emailDetallePedidoTV = (TextView) findViewById(R.id.emailDetallePedidoTV);
         fotoCategoria = findViewById(R.id.fotoCategoria);
+        tipoPagoDetallePedidoTV = findViewById(R.id.tipoPagoDetallePedidoTV);
 
         //ejemplo de como acceder a los datos de pedido
         tituloDetallePedido.setText(pedido.getTitulo());
@@ -50,6 +49,7 @@ public class DetallesPedido extends AppCompatActivity {
         nombreDetallePedidoTV.setText(pedido.getPerfil().getNombre());
         descripDetallePedidoTV.setText(pedido.getDescripcion());
         emailDetallePedidoTV.setText(pedido.getPerfil().getEmail());
+        tipoPagoDetallePedidoTV.setText(pedido.getTipoPago());
 
         //accedemos a la imagen tipo categoria
         fotoCategoria.setImageResource(seleccionarImagenTipo());
@@ -67,10 +67,14 @@ public class DetallesPedido extends AppCompatActivity {
     }
     //CODIGO PARA CONTACTAR CON EL USUARIO
     public void contactar(View v){
-        Intent i=new Intent(android.content.Intent.ACTION_DIAL, Uri.parse(""));
-        startActivity(i);
+        String tel=pedido.getPerfil().getTelf().toString();
+        if(tel.equals("")){
+            Toast.makeText(this,"User hasn´t a phone number defined",Toast.LENGTH_SHORT).show();
+        }else {
+            Intent i = new Intent(android.content.Intent.ACTION_DIAL, Uri.parse("tel:"+tel));
+            startActivity(i);
+        }
     }
-
 
     private  int seleccionarImagenTipo(){
         if(pedido.getCategoria().equalsIgnoreCase("compañia")){

@@ -11,13 +11,22 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.paulapps.kereseresapp.R;
+import com.paulapps.kereseresapp.model.FirebaseReferences;
+import com.paulapps.kereseresapp.model.Perfil;
 
 public class EditPerfilActivity extends AppCompatActivity {
 
+    Perfil perfil;
+    Intent i;
     TextView tituloAppProfile;
-    Button btnCalcelarProfile;
+    Button btnCalcelarEditProfile, btnAceptarEditProfile;
     EditText EtEmail,EtPassword,EtName,EtApartment,EtComCode,EtTelefono;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mDatabaseReference;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +34,8 @@ public class EditPerfilActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_perfil);
 
         tituloAppProfile = (TextView) findViewById(R.id.tituloAppProfile);
-        btnCalcelarProfile = (Button) findViewById(R.id.btnCalcelarProfile);
+        btnCalcelarEditProfile = (Button) findViewById(R.id.btnCalcelarEditProfile);
+        btnAceptarEditProfile = (Button) findViewById(R.id.btnAceptarEditProfile);
         EtEmail=(EditText)findViewById(R.id.EtEmail);
         EtPassword=(EditText)findViewById(R.id.EtPassword);
         EtName=(EditText)findViewById(R.id.EtName);
@@ -38,34 +48,60 @@ public class EditPerfilActivity extends AppCompatActivity {
         Typeface myFont = Typeface.createFromAsset(getAssets(), "Strawberry Blossom.ttf");
         tituloAppProfile.setTypeface(myFont);
 
-        btnCalcelarProfile.setOnClickListener(new View.OnClickListener() {
+        btnCalcelarEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i  = new Intent(EditPerfilActivity.this, PerfilActivity.class);
+                i  = new Intent(EditPerfilActivity.this, PerfilActivity.class);
                 startActivity(i);
                 overridePendingTransition(R.transition.right_in, R.transition.right_out);
             }
         });
 
+        btnAceptarEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                actualizarPerfil();
+                i = new Intent(EditPerfilActivity.this, PerfilActivity.class);
+                i.putExtra("PV",perfil);
+                setResult(AppCompatActivity.RESULT_OK, i);
+                startActivity(i);
+            }
+        });
+
+        InfoUser();
 
     }
     //para sacar info del usuario
     public void InfoUser(){
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            // Name, email address, and profile photo Url
-            String name = user.getDisplayName();
-            String email = user.getEmail();
+        perfil = (Perfil) getIntent().getSerializableExtra("PERFIL");
+        //obtenemos el usuario q ha abierto la sesion
+
+        EtEmail.setText(perfil.getEmail());
+        EtPassword.setText(perfil.getPass());
+        EtName.setText(perfil.getNombre());
+        EtApartment.setText(perfil.getApart());
+        EtComCode.setText(Integer.toString(perfil.getComCode()));
+        EtTelefono.setText(perfil.getTelf());
+
+    }
+
+    public void actualizarPerfil() {
+
+        //initialize firebase components
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mDatabaseReference = mFirebaseDatabase.getReference();
+        mAuth = FirebaseAuth.getInstance();
+
+        perfil.setEmail(EtEmail.getText().toString());
+        perfil.setPass(EtPassword.getText().toString());
+        perfil.setNombre(EtName.getText().toString());
+        perfil.setApart(EtApartment.getText().toString());
+        perfil.setComCode(Integer.parseInt(EtComCode.getText().toString()));
+        perfil.setTelf(EtTelefono.getText().toString());
 
 
-            // Check if user's email is verified
-            boolean emailVerified = user.isEmailVerified();
+        mDatabaseReference.child(mAuth.getCurrentUser().getUid()).child("nombre").setValue(perfil.getNombre());
 
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            // FirebaseUser.getToken() instead.
-            String uid = user.getUid();
-        }
     }
 
 }
