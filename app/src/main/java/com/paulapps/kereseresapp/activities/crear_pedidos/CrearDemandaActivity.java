@@ -7,6 +7,10 @@ import android.widget.*;
 import android.view.View;
 import android.content.Intent;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.paulapps.kereseresapp.model.FirebaseReferences;
+import com.paulapps.kereseresapp.model.Pedido;
 import com.paulapps.kereseresapp.R;
 import com.paulapps.kereseresapp.activities.ListViewActivity;
 
@@ -16,6 +20,12 @@ public class CrearDemandaActivity extends AppCompatActivity {
     Button btnCancelarCreaDemanda, btnCrearDemanda;
     Intent i;
     Spinner spinnerCreaDemanda;
+    RadioButton radioBtnFavorCreaDemanda,radioBtnMoneyCreaDemanda;
+    RadioGroup radioGroup;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mDatabaseReference;
+
+
 
 
 
@@ -24,12 +34,18 @@ public class CrearDemandaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_demanda);
 
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mDatabaseReference = mFirebaseDatabase.getReference();
+
         //Declaramos elementos
         titleCreaDemandaET = findViewById(R.id.titleCreaDemandaET);
         btnCancelarCreaDemanda = findViewById(R.id.btnCancelarCreaDemanda);
         btnCrearDemanda = findViewById(R.id.btnCrearDemanda);
         descripCreaDemandaET = findViewById(R.id.descripCreaDemandaET);
         spinnerCreaDemanda = findViewById(R.id.spinnerCreaDemanda);
+        radioBtnFavorCreaDemanda = findViewById(R.id.radioBtnFavorCreaDemanda);
+        radioBtnMoneyCreaDemanda = findViewById(R.id.radioBtnMoneyCreaDemanda);
+        radioGroup = findViewById(R.id.radioGroupBtn);
         //Coger valor spinner
         String categoria=spinnerCreaDemanda.getSelectedItem().toString();
         //Hacer scroll en el texto para descripcion
@@ -47,6 +63,16 @@ public class CrearDemandaActivity extends AppCompatActivity {
         btnCrearDemanda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if(examinarCampos() == true) {
+                    Pedido p = new Pedido();
+                    rellnarPedido(p);
+                    mDatabaseReference.child(FirebaseReferences.PEDIDO_REFERENCES).push().setValue(p);
+                    Toast t = Toast.makeText(CrearDemandaActivity.this, "Demand created", Toast.LENGTH_SHORT);
+                    t.show();
+                    i = new Intent(CrearDemandaActivity.this, ListViewActivity.class);
+                    startActivity(i);
+                }
 
             }
         });
@@ -68,6 +94,44 @@ public class CrearDemandaActivity extends AppCompatActivity {
         }
     }
 
-    //Funcionalidad spinner
+    private void rellnarPedido(Pedido p){
+        p.setTitulo(titleCreaDemandaET.getText().toString());
+        p.setCategoria(spinnerCreaDemanda.getSelectedItem().toString());
+        p.setDescripcion(descripCreaDemandaET.getText().toString());
+        if (radioBtnFavorCreaDemanda.isChecked())
+        {
+            p.setTipoPago(radioBtnFavorCreaDemanda.getText().toString());
+        }else
+        {
+            p.setTipoPago(radioBtnMoneyCreaDemanda.getText().toString());
+        }
+        p.setOferDeman("demanda");
+        p.setPerfil(null);
+
+    }
+
+    //Examinar que todos los campos esten rellenados
+    public boolean examinarCampos()
+    {
+        boolean b = true;
+        if(titleCreaDemandaET.getText().toString().equals("")) {
+            Toast t = Toast.makeText(this,"Fill Title", Toast.LENGTH_SHORT);
+            t.show();
+            b = false;
+        }else if(spinnerCreaDemanda.getSelectedItem().toString().equals("Select category")){
+            Toast t = Toast.makeText(this,"Select category", Toast.LENGTH_SHORT);
+            t.show();
+            b = false;
+        }else if(descripCreaDemandaET.getText().toString().equals("")){
+            Toast t = Toast.makeText(this,"Fill description", Toast.LENGTH_SHORT);
+            t.show();
+            b = false;
+        }else if(radioGroup.getCheckedRadioButtonId() == -1){
+            Toast t = Toast.makeText(this,"Select type of payment", Toast.LENGTH_SHORT);
+            t.show();
+            b = false;
+        }
+        return b;
+    }
 
 }

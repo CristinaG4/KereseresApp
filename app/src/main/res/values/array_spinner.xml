@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
         <string-array name="Categories">
+            <item>Select category</item>
             <item>@string/arraySpinnerCompany</item>
             <item>@string/arraySpinnerComputing</item>
             <item>@string/arraySpinnerClases</item>

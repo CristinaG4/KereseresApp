@@ -30,7 +30,7 @@ import com.paulapps.kereseresapp.R;
 import com.paulapps.kereseresapp.activities.ListViewActivity;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
-    private FirebaseDatabase firebase;
+    //private FirebaseDatabase firebase;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private GoogleApiClient googleApiClient;
@@ -120,9 +120,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         password = etPassword.getText().toString().trim();
         if(email.equals("")|| password.equals("")) {
             Toast.makeText(MainActivity.this, "Introduce email y contraseña", Toast.LENGTH_LONG).show();
-
         }else{
-
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override

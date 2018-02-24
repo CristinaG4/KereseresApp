@@ -90,6 +90,8 @@ public class ListViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_view);
         // getSupportActionBar().hide();
 
+
+
         Prodialog=new ProgressDialog(this);
 
         //initialize firebase components
@@ -100,7 +102,9 @@ public class ListViewActivity extends AppCompatActivity {
         floatButtonPrincipal = findViewById(R.id.floatButtonPrincipal);
         floatButtonDemanda = findViewById(R.id.floatButtonDemanda);
         floatButtonOferta = findViewById(R.id.floatButtonOferta);
+        toolbar = findViewById(R.id.toolbar);
 
+        //toolbar.setTitleTextColor(0xFFF0);
 
         //Barra para filtrar
         filtroAll =  findViewById(R.id.filtroAll);

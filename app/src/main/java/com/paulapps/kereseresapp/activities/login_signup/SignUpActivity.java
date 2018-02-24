@@ -14,17 +14,22 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.paulapps.kereseresapp.R;
+import com.paulapps.kereseresapp.model.FirebaseReferences;
+import com.paulapps.kereseresapp.model.Perfil;
 
 public class SignUpActivity extends AppCompatActivity {
 
     private FirebaseDatabase firebase;
+    private DatabaseReference mDatabaseReference;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private Button btSignUp;
     private EditText etEmail, etPassword, etName, etApartment, etCode;
-    private String emailUser, passwordUser, nameUser, codeUser, apartmentUser;
+    private String emailUser, passwordUser, nameUser, apartmentUser;
+    private int codeUser;
     TextView tituloApp;
     Intent i;
 
@@ -37,6 +42,7 @@ public class SignUpActivity extends AppCompatActivity {
      //getSupportActionBar().hide();
         //Establecer la conexion
         firebase = FirebaseDatabase.getInstance();
+        mDatabaseReference = firebase.getReference();
         mAuth = FirebaseAuth.getInstance();
         btSignUp = (Button) findViewById(R.id.btnSingUp);
         etEmail = (EditText) findViewById(R.id.etEmailSingUp);
@@ -72,7 +78,8 @@ public class SignUpActivity extends AppCompatActivity {
         passwordUser = etPassword.getText().toString().trim();
         nameUser = etName.getText().toString().trim();
         apartmentUser = etApartment.getText().toString().trim();
-        codeUser = etCode.getText().toString().trim();
+        codeUser = Integer.parseInt(etCode.getText().toString().trim());
+
 
         //verficamos q los editText eno este vacios
         if (TextUtils.isEmpty(emailUser)) {
@@ -84,6 +91,8 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         } else {
 
+
+
             //creamos nuevo usuario
             mAuth.createUserWithEmailAndPassword(emailUser, passwordUser)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -92,6 +101,16 @@ public class SignUpActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Toast.makeText(SignUpActivity.this, "Se ha registrado el usuario", Toast.LENGTH_LONG).show();
+
+                                Perfil p = new Perfil();
+                                p.setNombre(nameUser);
+                                p.setApart(apartmentUser);
+                                p.setComCode(codeUser);
+                                p.setEmail(emailUser);
+                                p.setPass(passwordUser);
+
+                                mDatabaseReference.child(FirebaseReferences.PERFIL_REFERENCES).push().setValue(p);
+
                                 //updateUI(user);
                                 i = new Intent(SignUpActivity.this, MainActivity.class);
                                 startActivity(i);
