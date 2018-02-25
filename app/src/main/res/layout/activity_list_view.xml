@@ -129,7 +129,7 @@
             android:id="@+id/filtroAmigos"
             android:layout_width="70dp"
             android:layout_height="match_parent"
-            android:background="@drawable/amigos"/>
+            android:background="@drawable/amigos_fondo"/>
 
         <ImageView
             android:layout_width="5dp"
@@ -140,7 +140,7 @@
             android:id="@+id/filtroInformatica"
             android:layout_width="65dp"
             android:layout_height="match_parent"
-            android:background="@drawable/ordenador"/>
+            android:background="@drawable/ordenador_fondo"/>
 
         <ImageView
             android:layout_width="5dp"
@@ -151,7 +151,8 @@
             android:id="@+id/filtroClases"
             android:layout_width="65dp"
             android:layout_height="match_parent"
-            android:background="@drawable/clases"/>
+            android:background="@drawable/clases_fondo"
+            />
 
         <ImageView
             android:layout_width="5dp"
@@ -161,7 +162,7 @@
             android:id="@+id/filtroMenaje"
             android:layout_width="60dp"
             android:layout_height="match_parent"
-            android:background="@drawable/herramientas"/>
+            android:background="@drawable/herramientas_fondo"/>
 
         <ImageView
             android:layout_width="5dp"

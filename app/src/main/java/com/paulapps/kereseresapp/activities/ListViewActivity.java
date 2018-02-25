@@ -40,7 +40,6 @@ import com.paulapps.kereseresapp.model.Pedido;
 import com.paulapps.kereseresapp.model.Perfil;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ListViewActivity extends AppCompatActivity {
 
@@ -218,7 +217,7 @@ public class ListViewActivity extends AppCompatActivity {
         spec.setContent(R.id.tab2);
         spec.setIndicator("Demandas",getDrawable(R.drawable.ic_launcher_background));
         tabs.addTab(spec);
-
+        
         tabs.setCurrentTab(0);
 
         //MÉTODOS PARA FILTRAR POR CATEGORIAS
@@ -229,6 +228,14 @@ public class ListViewActivity extends AppCompatActivity {
                 //Volvemos el adapter al original diferenciandolo por oferta o compañia
                 //listViewOfertas.setAdapter(new Adapter(ListViewActivity.this, seleccionarLista(pedidos,"oferta")));
                 //listViewDemandas.setAdapter(new Adapter(ListViewActivity.this, seleccionarLista(pedidos,"demanda")));
+
+                //Control fondo filtro
+                filtroAmigos.setBackgroundResource(R.drawable.amigos_fondo);
+                filtroAll.setBackgroundResource(R.drawable.all);
+                filtroClases.setBackgroundResource(R.drawable.clases_fondo);
+                filtroInformatica.setBackgroundResource(R.drawable.ordenador_fondo);
+                filtroMenaje.setBackgroundResource(R.drawable.herramientas_fondo);
+
                 adapterDemandas.clear();
                 adapterDemandas.addAll(seleccionarLista(pedidos,"demanda"));
                 adapterOfertas.clear();
@@ -242,6 +249,13 @@ public class ListViewActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Recorremos el array y seleccionamos solo los que son de compañia luego lo dividimos en oferta y demanda
                 ArrayList<Pedido> pedidosFiltrados = new ArrayList<>();
+
+                //Control fondo filtro
+                filtroAmigos.setBackgroundResource(R.drawable.amigos);
+                filtroAll.setBackgroundResource(R.drawable.all_fondo);
+                filtroClases.setBackgroundResource(R.drawable.clases_fondo);
+                filtroInformatica.setBackgroundResource(R.drawable.ordenador_fondo);
+                filtroMenaje.setBackgroundResource(R.drawable.herramientas_fondo);
 
                 for (Pedido p:pedidos)
                 {
@@ -267,6 +281,13 @@ public class ListViewActivity extends AppCompatActivity {
 
                 ArrayList<Pedido> pedidosFiltrados = new ArrayList<>();
 
+                //Control fondo filtro
+                filtroAmigos.setBackgroundResource(R.drawable.amigos_fondo);
+                filtroAll.setBackgroundResource(R.drawable.all_fondo);
+                filtroClases.setBackgroundResource(R.drawable.clases_fondo);
+                filtroInformatica.setBackgroundResource(R.drawable.ordenador);
+                filtroMenaje.setBackgroundResource(R.drawable.herramientas_fondo);
+
                 for (Pedido p:pedidos)
                 {
                     if (p.getCategoria().equalsIgnoreCase("informatica"))
@@ -290,6 +311,13 @@ public class ListViewActivity extends AppCompatActivity {
                 //Recorremos el array y seleccionamos solo los que son de Clase, luego lo dividimos en oferta y demanda
                 ArrayList<Pedido> pedidosFiltrados = new ArrayList<>();
 
+                //Control fondo filtro
+                filtroAmigos.setBackgroundResource(R.drawable.amigos_fondo);
+                filtroAll.setBackgroundResource(R.drawable.all_fondo);
+                filtroClases.setBackgroundResource(R.drawable.clases);
+                filtroInformatica.setBackgroundResource(R.drawable.ordenador_fondo);
+                filtroMenaje.setBackgroundResource(R.drawable.herramientas_fondo);
+
                 for (Pedido p:pedidos)
                 {
                     if (p.getCategoria().equalsIgnoreCase("clases"))
@@ -311,6 +339,14 @@ public class ListViewActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Recorremos el array y seleccionamos solo los que son de Hogar/Menaje, luego lo dividimos en oferta y demanda
                 ArrayList<Pedido> pedidosFiltrados = new ArrayList<>();
+
+                //Control fondo filtro
+                filtroAmigos.setBackgroundResource(R.drawable.amigos_fondo);
+                filtroAll.setBackgroundResource(R.drawable.all_fondo);
+                filtroClases.setBackgroundResource(R.drawable.clases_fondo);
+                filtroInformatica.setBackgroundResource(R.drawable.ordenador_fondo);
+                filtroMenaje.setBackgroundResource(R.drawable.herramientas);
+
 
                 for (Pedido p:pedidos)
                 {
