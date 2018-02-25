@@ -53,8 +53,6 @@ public class verPedidosListViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_pedidos_listview);
 
-       // EliminarCelda();
-
         Prodialog = new ProgressDialog(this);
 
         Toolbar menu = (Toolbar) findViewById(R.id.toolbar);//importar como v7 para q no de error
@@ -121,6 +119,9 @@ public class verPedidosListViewActivity extends AppCompatActivity {
         tabs.addTab(spec);
 
         tabs.setCurrentTab(0);
+
+        EliminarCeldaOfertas();
+        EliminarCeldaDemandas();
     }
 
     //creamos el menu
@@ -222,17 +223,17 @@ public class verPedidosListViewActivity extends AppCompatActivity {
     }
 
 
-    //Deslizar item para borrarlo
-    /*public void EliminarCelda() {
+    //Deslizar item del listview de ofertas para borrarlo
+    public void EliminarCeldaOfertas() {
         SwipeListViewTouchListener touchListener = new SwipeListViewTouchListener(lvOfertasVerPedido, new SwipeListViewTouchListener.OnSwipeCallback() {
 
             @Override
             public void onSwipeLeft(ListView listView, int[] reverseSortedPositions) {
-
                 //Aqui ponemos lo que hara el programa cuando deslizamos un item ha la izquierda
                 pedidos.remove(reverseSortedPositions[0]);
-                adapterOfertas.notifyDataSetChanged();
 
+                //con esta llamada se refresca la pantalla
+                adapterOfertas.notifyDataSetChanged();
             }
 
             @Override
@@ -240,15 +241,47 @@ public class verPedidosListViewActivity extends AppCompatActivity {
 
                 //Aqui ponemos lo que hara el programa cuando deslizamos un item ha la derecha
                 pedidos.remove(reverseSortedPositions[0]);
+
+                //con esta llamada se refresca la pantalla
                 adapterOfertas.notifyDataSetChanged();
             }
 
-        }, true, false);
+        });
 
         //Escuchadores del listView
         lvOfertasVerPedido.setOnTouchListener(touchListener);
         //adapterOfertas.setOnScrollListener(touchListener.makeScrollListener());
-    }*/
+    }
+
+    //Deslizar item del listview de demandas para borrarlo
+    public void EliminarCeldaDemandas() {
+        SwipeListViewTouchListener touchListener = new SwipeListViewTouchListener(lvDemandasVerPedido, new SwipeListViewTouchListener.OnSwipeCallback() {
+
+            @Override
+            public void onSwipeLeft(ListView listView, int[] reverseSortedPositions) {
+                //Aqui ponemos lo que hara el programa cuando deslizamos un item ha la izquierda
+                pedidos.remove(reverseSortedPositions[0]);
+
+                //con esta llamada se refresca la pantalla
+                adapterDemandas.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onSwipeRight(ListView listView, int[] reverseSortedPositions) {
+
+                //Aqui ponemos lo que hara el programa cuando deslizamos un item ha la derecha
+                pedidos.remove(reverseSortedPositions[0]);
+
+                //con esta llamada se refresca la pantalla
+                adapterDemandas.notifyDataSetChanged();
+            }
+
+        });
+
+        //Escuchadores del listView
+        lvDemandasVerPedido.setOnTouchListener(touchListener);
+        //adapterOfertas.setOnScrollListener(touchListener.makeScrollListener());
+    }
 }
 
 
