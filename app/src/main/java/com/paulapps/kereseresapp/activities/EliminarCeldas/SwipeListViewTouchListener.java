@@ -71,13 +71,20 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
 
     }
 
-   //Constructs a new swipe-to-action touch listener for the given list view.
+   // callback devuelve de llamada cuando el usuario ha indicado que le gustaría descartar,si uno o más elementos de la lista.
+    // dismissLeft es para ver si la animación de desactivación está activada cuando el usuario desliza hacia la izquierda  y lo mismo para la derecha
+    public SwipeListViewTouchListener(ListView listView, OnSwipeCallback callback, boolean dismissLeft, boolean dismissRight) {
+        this(listView, callback);
+        this.dismissLeft = dismissLeft;
+        this.dismissRight = dismissRight;
+    }
 
     public void setEnabled(boolean enabled) {
         mPaused = !enabled;
     }
 
 
+ //por si hay un scroll listener
     public AbsListView.OnScrollListener makeScrollListener() {
 
         return new AbsListView.OnScrollListener() {
@@ -97,7 +104,6 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
 
 
     @Override
-
     public boolean onTouch(View view, MotionEvent motionEvent) {
 
         if (mViewWidth < 2) {
@@ -112,7 +118,6 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
                 }
 
                 // Find the child view that was touched (perform a hit test)
-
                 Rect rect = new Rect();
                 int childCount = mListView.getChildCount();
                 int[] listViewCoords = new int[2];
@@ -144,8 +149,6 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
                 view.onTouchEvent(motionEvent);
                 return true;
             }
-
-
 
             case MotionEvent.ACTION_UP: {
 
@@ -253,8 +256,6 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
         public int position;
         public View view;
 
-
-
         public PendingSwipeData(int position, View view) {
 
             this.position = position;
@@ -263,9 +264,7 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
         }
 
 
-
         @Override
-
         public int compareTo(PendingSwipeData other) {
 
             // Sort by descending position
@@ -279,9 +278,7 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
     private void performSwipeAction(final View swipeView, final int swipePosition, boolean toTheRight, boolean dismiss) {
 
         // Animate the dismissed list item to zero-height and fire the dismiss callback when
-
         // all dismissed list item animations have completed. This triggers layout on each animation
-
         // frame; in the future we may want to do something smarter and more performant.
 
         final ViewGroup.LayoutParams lp = swipeView.getLayoutParams();

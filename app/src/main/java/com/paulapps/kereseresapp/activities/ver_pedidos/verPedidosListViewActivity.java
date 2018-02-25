@@ -229,7 +229,7 @@ public class verPedidosListViewActivity extends AppCompatActivity {
 
             @Override
             public void onSwipeLeft(ListView listView, int[] reverseSortedPositions) {
-                //Aqui ponemos lo que hara el programa cuando deslizamos un item ha la izquierda
+                //Aqui ponemos lo que hara el programa cuando deslizamos un item a la izquierda
                 pedidos.remove(reverseSortedPositions[0]);
 
                 //con esta llamada se refresca la pantalla
@@ -239,14 +239,14 @@ public class verPedidosListViewActivity extends AppCompatActivity {
             @Override
             public void onSwipeRight(ListView listView, int[] reverseSortedPositions) {
 
-                //Aqui ponemos lo que hara el programa cuando deslizamos un item ha la derecha
+                //Aqui ponemos lo que hara el programa cuando deslizamos un item a la derecha
                 pedidos.remove(reverseSortedPositions[0]);
 
                 //con esta llamada se refresca la pantalla
                 adapterOfertas.notifyDataSetChanged();
             }
 
-        });
+        },true, false);
 
         //Escuchadores del listView
         lvOfertasVerPedido.setOnTouchListener(touchListener);
@@ -256,10 +256,13 @@ public class verPedidosListViewActivity extends AppCompatActivity {
     //Deslizar item del listview de demandas para borrarlo
     public void EliminarCeldaDemandas() {
         SwipeListViewTouchListener touchListener = new SwipeListViewTouchListener(lvDemandasVerPedido, new SwipeListViewTouchListener.OnSwipeCallback() {
+            // callback devuelve de llamada cuando el usuario ha indicado que le gustaría descartar,si uno o más elementos de la lista.
+            // dismissLeft es para ver si la animación de desactivación está activada cuando el usuario desliza hacia la izquierda  y
+            // lo mismo para la derecha
 
             @Override
             public void onSwipeLeft(ListView listView, int[] reverseSortedPositions) {
-                //Aqui ponemos lo que hara el programa cuando deslizamos un item ha la izquierda
+                //Aqui ponemos lo que hara el programa cuando deslizamos un item a la izquierda
                 pedidos.remove(reverseSortedPositions[0]);
 
                 //con esta llamada se refresca la pantalla
@@ -269,17 +272,19 @@ public class verPedidosListViewActivity extends AppCompatActivity {
             @Override
             public void onSwipeRight(ListView listView, int[] reverseSortedPositions) {
 
-                //Aqui ponemos lo que hara el programa cuando deslizamos un item ha la derecha
+                //Aqui ponemos lo que hara el programa cuando deslizamos un item a la derecha
                 pedidos.remove(reverseSortedPositions[0]);
 
                 //con esta llamada se refresca la pantalla
                 adapterDemandas.notifyDataSetChanged();
             }
 
-        });
+        },true, false);
 
         //Escuchadores del listView
         lvDemandasVerPedido.setOnTouchListener(touchListener);
+
+        //cuando hay un scroll
         //adapterOfertas.setOnScrollListener(touchListener.makeScrollListener());
     }
 }
