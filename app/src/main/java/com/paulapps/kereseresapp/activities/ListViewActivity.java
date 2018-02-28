@@ -162,7 +162,7 @@ public class ListViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ListViewActivity.this,CrearDemandaActivity.class);
-                intent.putExtra("PCD",perfil);
+                //intent.putExtra("PCD",perfil);
                 startActivity(intent);
             }
         });
@@ -259,7 +259,7 @@ public class ListViewActivity extends AppCompatActivity {
 
                 for (Pedido p:pedidos)
                 {
-                    if (p.getCategoria().equalsIgnoreCase("compañia"))
+                    if (p.getCategoria().equalsIgnoreCase("Company/Babysitter"))
                     {
                         pedidosFiltrados.add(p);
                     }
@@ -290,7 +290,7 @@ public class ListViewActivity extends AppCompatActivity {
 
                 for (Pedido p:pedidos)
                 {
-                    if (p.getCategoria().equalsIgnoreCase("informatica"))
+                    if (p.getCategoria().equalsIgnoreCase("Computing"))
                     {
                         pedidosFiltrados.add(p);
                     }
@@ -320,7 +320,7 @@ public class ListViewActivity extends AppCompatActivity {
 
                 for (Pedido p:pedidos)
                 {
-                    if (p.getCategoria().equalsIgnoreCase("clases"))
+                    if (p.getCategoria().equalsIgnoreCase("Lessons"))
                     {
                         pedidosFiltrados.add(p);
                     }
@@ -350,7 +350,7 @@ public class ListViewActivity extends AppCompatActivity {
 
                 for (Pedido p:pedidos)
                 {
-                    if (p.getCategoria().equalsIgnoreCase("hogar"))
+                    if (p.getCategoria().equalsIgnoreCase("Household items"))
                     {
                         pedidosFiltrados.add(p);
                     }

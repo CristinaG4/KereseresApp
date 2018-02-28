@@ -7,6 +7,11 @@ import android.widget.*;
 import android.view.View;
 import android.content.Intent;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.paulapps.kereseresapp.model.FirebaseReferences;
@@ -26,6 +31,7 @@ public class CrearDemandaActivity extends AppCompatActivity {
     RadioGroup radioGroup;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
+    private ChildEventListener mChildEventListener;
     private Perfil perfil;
 
 
@@ -47,12 +53,32 @@ public class CrearDemandaActivity extends AppCompatActivity {
         radioBtnMoneyCreaDemanda = findViewById(R.id.radioBtnMoneyCreaDemanda);
         radioGroup = findViewById(R.id.radioGroupBtn);
 
-        perfil = new Perfil();
-        perfil = (Perfil) getIntent().getSerializableExtra("PCD");
+        mChildEventListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Perfil p = dataSnapshot.getValue(Perfil.class);
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (p.getEmail().equals(user.getEmail())){
+                    perfil = p;
+                    if (perfil.getTelf()==null){
+                        perfil.setTelf("");
+                    }
+                }
+            }
+
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
+            public void onChildRemoved(DataSnapshot dataSnapshot) {}
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+        mDatabaseReference.child(FirebaseReferences.PERFIL_REFERENCES).addChildEventListener(mChildEventListener);
+
+        /*perfil = new Perfil();
+        perfil = (Perfil) getIntent().getSerializableExtra("PCD");*/
 
 
         //Coger valor spinner
-        String categoria=spinnerCreaDemanda.getSelectedItem().toString();
+        //String categoria=spinnerCreaDemanda.getSelectedItem().toString();
         //Hacer scroll en el texto para descripcion
         descripCreaDemandaET.setMovementMethod(new ScrollingMovementMethod());
 
@@ -69,7 +95,7 @@ public class CrearDemandaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(examinarCampos() == true) {
+                if(examinarCampos()) {
                     Pedido p = new Pedido();
                     rellenarPedido(p);
                     mDatabaseReference.child(FirebaseReferences.PEDIDO_REFERENCES).push().setValue(p);

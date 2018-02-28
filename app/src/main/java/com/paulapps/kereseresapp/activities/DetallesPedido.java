@@ -77,13 +77,13 @@ public class DetallesPedido extends AppCompatActivity {
     }
 
     private  int seleccionarImagenTipo(){
-        if(pedido.getCategoria().equalsIgnoreCase("compañia")){
+        if(pedido.getCategoria().equalsIgnoreCase("Company/Babysitter")){
             return R.drawable.amigos;
-        }else if (pedido.getCategoria().equalsIgnoreCase("informatica")){
+        }else if (pedido.getCategoria().equalsIgnoreCase("Computing")){
             return R.drawable.ordenador;
-        }else if (pedido.getCategoria().equalsIgnoreCase("clases")){
+        }else if (pedido.getCategoria().equalsIgnoreCase("Lessons")){
             return R.drawable.clases;
-        }else if (pedido.getCategoria().equalsIgnoreCase("hogar")){
+        }else if (pedido.getCategoria().equalsIgnoreCase("Household items")){
             return R.drawable.herramientas;
         }
         return 0;
