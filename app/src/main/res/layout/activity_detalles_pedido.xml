@@ -30,8 +30,7 @@
             android:id="@+id/fotoCategoria"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@drawable/estilo_edit_text"
-            />
+            android:background="@drawable/estilo_edit_text"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -70,7 +69,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Category:"
+            android:text="@string/textCategory"
             android:textSize="20dp"
             android:textStyle="bold"
             android:layout_marginRight="15dp"/>
@@ -87,7 +86,7 @@
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Description:"
+        android:text="@string/textDescription"
         android:textSize="20dp"
         android:textStyle="bold"
         android:layout_marginRight="15dp"/>
@@ -110,7 +109,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Type of payment:"
+            android:text="@string/textTypePayment"
             android:textSize="20dp"
             android:textStyle="bold"
             android:layout_marginRight="15dp"/>
@@ -135,7 +134,7 @@
             android:id="@+id/btnVolverDetallePedido"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="BACK"
+            android:text="@string/btnBACK"
             android:background="@drawable/boton_cambio_color"
             android:clickable="false"
             android:textColor="@color/textBtnLogin"
@@ -149,7 +148,7 @@
             android:background="@drawable/boton_cambio_color"
             android:clickable="false"
             android:onClick="contactar"
-            android:text="CONTACT"
+            android:text="@string/btnCONTACT"
             android:textColor="@color/textBtnLogin" />
     </LinearLayout>
 

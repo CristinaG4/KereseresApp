@@ -21,8 +21,7 @@
         android:layout_marginStart="20dp"
         android:textSize="16sp"
         android:layout_alignTop="@+id/imgViewProfile"
-        android:layout_toEndOf="@+id/imgViewProfile"
-        />
+        android:layout_toEndOf="@+id/imgViewProfile"/>
 
     <TextView
         android:id="@+id/tvNombre"

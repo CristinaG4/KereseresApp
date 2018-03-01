@@ -124,9 +124,7 @@
                 android:layout_weight="2"
                 android:textAlignment="center"
                 android:background="@drawable/tv_cambio_color"/>
-
         </LinearLayout>
-
 
         <Button
             android:id="@+id/btnAceptar"

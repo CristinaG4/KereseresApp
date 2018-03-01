@@ -7,7 +7,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create an offer"
+        android:text="@string/textCreateOffer"
         android:gravity="center"
         android:layout_margin="10dp"
         android:textSize="30dp"
@@ -17,35 +17,35 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="15dp">
+        android:layout_margin="15dp"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Title: "
-            android:textSize="20dp"/>
+            android:text="@string/textTitlePedido"
+            android:textSize="20dp" />
 
         <EditText
             android:id="@+id/titleCreaOfertaET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Introduce the title"/>
-
+            android:hint="@string/hintIntroduceTitulo" />
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="15dp">
+        android:layout_margin="15dp"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Category: "
-            android:textSize="20dp"
-            android:layout_marginTop="15dp"/>
+            android:layout_marginTop="15dp"
+            android:text="@string/textCategory"
+            android:textSize="20dp" />
 
         <Spinner
             android:id="@+id/spinnerCreaOferta"
@@ -64,9 +64,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Type of payment: "
+            android:text="@string/textTypePayment"
             android:textSize="20dp"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="3dp"/>
 
         <RadioGroup
             android:id="@+id/radioGroupBtn"
@@ -79,16 +79,16 @@
                 android:id="@+id/radioBtnMoneyCreaOferta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Money"
-                android:textSize="17dp"
+                android:textSize="15dp"
+                android:text="@string/radioButtonMoney"
                 android:layout_marginRight="20dp"
                 android:onClick="onRadioButtonClicked"/>
             <RadioButton
                 android:id="@+id/radioBtnFavorCreaOferta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Favor"
-                android:textSize="17dp"
+                android:text="@string/radioButtonFavor"
+                android:textSize="15dp"
                 android:onClick="onRadioButtonClicked"/>
 
         </RadioGroup>
@@ -98,14 +98,14 @@
         android:id="@+id/descripCreaOfertaET"
         android:layout_width="match_parent"
         android:layout_height="170dp"
+        android:background="@drawable/estilo_edit_text"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="15dp"
-        android:hint="Enter the description."
-        android:gravity="left"
-        android:padding="8dp"
+        android:hint="@string/hintEnterDescription"
         android:scrollbarThumbVertical="@drawable/scrollbar_design"
-        android:background="@drawable/estilo_edit_text"/>
+        android:padding="8dp"
+        android:gravity="left"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -122,8 +122,7 @@
             android:onClick="Cancelar"
             android:text="@string/cancelarBtn"
             android:textColor="@color/textBtnLogin"
-            android:layout_marginRight="10dp"
-            />
+            android:layout_marginRight="10dp"/>
 
         <Button
             android:id="@+id/btnCrearOferta"
@@ -132,15 +131,10 @@
             android:background="@drawable/boton_cambio_color"
             android:clickable="false"
             android:onClick="registrar"
-            android:text="@string/crearOfertaDemanda"
+            android:text="@string/createBtn"
             android:textColor="@color/textBtnLogin"
             android:layout_gravity="end"
-            android:layout_marginLeft="10dp"
-            />
+            android:layout_marginLeft="10dp"/>
 
     </LinearLayout>
-
-
-
-
 </LinearLayout>

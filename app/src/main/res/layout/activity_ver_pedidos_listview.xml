@@ -6,14 +6,12 @@
     android:orientation="vertical"
     android:background="@drawable/fondo_degradado">
 
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:background="@color/verdeTitulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </android.support.v7.widget.Toolbar>
-
 
     <TabHost
         android:id="@android:id/tabhost"
@@ -65,10 +63,6 @@
             </LinearLayout>
 
     </TabHost>
-
-
-
-
 
 </LinearLayout>
 

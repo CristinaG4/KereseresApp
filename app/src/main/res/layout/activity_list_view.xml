@@ -10,10 +10,7 @@
         android:id="@+id/toolbar"
         android:background="@color/verdeTitulo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-    </android.support.v7.widget.Toolbar>
+        android:layout_height="wrap_content"/>
 
     <TabHost
         android:id="@android:id/tabhost"
@@ -84,7 +81,7 @@
                 android:src="@mipmap/ic_demands_all"
                 app:fab_colorNormal="@color/btfloating"
                 app:fab_colorPressed="@color/verdeTitulo"
-                app:fab_label="Demand"
+                app:fab_label="@string/floatBTNdemand"
                 app:fab_size="mini" />
 
             <com.github.clans.fab.FloatingActionButton
@@ -94,7 +91,7 @@
                 android:src="@mipmap/ic_offers_all"
                 app:fab_colorNormal="@color/btfloating"
                 app:fab_colorPressed="@color/verdeTitulo"
-                app:fab_label="Offer"
+                app:fab_label="@string/floatBTNoffer"
                 app:fab_size="mini" />
 
         </com.github.clans.fab.FloatingActionMenu>

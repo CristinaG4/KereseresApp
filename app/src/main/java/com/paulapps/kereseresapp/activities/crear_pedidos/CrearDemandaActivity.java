@@ -75,7 +75,8 @@ public class CrearDemandaActivity extends AppCompatActivity {
 
         /*perfil = new Perfil();
         perfil = (Perfil) getIntent().getSerializableExtra("PCD");*/
-
+        String nombre = getIntent().getStringExtra("NOMBRE");
+        String email = getIntent().getStringExtra("EMAIL");
 
         //Coger valor spinner
         //String categoria=spinnerCreaDemanda.getSelectedItem().toString();

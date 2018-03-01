@@ -70,7 +70,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Category:"
+            android:text="@string/textCategory"
             android:textSize="20dp"
             android:textStyle="bold"
             android:layout_marginRight="15dp"/>
@@ -87,7 +87,7 @@
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Description:"
+        android:text="@string/textDescription"
         android:textSize="20dp"
         android:textStyle="bold"
         android:layout_marginRight="15dp"/>
@@ -110,7 +110,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Type of payment:"
+            android:text="@string/textTypePayment"
             android:textSize="20dp"
             android:textStyle="bold"
             android:layout_marginRight="15dp"/>
@@ -123,18 +123,17 @@
             android:textSize="18dp"/>
     </LinearLayout>
 
-        android:layout_marginBottom="25dp">
+    android:layout_marginBottom="25dp">
 
         <Button
             android:id="@+id/btnVolverVerDetallePedido"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="BACK"
+            android:text="@string/btnBACK"
             android:background="@drawable/boton_cambio_color"
             android:clickable="false"
             android:textColor="@color/textBtnLogin"
             android:layout_margin="15dp"
             android:layout_gravity="center"/>
-
 
 </LinearLayout>
