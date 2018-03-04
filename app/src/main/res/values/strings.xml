@@ -20,7 +20,7 @@
     <string name="sendBtn">Send</string>
     <string name="deleteBtn">Delete</string>
 
-    <!--Sing up y edit_perfil-->
+    <!--Sing up y _perfil-->
     <string name="apartment">Apartment:</string>
     <string name="name">Name:</string>
     <string name="code">Community Code:</string>
@@ -42,6 +42,7 @@
     <!-- activity_list_view-->
     <string name="floatBTNdemand">Demand</string>
     <string name="floatBTNoffer">Offer</string>
+
 
     <!-- activity_detalles_pedido-->
     <string name="btnBACK">BACK</string>

@@ -411,14 +411,14 @@ public class ListViewActivity extends AppCompatActivity {
                 builder=new AlertDialog.Builder(this);
                 builder.setTitle("Delete account");
                 builder.setMessage("Are you sure to delete your account?");
-                builder.setPositiveButton("Acept", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(R.string.aceptarBtn, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 eliminarCuenta();
                             }
                         });
 
-                builder.setNegativeButton(android.R.string.cancel,null);
+                builder.setNegativeButton(R.string.cancelarBtn,null);
                 Dialog dialog=builder.create();
                 dialog.show();
                 break;

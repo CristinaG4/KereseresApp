@@ -32,9 +32,10 @@
             android:parentActivityName=".activities.ListViewActivity" />
         <activity android:name=".activities.crear_pedidos.CrearDemandaActivity" />
         <activity android:name=".activities.crear_pedidos.CrearOfertaActivity" />
-        <activity android:name=".activities.ver_pedidos.verPedidosListViewActivity" />
+        <activity android:name=".activities.ver_pedidos.verPedidosListViewActivity"
+            android:parentActivityName=".activities.ListViewActivity"/>
         <activity android:name=".activities.ver_pedidos.VerDetallePedidoActivity"
-            ></activity>
+            android:parentActivityName=".activities.ver_pedidos.verPedidosListViewActivity" ></activity>
     </application>
 
 </manifest>
