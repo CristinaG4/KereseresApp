@@ -26,6 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.paulapps.kereseresapp.Adapters.Adapter2;
 import com.paulapps.kereseresapp.R;
+import com.paulapps.kereseresapp.activities.DetallesPedido;
 import com.paulapps.kereseresapp.activities.EliminarCeldas.SwipeListViewTouchListener;
 import com.paulapps.kereseresapp.activities.ListViewActivity;
 import com.paulapps.kereseresapp.activities.login_signup.MainActivity;
@@ -130,6 +131,32 @@ public class verPedidosListViewActivity extends AppCompatActivity {
         //funcionalidad de los adapters
         lvOfertasVerPedido.setAdapter(adapterOfertas);
         lvDemandasVerPedido.setAdapter(adapterDemandas);
+
+        //funcionalidad cuando se pulsa un elemento del listView
+        lvOfertasVerPedido.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent intent = new Intent(view.getContext(),DetallesPedido.class);
+                //se le pasa a traves del intent el pedido entero que ha seleccionado
+                intent.putExtra("PEDIDO",seleccionarLista(pedidos,"oferta").get(position));
+                pedidoIndex = position;
+
+                startActivityForResult(intent,1);
+            }
+        });
+
+        lvDemandasVerPedido.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent intent = new Intent(view.getContext(),DetallesPedido.class);
+                intent.putExtra("PEDIDO",seleccionarLista(pedidos,"demanda").get(position));
+                pedidoIndex = position;
+
+                startActivityForResult(intent,1);
+            }
+        });
 
 
         //funcionalidad cuando se pulsa un elemento del listView
