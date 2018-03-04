@@ -20,7 +20,7 @@ public class PerfilActivity extends AppCompatActivity {
     private Perfil perfil;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     TextView tituloAppPerfil,PerfilEmail,PerfilPassword,PerfilName,PerfilApartment,PerfilComCode,PerfilTelefono;
-    Button btnAceptarPerfil, btnEditarPerfil;
+    Button btnAceptarPerfil;
 
 
 
@@ -31,7 +31,6 @@ public class PerfilActivity extends AppCompatActivity {
 
         tituloAppPerfil = (TextView) findViewById(R.id.tituloAppPerfil);
         btnAceptarPerfil = (Button) findViewById(R.id.btnAceptarPerfil);
-        btnEditarPerfil = (Button) findViewById(R.id.btnEditarPerfil);
         PerfilEmail=(TextView) findViewById(R.id.PerfilEmail);
         PerfilPassword=(TextView) findViewById(R.id.PerfilPassword);
         PerfilName=(TextView) findViewById(R.id.PerfilName);
@@ -55,15 +54,7 @@ public class PerfilActivity extends AppCompatActivity {
             }
         });
 
-        btnEditarPerfil.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent in = new Intent(PerfilActivity.this, EditPerfilActivity.class);
-                in.putExtra("PERFIL",perfil);
-                startActivityForResult(in,1);
-                overridePendingTransition(R.transition.left_in, R.transition.left_out);
-            }
-        });
+
 
         //Mostrar datos usuario
         InfoUser();

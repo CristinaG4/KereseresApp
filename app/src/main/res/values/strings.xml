@@ -25,7 +25,7 @@
     <string name="name">Name:</string>
     <string name="code">Community Code:</string>
     <string name="descripResetPassword">Forgot your password?</string>
-    <string name="numTelefono">Telefono:</string>
+    <string name="numTelefono">Phone:</string>
 
     <!--activity_crear_demanda Y oferta-->
     <string name="textCreateDemand">Create a demand</string>

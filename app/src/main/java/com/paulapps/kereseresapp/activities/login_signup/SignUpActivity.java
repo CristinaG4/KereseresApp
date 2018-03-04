@@ -27,8 +27,8 @@ public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private Button btSignUp;
-    private EditText etEmail, etPassword, etName, etApartment, etCode;
-    private String emailUser, passwordUser, nameUser, apartmentUser;
+    private EditText etEmail, etPassword, etName, etApartment, etCode,etPhone;
+    private String emailUser, passwordUser, nameUser, apartmentUser,phoneUser;
     private int codeUser;
     TextView tituloApp;
     Intent i;
@@ -50,7 +50,9 @@ public class SignUpActivity extends AppCompatActivity {
         etName = findViewById(R.id.etNameSingUp);
         etApartment = findViewById(R.id.etAparmetnSignUp);
         etCode = findViewById(R.id.etCodeSingUp);
+        etPhone=findViewById(R.id.etTelSingUp);
         tituloApp = (TextView) findViewById(R.id.tituloApp);
+
 
         //Fuente titulo
         Typeface myFont = Typeface.createFromAsset(getAssets(), "Strawberry Blossom.ttf");
@@ -79,6 +81,7 @@ public class SignUpActivity extends AppCompatActivity {
         nameUser = etName.getText().toString().trim();
         apartmentUser = etApartment.getText().toString().trim();
         codeUser = Integer.parseInt(etCode.getText().toString().trim());
+        phoneUser=etPhone.getText().toString().trim();
 
 
         //verficamos q los editText eno este vacios
@@ -108,6 +111,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 p.setComCode(codeUser);
                                 p.setEmail(emailUser);
                                 p.setPass(passwordUser);
+                                p.setTelf(phoneUser);
 
                                 mDatabaseReference.child(FirebaseReferences.PERFIL_REFERENCES).push().setValue(p);
 

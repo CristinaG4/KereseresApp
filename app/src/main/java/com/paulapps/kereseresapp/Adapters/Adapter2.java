@@ -70,14 +70,4 @@ public class Adapter2 extends ArrayAdapter<Pedido> {
         return 0;
     }
 
-    //funcion que segun el tipo de pago le dispone un imagen personalizada
-   /* private int seleccionarImagenPago(int position){
-        if(pedido.get(position).getCategoria().equalsIgnoreCase("dinero")){
-            return R.drawable.amigos;
-        }else if (pedido.get(position).getCategoria().equalsIgnoreCase("favor")){
-            return R.drawable.herramientas;
-        }
-
-        return 0;
-    }*/
 }

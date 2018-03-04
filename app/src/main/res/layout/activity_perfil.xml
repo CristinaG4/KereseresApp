@@ -28,13 +28,9 @@
         android:background="@drawable/box_login_radious"
         android:gravity="center"
         android:weightSum="10"
-        android:padding="5dp">
+        android:padding="20dp"
+        >
 
-        <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:background="@drawable/user"
-            android:layout_margin="15dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -47,13 +43,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/email"
                 android:layout_gravity="left"
-                android:layout_margin="5dp"/>
+                android:layout_margin="5dp"
+                android:textSize="20sp"/>
 
             <TextView
                 android:id="@+id/PerfilEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                />
+                android:textSize="19sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -68,12 +65,15 @@
                 android:text="@string/password"
                 android:layout_gravity="left"
                 android:layout_margin="5dp"
+                android:textSize="20sp"
                 />
             <TextView
                 android:id="@+id/PerfilPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"/>
+                android:inputType="textPassword"
+                android:textSize="19sp"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -86,11 +86,13 @@
                 android:layout_height="wrap_content"
                 android:text="@string/name"
                 android:layout_gravity="left"
-                android:layout_margin="5dp"/>
+                android:layout_margin="5dp"
+                android:textSize="20sp"/>
             <TextView
                 android:id="@+id/PerfilName"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textSize="19sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -104,12 +106,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/apartment"
                 android:layout_gravity="left"
-                android:layout_margin="5dp"/>
+                android:layout_margin="5dp"
+                android:textSize="20sp"/>
 
             <TextView
                 android:id="@+id/PerfilApartment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textSize="19sp"/>
 
         </LinearLayout>
 
@@ -124,11 +128,13 @@
                 android:layout_height="wrap_content"
                 android:text="@string/code"
                 android:layout_gravity="left"
-                android:layout_margin="5dp"/>
+                android:layout_margin="5dp"
+                android:textSize="20sp"/>
              <TextView
                 android:id="@+id/PerfilComCode"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                 android:textSize="19sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -142,34 +148,29 @@
                 android:layout_height="wrap_content"
                 android:text="@string/numTelefono"
                 android:layout_gravity="left"
-                android:layout_margin="5dp"/>
+                android:layout_margin="5dp"
+                android:textSize="20sp"/>
             <TextView
                 android:id="@+id/PerfilTelefono"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textSize="19sp"/>
         </LinearLayout>
 
+
         <Button
-                android:id="@+id/btnEditarPerfil"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/editarBtn"
-                android:background="@drawable/boton_cambio_color"
-                android:clickable="false"
-                android:textColor="@color/textBtnLogin"
-                android:layout_margin="10dp"/>
+            android:id="@+id/btnAceptarPerfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/aceptarBtn"
+            android:background="@drawable/boton_cambio_color"
+            android:clickable="false"
+            android:textColor="@color/textBtnLogin"/>
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnAceptarPerfil"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="25dp"
-        android:layout_marginLeft="25dp"
-        android:text="@string/aceptarBtn"
-        android:background="@drawable/boton_cambio_color"
-        android:clickable="false"
-        android:textColor="@color/textBtnLogin"/>
 
 </LinearLayout>

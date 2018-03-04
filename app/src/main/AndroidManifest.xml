@@ -26,10 +26,6 @@
             android:name=".activities.perfil.PerfilActivity"
             android:label="@string/title_activity_perfil"
             android:theme="@style/AppTheme" />
-        <activity
-            android:name=".activities.perfil.EditPerfilActivity"
-            android:label="@string/title_activity_edit_perfil"
-            android:theme="@style/AppTheme" />
         <activity android:name=".activities.login_signup.ResetPasswordActivity" />
         <activity
             android:name=".activities.DetallesPedido"
