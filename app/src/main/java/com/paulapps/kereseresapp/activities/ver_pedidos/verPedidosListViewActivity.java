@@ -69,6 +69,7 @@ public class verPedidosListViewActivity extends AppCompatActivity {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mFirebaseDatabase.getReference();
 
+
         Prodialog = new ProgressDialog(this);
 
         toolbar= (Toolbar) findViewById(R.id.toolbar);//importar como v7 para q no de error
@@ -105,12 +106,16 @@ public class verPedidosListViewActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Pedido pedido = dataSnapshot.getValue(Pedido.class);
-                if (pedido.getOferDeman().equalsIgnoreCase("oferta")){
-                    adapterOfertas.add(pedido);
-                }else if(pedido.getOferDeman().equalsIgnoreCase("demanda")){
-                    adapterDemandas.add(pedido);
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user.getEmail().equals(pedido.getPerfil().getEmail())){
+                    if (pedido.getOferDeman().equalsIgnoreCase("oferta")){
+                        adapterOfertas.add(pedido);
+                    }else if(pedido.getOferDeman().equalsIgnoreCase("demanda")){
+                        adapterDemandas.add(pedido);
+                    }
+                    pedidos.add(pedido);
                 }
-                pedidos.add(pedido);
+
             }
 
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
@@ -120,25 +125,6 @@ public class verPedidosListViewActivity extends AppCompatActivity {
         };
         mDatabaseReference.child(FirebaseReferences.PEDIDO_REFERENCES).addChildEventListener(mChildEventListener);
 
-        mChildEventListener = new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                perfil = dataSnapshot.getValue(Perfil.class);
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if (perfil.getEmail().equals(user.getEmail())){
-                    perfil = perfil;
-                    if (perfil.getTelf()==null){
-                        perfil.setTelf("");
-                    }
-                }
-            }
-
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
-            public void onChildRemoved(DataSnapshot dataSnapshot) {}
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
-            public void onCancelled(DatabaseError databaseError) {}
-        };
-        mDatabaseReference.child(FirebaseReferences.PERFIL_REFERENCES).addChildEventListener(mChildEventListener);
 
 
         //funcionalidad de los adapters
@@ -211,6 +197,7 @@ public class verPedidosListViewActivity extends AppCompatActivity {
             case R.id.perfil:
                 i = new Intent(verPedidosListViewActivity.this, PerfilActivity.class);
                 //i.putExtra("PEDIDO",seleccionarLista(pedidos,"oferta").get(position));
+                i.putExtra("PERFIL",perfil);
                 startActivity(i);
                 break;
             case R.id.misPedidos:
@@ -342,6 +329,7 @@ public class verPedidosListViewActivity extends AppCompatActivity {
 
                 //Aqui ponemos lo que hara el programa cuando deslizamos un item a la derecha
                 pedidos.remove(reverseSortedPositions[0]);
+                //mDatabaseReference.child(FirebaseReferences.PEDIDO_REFERENCES).child();
 
                 //con esta llamada se refresca la pantalla
                 adapterDemandas.notifyDataSetChanged();

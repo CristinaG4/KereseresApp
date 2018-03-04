@@ -35,7 +35,7 @@ public class Adapter2 extends ArrayAdapter<Pedido> {
 
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null){
-            convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.celda_listview,parent,false);
+            convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.celda_ver_pedidos,parent,false);
         }
 //
 
@@ -58,13 +58,13 @@ public class Adapter2 extends ArrayAdapter<Pedido> {
 
     //funcion que segun el tipo de pedido le dispone un imagen personalizada
     private  int seleccionarImagenTipo(){
-        if(pedido.getCategoria().equalsIgnoreCase("compañia")){
+        if(pedido.getCategoria().equalsIgnoreCase("Company/Babysitter")){
             return R.drawable.amigos;
-        }else if (pedido.getCategoria().equalsIgnoreCase("informatica")){
+        }else if (pedido.getCategoria().equalsIgnoreCase("Computing")){
             return R.drawable.ordenador;
-        }else if (pedido.getCategoria().equalsIgnoreCase("clases")){
+        }else if (pedido.getCategoria().equalsIgnoreCase("Lessons")){
             return R.drawable.clases;
-        }else if (pedido.getCategoria().equalsIgnoreCase("hogar")){
+        }else if (pedido.getCategoria().equalsIgnoreCase("Household items")){
             return R.drawable.herramientas;
         }
         return 0;
