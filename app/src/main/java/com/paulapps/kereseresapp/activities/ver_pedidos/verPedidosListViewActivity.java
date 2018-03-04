@@ -19,13 +19,18 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.paulapps.kereseresapp.Adapters.Adapter;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.paulapps.kereseresapp.Adapters.Adapter2;
 import com.paulapps.kereseresapp.R;
 import com.paulapps.kereseresapp.activities.EliminarCeldas.SwipeListViewTouchListener;
 import com.paulapps.kereseresapp.activities.ListViewActivity;
 import com.paulapps.kereseresapp.activities.login_signup.MainActivity;
 import com.paulapps.kereseresapp.activities.perfil.PerfilActivity;
+import com.paulapps.kereseresapp.model.FirebaseReferences;
 import com.paulapps.kereseresapp.model.Pedido;
 import com.paulapps.kereseresapp.model.Perfil;
 
@@ -33,18 +38,21 @@ import java.util.ArrayList;
 
 public class verPedidosListViewActivity extends AppCompatActivity {
 
-    private ArrayList<Perfil> perfiles;
     private ArrayList<Pedido> pedidos;
-    private ArrayList<Pedido> pedidosOfertas;
-    private ArrayList<Pedido> pedidosDemandas;
+    private Perfil perfil;
     private int pedidoIndex;
     private MenuInflater inflater;
     private ListView lvOfertasVerPedido, lvDemandasVerPedido;
     private Toolbar toolbar;
-    AlertDialog.Builder builder;
+    private AlertDialog.Builder builder;
     private ProgressDialog Prodialog;
-    private Adapter adapterOfertas;
-    private Adapter adapterDemandas;
+    private Adapter2 adapterOfertas;
+    private Adapter2 adapterDemandas;
+    //Firebase Instance variables
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mDatabaseReference;
+    private ChildEventListener mChildEventListener;
+    private FirebaseAuth mAuth;
 
     Intent i;
 
@@ -52,31 +60,91 @@ public class verPedidosListViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_pedidos_listview);
+        //perfil = (Perfil) getIntent().getSerializableExtra("PERFIL");
+
+        //declaramos el Arraylist aqui porque sino tiene un bug que duplica la list view de forma exponencial al volver a cargar la Activity
+        pedidos = new ArrayList<>();
+
+        //initialize firebase components
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mDatabaseReference = mFirebaseDatabase.getReference();
 
         Prodialog = new ProgressDialog(this);
 
-        Toolbar menu = (Toolbar) findViewById(R.id.toolbar);//importar como v7 para q no de error
-        setSupportActionBar(menu);
+        toolbar= (Toolbar) findViewById(R.id.toolbar);//importar como v7 para q no de error
+        setSupportActionBar(toolbar);
 
         lvDemandasVerPedido = (ListView) findViewById(R.id.lvDemandasVerPedido);
         lvOfertasVerPedido = (ListView) findViewById(R.id.lvOfertasVerPedido);
 
-        perfiles = new ArrayList<>();
-        perfiles.add(new Perfil("Nacho Jimenez", "ncassinello@gmail.com", "1234", "7ºG", 1000, "913140885", R.drawable.all));
 
-        pedidos = new ArrayList<>();
-        //Todos los perfiles.get(0) a 0 para que salga el mismo usuario
-        pedidos.add(new Pedido(0, "Formatear Ordenador", perfiles.get(0), "dinero", "informatica", "Necesito que me formateis el ordenador", "demanda"));
-        pedidos.add(new Pedido(1, "Cuidar a mis hijos", perfiles.get(0), "favor", "compañia", "Salgo esta noche y encesito niñera", "demanda"));
-        pedidos.add(new Pedido(2, "Ver el Madrid", perfiles.get(0), "favor", "compañia", "Ofrezco salon y futbol a cambio de alguien con quien verlo", "oferta"));
-        pedidos.add(new Pedido(3, "Clases de XML", perfiles.get(0), "dinero", "clases", "Necesito clases de XML avanzadas", "demanda"));
+        adapterDemandas = new Adapter2(this,R.layout.celda_listview,seleccionarLista(pedidos,"demanda"));
+        adapterOfertas = new Adapter2(this,R.layout.celda_listview, seleccionarLista(pedidos,"oferta"));
+
+        mChildEventListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Perfil p = dataSnapshot.getValue(Perfil.class);
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (p.getEmail().equals(user.getEmail())){
+                    perfil = p;
+                    if (perfil.getTelf()==null){
+                        perfil.setTelf("");
+                    }
+                }
+            }
+
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
+            public void onChildRemoved(DataSnapshot dataSnapshot) {}
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+        mDatabaseReference.child(FirebaseReferences.PERFIL_REFERENCES).addChildEventListener(mChildEventListener);
+
+        mChildEventListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Pedido pedido = dataSnapshot.getValue(Pedido.class);
+                if (pedido.getOferDeman().equalsIgnoreCase("oferta")){
+                    adapterOfertas.add(pedido);
+                }else if(pedido.getOferDeman().equalsIgnoreCase("demanda")){
+                    adapterDemandas.add(pedido);
+                }
+                pedidos.add(pedido);
+            }
+
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
+            public void onChildRemoved(DataSnapshot dataSnapshot) {}
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+        mDatabaseReference.child(FirebaseReferences.PEDIDO_REFERENCES).addChildEventListener(mChildEventListener);
+
+        mChildEventListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                perfil = dataSnapshot.getValue(Perfil.class);
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (perfil.getEmail().equals(user.getEmail())){
+                    perfil = perfil;
+                    if (perfil.getTelf()==null){
+                        perfil.setTelf("");
+                    }
+                }
+            }
+
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
+            public void onChildRemoved(DataSnapshot dataSnapshot) {}
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+        mDatabaseReference.child(FirebaseReferences.PERFIL_REFERENCES).addChildEventListener(mChildEventListener);
 
 
-        adapterDemandas = new Adapter(this, R.layout.celda_listview, pedidosDemandas);
-        adapterOfertas = new Adapter(this, R.layout.celda_listview, pedidosOfertas);
         //funcionalidad de los adapters
-        lvOfertasVerPedido.setAdapter(new Adapter2(this, seleccionarLista(pedidos, "oferta")));
-        lvDemandasVerPedido.setAdapter(new Adapter2(this, seleccionarLista(pedidos, "demanda")));
+        lvOfertasVerPedido.setAdapter(adapterOfertas);
+        lvDemandasVerPedido.setAdapter(adapterDemandas);
+
 
         //funcionalidad cuando se pulsa un elemento del listView
         lvOfertasVerPedido.setOnItemClickListener(new AdapterView.OnItemClickListener() {

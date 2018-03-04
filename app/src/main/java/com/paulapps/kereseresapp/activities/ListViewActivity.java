@@ -79,8 +79,6 @@ public class ListViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_view);
         // getSupportActionBar().hide();
 
-
-
         Prodialog=new ProgressDialog(this);
 
         //initialize firebase components
@@ -259,7 +257,7 @@ public class ListViewActivity extends AppCompatActivity {
 
                 for (Pedido p:pedidos)
                 {
-                    if (p.getCategoria().equalsIgnoreCase("compañia"))
+                    if (p.getCategoria().equalsIgnoreCase("Company/Babysitter"))
                     {
                         pedidosFiltrados.add(p);
                     }
@@ -290,7 +288,7 @@ public class ListViewActivity extends AppCompatActivity {
 
                 for (Pedido p:pedidos)
                 {
-                    if (p.getCategoria().equalsIgnoreCase("informatica"))
+                    if (p.getCategoria().equalsIgnoreCase("Computing"))
                     {
                         pedidosFiltrados.add(p);
                     }
@@ -320,7 +318,7 @@ public class ListViewActivity extends AppCompatActivity {
 
                 for (Pedido p:pedidos)
                 {
-                    if (p.getCategoria().equalsIgnoreCase("clases"))
+                    if (p.getCategoria().equalsIgnoreCase("Lessons"))
                     {
                         pedidosFiltrados.add(p);
                     }
@@ -350,7 +348,7 @@ public class ListViewActivity extends AppCompatActivity {
 
                 for (Pedido p:pedidos)
                 {
-                    if (p.getCategoria().equalsIgnoreCase("hogar"))
+                    if (p.getCategoria().equalsIgnoreCase("Household items"))
                     {
                         pedidosFiltrados.add(p);
                     }

@@ -1,10 +1,12 @@
 package com.paulapps.kereseresapp.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
@@ -15,74 +17,61 @@ import com.paulapps.kereseresapp.model.Pedido;
 import com.paulapps.kereseresapp.model.Perfil;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by crist on 20/02/2018.
  */
 
-public class Adapter2 extends BaseAdapter {
+public class Adapter2 extends ArrayAdapter<Pedido> {
 
-    Context context;
-    ArrayList<Pedido> pedido;
-    private static LayoutInflater inflater = null;
-    TextView tvTituloVerPedido, tvEmailVerPedido;
-    ImageView imgViewProfile;
+    Pedido pedido;
+    Perfil perfil;
 
 
-    public Adapter2(Context context, ArrayList<Pedido> pedido) {
-        this.context = context;
-        this.pedido = pedido;
-        inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+    public Adapter2(Context context, int resource, List<Pedido> objects){
+        super(context,resource,objects);
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        final View listview = inflater.inflate(R.layout.celda_ver_pedidos,null);
+        if (convertView == null){
+            convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.celda_listview,parent,false);
+        }
+//
 
         //Declaramos todos los elementos de la celda del listView
-        tvTituloVerPedido = (TextView) listview.findViewById(R.id.tvTituloVerPedido);
-        tvEmailVerPedido = (TextView) listview.findViewById(R.id.tvEmailVerPedido);
-        imgViewProfile = listview.findViewById(R.id.imgViewProfile);
+        TextView  tvTituloVerPedido = (TextView) convertView.findViewById(R.id.tvTituloVerPedido);
+        TextView  tvEmailVerPedido = (TextView) convertView.findViewById(R.id.tvEmailVerPedido);
+        ImageView imgViewProfile = convertView.findViewById(R.id.imgViewProfile);
+
+        pedido = getItem(position);
+
 
         //Introducimos los valores en el xml
-        tvEmailVerPedido.setText(pedido.get(position).getPerfil().getEmail()/*perfil.get(position).getNombre()*/);
-        tvTituloVerPedido.setText(pedido.get(position).getTitulo());
-        imgViewProfile.setImageResource(seleccionarImagenTipo(position));
+        tvEmailVerPedido.setText(pedido.getPerfil().getEmail());
+        tvTituloVerPedido.setText(pedido.getTitulo());
+        imgViewProfile.setImageResource(seleccionarImagenTipo());
 
-        return listview;
+        return convertView;
     }
 
-
-    @Override
-    public int getCount() {
-        return pedido.size();
-    }
-
-    @Override
-    public Perfil getItem(int position) {
-        return null;
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
 
     //funcion que segun el tipo de pedido le dispone un imagen personalizada
-    private  int seleccionarImagenTipo(int position){
-        if(pedido.get(position).getCategoria().equalsIgnoreCase("compañia")){
+    private  int seleccionarImagenTipo(){
+        if(pedido.getCategoria().equalsIgnoreCase("compañia")){
             return R.drawable.amigos;
-        }else if (pedido.get(position).getCategoria().equalsIgnoreCase("informatica")){
+        }else if (pedido.getCategoria().equalsIgnoreCase("informatica")){
             return R.drawable.ordenador;
-        }else if (pedido.get(position).getCategoria().equalsIgnoreCase("clases")){
+        }else if (pedido.getCategoria().equalsIgnoreCase("clases")){
             return R.drawable.clases;
-        }else if (pedido.get(position).getCategoria().equalsIgnoreCase("hogar")){
+        }else if (pedido.getCategoria().equalsIgnoreCase("hogar")){
             return R.drawable.herramientas;
         }
         return 0;
     }
 
     //funcion que segun el tipo de pago le dispone un imagen personalizada
-    private int seleccionarImagenPago(int position){
+   /* private int seleccionarImagenPago(int position){
         if(pedido.get(position).getCategoria().equalsIgnoreCase("dinero")){
             return R.drawable.amigos;
         }else if (pedido.get(position).getCategoria().equalsIgnoreCase("favor")){
@@ -90,5 +79,5 @@ public class Adapter2 extends BaseAdapter {
         }
 
         return 0;
-    }
+    }*/
 }

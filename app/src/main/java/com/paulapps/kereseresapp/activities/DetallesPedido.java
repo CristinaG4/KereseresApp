@@ -16,7 +16,7 @@ import com.paulapps.kereseresapp.model.Perfil;
 public class DetallesPedido extends AppCompatActivity {
 
     Intent intent;
-    TextView tituloDetallePedido, categoriaDetallePedidoTV, nombreDetallePedidoTV, descripDetallePedidoTV, emailDetallePedidoTV,tipoPagoDetallePedidoTV;
+    TextView tituloDetallePedido, categoriaDetallePedidoTV, nombreDetallePedidoTV, direccionDetallePedidotv, descripDetallePedidoTV, emailDetallePedidoTV,tipoPagoDetallePedidoTV;
     ImageView fotoCategoria;
     private Pedido pedido = new Pedido();
     Button btnVolverDetallePedido,btnContactarDetallePedido;
@@ -38,6 +38,7 @@ public class DetallesPedido extends AppCompatActivity {
         tituloDetallePedido = (TextView) findViewById(R.id.tituloDetallePedido);
         categoriaDetallePedidoTV = (TextView) findViewById(R.id.categoriaDetallePedidoTV);
         nombreDetallePedidoTV = (TextView) findViewById(R.id.nombreDetallePedidoTV);
+        direccionDetallePedidotv=(TextView)findViewById(R.id.direccionDetallePedidoTV) ;
         descripDetallePedidoTV = (TextView) findViewById(R.id.descripDetallePedidoTV);
         emailDetallePedidoTV = (TextView) findViewById(R.id.emailDetallePedidoTV);
         fotoCategoria = findViewById(R.id.fotoCategoria);
@@ -47,6 +48,7 @@ public class DetallesPedido extends AppCompatActivity {
         tituloDetallePedido.setText(pedido.getTitulo());
         categoriaDetallePedidoTV.setText(pedido.getCategoria());
         nombreDetallePedidoTV.setText(pedido.getPerfil().getNombre());
+        direccionDetallePedidotv.setText(pedido.getPerfil().getApart());
         descripDetallePedidoTV.setText(pedido.getDescripcion());
         emailDetallePedidoTV.setText(pedido.getPerfil().getEmail());
         tipoPagoDetallePedidoTV.setText(pedido.getTipoPago());
