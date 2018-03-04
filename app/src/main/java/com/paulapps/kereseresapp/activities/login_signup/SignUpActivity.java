@@ -84,17 +84,27 @@ public class SignUpActivity extends AppCompatActivity {
         phoneUser=etPhone.getText().toString().trim();
 
 
-        //verficamos q los editText eno este vacios
+        //verficamos q los editText no este vacios
         if (TextUtils.isEmpty(emailUser)) {
-            Toast.makeText(this, "Se debe ingresar un email", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "You must to introduce an email", Toast.LENGTH_LONG).show();
             return;
         }
         if (TextUtils.isEmpty(passwordUser)) {
-            Toast.makeText(this, "Se debe ingresar una contraseña", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "You must to introduce a password", Toast.LENGTH_LONG).show();
             return;
-        } else {
-
-
+        }
+        if(TextUtils.isEmpty(nameUser)) {
+            Toast.makeText(this, "You must to introduce a user name", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(TextUtils.isEmpty(apartmentUser)) {
+            Toast.makeText(this, "You must to introduce an apartment number", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(TextUtils.isEmpty(etCode.getText().toString().trim())) {
+            Toast.makeText(this, "You must to introduce a comunity code", Toast.LENGTH_LONG).show();
+            return;
+        }else {
 
             //creamos nuevo usuario
             mAuth.createUserWithEmailAndPassword(emailUser, passwordUser)
@@ -103,7 +113,7 @@ public class SignUpActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
-                                Toast.makeText(SignUpActivity.this, "Se ha registrado el usuario", Toast.LENGTH_LONG).show();
+                                Toast.makeText(SignUpActivity.this, "The user has registered", Toast.LENGTH_LONG).show();
 
                                 Perfil p = new Perfil();
                                 p.setNombre(nameUser);
@@ -120,7 +130,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 startActivity(i);
                             } else {
                                 // If sign in fails, display a message to the user.
-                                Toast.makeText(SignUpActivity.this, "No se pudo registrar el usuario", Toast.LENGTH_LONG).show();
+                                Toast.makeText(SignUpActivity.this, "The user could not register", Toast.LENGTH_LONG).show();
                                 // updateUI(null);
                             }
                         }

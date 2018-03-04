@@ -62,7 +62,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getApplicationContext(),
-                                    "Email don't exist", Toast.LENGTH_SHORT).show();
+                                    "Email doesn't exist", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -76,34 +76,5 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
 }
 
-//para actualizar contraseña
-     /* public void resetUserPassword(String email){
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        AuthCredential credential = EmailAuthProvider
-                .getCredential("user@example.com", "password1234");
-    // Prompt the user to re-provide their sign-in credentials
-user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
-        @Override
-        public void onComplete (Task < Void > task) {
-            if (task.isSuccessful()) {
-                user.updatePassword(newPass).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(),
-                                    "Password updated", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getApplicationContext(),
-                                    "Error password not updated", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-            } else {
-                Toast.makeText(getApplicationContext(),
-                        "Error auth failed", Toast.LENGTH_SHORT).show();
-            }
-        }
-    });
-}*/
 

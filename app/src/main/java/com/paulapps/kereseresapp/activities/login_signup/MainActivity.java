@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         email = etEmail.getText().toString().trim();
         password = etPassword.getText().toString().trim();
         if(email.equals("")|| password.equals("")) {
-            Toast.makeText(MainActivity.this, "Introduce email y contraseña", Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this,"Enter email and password", Toast.LENGTH_LONG).show();
         }else{
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -128,12 +128,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
-                                Toast.makeText(MainActivity.this, "Inicio sesión correcto", Toast.LENGTH_LONG).show();
+                                Toast.makeText(MainActivity.this, "Right login", Toast.LENGTH_LONG).show();
                                 // updateUI(user);
                             } else {
                                 // If sign in fails, display a message to the user.
                                 // updateUI(null);
-                                Toast.makeText(MainActivity.this, "Email o contraseña incorrectos", Toast.LENGTH_LONG).show();
+                                Toast.makeText(MainActivity.this, "Wrong email or password", Toast.LENGTH_LONG).show();
                                 etPassword.setText("");
                             }
 
@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             //nameTextView,setText(account.getDisplayName()); asi cogeriamos datos de la cuenta google
 
         } else {
-            Toast.makeText(this, "No se pudo iniciar sesión con google", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Could not start session with google", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             //con este metodo vemos si la conexion se hizo bien o no
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(getApplicationContext(), " Autentificado correctamente con firebase", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getApplicationContext(), " Autentificado correctamente con firebase", Toast.LENGTH_SHORT).show();
                     //  FirebaseUser user = mAuth.getCurrentUser();//con esto se obtienen los datos de la cuenta del usuario
                 }
             }
