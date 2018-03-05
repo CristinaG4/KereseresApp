@@ -80,8 +80,14 @@ public class SignUpActivity extends AppCompatActivity {
         passwordUser = etPassword.getText().toString().trim();
         nameUser = etName.getText().toString().trim();
         apartmentUser = etApartment.getText().toString().trim();
-        codeUser = Integer.parseInt(etCode.getText().toString().trim());
         phoneUser=etPhone.getText().toString().trim();
+        try {
+            codeUser = Integer.parseInt(etCode.getText().toString().trim());
+        }catch(NumberFormatException e){
+            Toast.makeText(this, "Community Code is Empty or Invalid Number", Toast.LENGTH_LONG).show();
+            return;
+        }
+
 
 
         //verficamos q los editText no este vacios
@@ -99,10 +105,6 @@ public class SignUpActivity extends AppCompatActivity {
         }
         if(TextUtils.isEmpty(apartmentUser)) {
             Toast.makeText(this, "You must to introduce an apartment number", Toast.LENGTH_LONG).show();
-            return;
-        }
-        if(TextUtils.isEmpty(etCode.getText().toString().trim())) {
-            Toast.makeText(this, "You must to introduce a comunity code", Toast.LENGTH_LONG).show();
             return;
         }else {
 
