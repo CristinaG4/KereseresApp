@@ -9,6 +9,7 @@
     <!-- Login -->
     <string name="email">Email:</string>
     <string name="password">Password:</string>
+    <string name="passwordHint">Password</string>
     <string name="forgotPass">Password?</string>
     <string name="singUp">Sing Up</string>
 
