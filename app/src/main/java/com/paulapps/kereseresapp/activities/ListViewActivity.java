@@ -6,8 +6,10 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -41,7 +43,7 @@ import com.paulapps.kereseresapp.model.Perfil;
 
 import java.util.ArrayList;
 
-public class ListViewActivity extends AppCompatActivity {
+public class ListViewActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
 
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private FirebaseDatabase firebase;
@@ -69,6 +71,8 @@ public class ListViewActivity extends AppCompatActivity {
     private ChildEventListener mChildEventListener;
     private FirebaseAuth mAuth;
 
+    private SwipeRefreshLayout swipeLayoutOfertas;
+    private SwipeRefreshLayout swipeLayoutDemandas;
     Intent i;
 
 
@@ -80,6 +84,14 @@ public class ListViewActivity extends AppCompatActivity {
         // getSupportActionBar().hide();
 
         Prodialog=new ProgressDialog(this);
+
+
+
+
+        swipeLayoutOfertas = (SwipeRefreshLayout) findViewById(R.id.swipe_container_ofertas);
+        swipeLayoutDemandas = (SwipeRefreshLayout) findViewById(R.id.swipe_container_demandas);
+        swipeLayoutOfertas.setOnRefreshListener(this);
+        swipeLayoutDemandas.setOnRefreshListener(this);
 
         //initialize firebase components
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -459,6 +471,26 @@ public class ListViewActivity extends AppCompatActivity {
             }
         }
     }
+    @Override
+    public void onRefresh() {
+        //Aqui ejecutamos el codigo necesario para refrescar nuestra interfaz grafica.
+        //Antes de ejecutarlo, indicamos al swipe layout que muestre la barra indeterminada de progreso.
+        swipeLayoutOfertas.setRefreshing(true);
+        swipeLayoutDemandas.setRefreshing(true);
+
+        //Vamos a simular un refresco con un handle.
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                //Se supone que aqui hemos realizado las tareas necesarias de refresco, y que ya podemos ocultar la barra de progreso
+                swipeLayoutOfertas.setRefreshing(false);
+                swipeLayoutDemandas.setRefreshing(false);
+
+            }
+        }, 500);
+
+    }
+
 
     public void eliminarCuenta(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

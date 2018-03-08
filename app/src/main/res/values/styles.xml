@@ -13,6 +13,70 @@
 
     </style>
 
+    <style name="style_EditText" >
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/verdeTitulo</item>
+        <item name="android:textColorHint">@color/verdeTitulo</item>
+        <item name="android:ems">10</item>
+    </style>
+
+    <style name="style_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:textSize">70sp</item>
+        <item name="android:textColor">@color/verdeTitulo</item>
+    </style>
+
+    <style name="style_fondologIn">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_marginTop">180dp</item>
+        <item name="android:layout_marginBottom">100dp</item>
+        <item name="android:layout_marginRight">50dp</item>
+        <item name="android:layout_marginLeft">50dp</item>
+        <item name="android:padding">5dp</item>
+    </style>
+
+
+    <style name="style_categoriaListView">
+        <item name="android:layout_width">55dp</item>
+        <item name="android:layout_height">55dp</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginBottom">15dp</item>
+    </style>
+
+    <style name="style_btnCrear">
+        <item name="android:layout_width">90dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:background">@drawable/boton_cambio_color</item>
+        <item name="android:textColor">@color/textBtnLogin</item>
+    </style>
+
+    <style name="style_editTextCrear">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">170dp</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:layout_marginRight">15dp</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:gravity">left</item>
+    </style>
+
+
+    <style name="style_titleCrear">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:textSize">30dp</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

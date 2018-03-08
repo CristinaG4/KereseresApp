@@ -93,7 +93,7 @@ public class CrearOfertaActivity extends AppCompatActivity {
                     Pedido p = new Pedido();
                     rellenarPedido(p);
                     mDatabaseReference.child(FirebaseReferences.PEDIDO_REFERENCES).push().setValue(p);
-                    Toast t = Toast.makeText(CrearOfertaActivity.this, "Demand created", Toast.LENGTH_SHORT);
+                    Toast t = Toast.makeText(CrearOfertaActivity.this, "Offer created", Toast.LENGTH_SHORT);
                     t.show();
                     i = new Intent(CrearOfertaActivity.this, ListViewActivity.class);
                     startActivity(i);

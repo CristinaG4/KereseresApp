@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+
     <TabHost
         android:id="@android:id/tabhost"
         android:layout_width="match_parent"
@@ -39,11 +40,21 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <ListView
-                        android:id="@+id/lvOfertas"
+                    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:tools="http://schemas.android.com/tools"
+                        android:id="@+id/swipe_container_ofertas"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scrollbarThumbVertical="@drawable/scrollbar_design" />
+                        tools:ignore="MergeRootFrame" >
+
+                        <ListView
+                            android:id="@+id/lvOfertas"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scrollbarThumbVertical="@drawable/scrollbar_design" />
+
+                    </android.support.v4.widget.SwipeRefreshLayout>
+
 
                 </LinearLayout>
 
@@ -53,11 +64,20 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
+                    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:tools="http://schemas.android.com/tools"
+                        android:id="@+id/swipe_container_demandas"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:ignore="MergeRootFrame" >
+
                     <ListView
                         android:id="@+id/lvDemandas"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scrollbarThumbVertical="@drawable/scrollbar_design" />
+
+                    </android.support.v4.widget.SwipeRefreshLayout>
                 </LinearLayout>
             </FrameLayout>
 
@@ -94,8 +114,11 @@
                 app:fab_label="@string/floatBTNoffer"
                 app:fab_size="mini" />
 
+
         </com.github.clans.fab.FloatingActionMenu>
     </TabHost>
+
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="4dp"

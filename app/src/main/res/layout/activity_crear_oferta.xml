@@ -5,12 +5,8 @@
     android:background="@drawable/fondo_degradado"
     android:orientation="vertical">
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/style_titleCrear"
         android:text="@string/textCreateOffer"
-        android:gravity="center"
-        android:layout_margin="10dp"
-        android:textSize="30dp"
         android:background="@color/verdeTitulo"
         android:textColor="@color/textBtnLogin"/>
 
@@ -96,16 +92,10 @@
 
     <EditText
         android:id="@+id/descripCreaOfertaET"
-        android:layout_width="match_parent"
-        android:layout_height="170dp"
+        style="@style/style_editTextCrear"
         android:background="@drawable/estilo_edit_text"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="15dp"
         android:hint="@string/hintEnterDescription"
-        android:scrollbarThumbVertical="@drawable/scrollbar_design"
-        android:padding="8dp"
-        android:gravity="left"/>
+        android:scrollbarThumbVertical="@drawable/scrollbar_design" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -115,24 +105,18 @@
         android:layout_margin="15dp">
         <Button
             android:id="@+id/btnCancelarCreaOferta"
-            android:layout_width="90dp"
-            android:layout_height="50dp"
-            android:background="@drawable/boton_cambio_color"
+            style="@style/style_btnCrear"
             android:clickable="false"
             android:onClick="Cancelar"
             android:text="@string/cancelarBtn"
-            android:textColor="@color/textBtnLogin"
             android:layout_marginRight="10dp"/>
 
         <Button
             android:id="@+id/btnCrearOferta"
-            android:layout_width="90dp"
-            android:layout_height="50dp"
-            android:background="@drawable/boton_cambio_color"
+            style="@style/style_btnCrear"
             android:clickable="false"
             android:onClick="registrar"
             android:text="@string/createBtn"
-            android:textColor="@color/textBtnLogin"
             android:layout_gravity="end"
             android:layout_marginLeft="10dp"/>
 
