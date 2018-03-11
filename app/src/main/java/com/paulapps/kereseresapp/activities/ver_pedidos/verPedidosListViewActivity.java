@@ -88,7 +88,7 @@ public class verPedidosListViewActivity extends AppCompatActivity {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Perfil p = dataSnapshot.getValue(Perfil.class);
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if (p.getEmail().equals(user.getEmail())){
+                if (p.getEmail().equalsIgnoreCase(user.getEmail())){
                     perfil = p;
                     if (perfil.getTelf()==null){
                         perfil.setTelf("");
@@ -191,12 +191,12 @@ public class verPedidosListViewActivity extends AppCompatActivity {
 
         TabHost.TabSpec spec = tabs.newTabSpec("mitab1");
         spec.setContent(R.id.tab1);
-        spec.setIndicator("Ofertas", getDrawable(R.drawable.ic_launcher_background));
+        spec.setIndicator("My offers", getDrawable(R.drawable.ic_launcher_background));
         tabs.addTab(spec);
 
         spec = tabs.newTabSpec("mitab2");
         spec.setContent(R.id.tab2);
-        spec.setIndicator("Demandas", getDrawable(R.drawable.ic_launcher_background));
+        spec.setIndicator("My demands", getDrawable(R.drawable.ic_launcher_background));
         tabs.addTab(spec);
 
         tabs.setCurrentTab(0);
@@ -345,7 +345,7 @@ public class verPedidosListViewActivity extends AppCompatActivity {
             @Override
             public void onSwipeLeft(ListView listView, int[] reverseSortedPositions) {
                 //Aqui ponemos lo que hara el programa cuando deslizamos un item a la izquierda
-                pedidos.remove(reverseSortedPositions[0]);
+               // pedidos.remove(reverseSortedPositions[0]);
 
                 //con esta llamada se refresca la pantalla
                 adapterDemandas.notifyDataSetChanged();
@@ -355,7 +355,7 @@ public class verPedidosListViewActivity extends AppCompatActivity {
             public void onSwipeRight(ListView listView, int[] reverseSortedPositions) {
 
                 //Aqui ponemos lo que hara el programa cuando deslizamos un item a la derecha
-                pedidos.remove(reverseSortedPositions[0]);
+               // pedidos.remove(reverseSortedPositions[0]);
                 //mDatabaseReference.child(FirebaseReferences.PEDIDO_REFERENCES).child();
 
                 //con esta llamada se refresca la pantalla

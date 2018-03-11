@@ -220,12 +220,12 @@ public class ListViewActivity extends AppCompatActivity implements SwipeRefreshL
 
         TabHost.TabSpec spec = tabs.newTabSpec("mitab1");
         spec.setContent(R.id.tab1);
-        spec.setIndicator("Ofertas",getDrawable(R.drawable.ic_launcher_background));
+        spec.setIndicator("Offers",getDrawable(R.drawable.ic_launcher_background));
         tabs.addTab(spec);
 
         spec = tabs.newTabSpec("mitab2");
         spec.setContent(R.id.tab2);
-        spec.setIndicator("Demandas",getDrawable(R.drawable.ic_launcher_background));
+        spec.setIndicator("Demands",getDrawable(R.drawable.ic_launcher_background));
         tabs.addTab(spec);
         
         tabs.setCurrentTab(0);
