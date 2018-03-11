@@ -100,7 +100,7 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
         if(TextUtils.isEmpty(nameUser)) {
-            Toast.makeText(this, "You must to introduce a user name", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "You must to introduce an user name", Toast.LENGTH_LONG).show();
             return;
         }
         if(TextUtils.isEmpty(apartmentUser)) {
