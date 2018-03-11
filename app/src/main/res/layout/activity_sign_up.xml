@@ -71,7 +71,8 @@
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/etPasswordSignUp"
                     style="@style/style_EditText"
-                    android:hint="@string/password">
+                    android:hint="@string/password"
+                    android:inputType="textPassword" >
 
                 </android.support.design.widget.TextInputEditText>
             </android.support.design.widget.TextInputLayout>
